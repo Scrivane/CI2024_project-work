@@ -27,11 +27,6 @@ class DagGP:
 
     def create_individual(self, n_nodes=7):
         pool = self._variables * (1 + len(self._constants) // len(self._variables)) + self._constants
-        ###
-        for el in pool:
-            print(str(el))
-        ###
-        
         individual = None
         while individual is None or len(individual) < n_nodes:
             op = gxgp_random.choice(self._operators)
@@ -42,11 +37,6 @@ class DagGP:
     
     def create_individuals(self, n_nodes=7):  #all different individuals
         pool = self._variables * (1 + len(self._constants) // len(self._variables)) + self._constants
-        ###
-        for el in pool:
-            print(str(el))
-        ###
-        
         individual = None
         for operand in self._operators:
             k=arity(operand)
