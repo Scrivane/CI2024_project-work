@@ -12,14 +12,33 @@ from .random import gxgp_random
 
 def xover_swap_subtree(tree1: Node, tree2: Node) -> Node:
     offspring = deepcopy(tree1)
-    ic(offspring)
+    #ic(offspring)
     successors = None
     while not successors:
         node = gxgp_random.choice(list(offspring.subtree))
         successors = node.successors
     i = gxgp_random.randrange(len(successors))
+    #ic(successors, i)
+    successors[i] = deepcopy(gxgp_random.choice(list(tree2.subtree)))
+    #ic(successors, i)
+    node.successors = successors
+    return offspring
+
+
+
+
+
+def mutation_hoist(tree1: Node) -> Node:
+    offspring = deepcopy(tree1)
+    #ic(offspring)
+    successors = None
+    while not successors:
+        node = gxgp_random.choice(list(offspring.subtree))
+        successors = node.successors
+    """ i = gxgp_random.randrange(len(successors))
     ic(successors, i)
     successors[i] = deepcopy(gxgp_random.choice(list(tree2.subtree)))
     ic(successors, i)
-    node.successors = successors
-    return offspring
+    node.successors = successors """
+    #ic(node)
+    return node
