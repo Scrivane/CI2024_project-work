@@ -23,11 +23,40 @@ import  numpy as np
 def arity(f: Callable) -> int:
     if isinstance(f, np.ufunc):
         return f.nin
-    """Return the number of expected parameter or None if variable"""
+
+            
+
     if inspect.getfullargspec(f).varargs is not None:
-        return None
+            return None
     else:
-        return len(inspect.getfullargspec(f).args)
+            return len(inspect.getfullargspec(f).args)
+    
+"""  try:
+        if inspect.getfullargspec(f).varargs is not None:
+            return None
+        else:
+            return len(inspect.getfullargspec(f).args)
+        
+    except TypeError:
+        ris=inspect.signature(f)
+        parameters=ris.parameters.values()
+        todelete=0
+        for p  in parameters:
+            type=p.kind
+            default=p.default
+        
+            
+            if default==None or default==0:
+                todelete+=1 
+            
+        return len(parameters)-todelete """
+        
+
+
+       
+
+        
+    
 
 
 

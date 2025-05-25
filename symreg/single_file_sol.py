@@ -95,6 +95,8 @@ def fitness(tree,nodefun,x, y):
         return math.inf 
     
 
+
+    return mse_val
     """ try :
         result=tree.mse(nodefun,x,y)
     except err:
@@ -194,7 +196,7 @@ ic(y[2])
 ic(x[:,2])
 
 dag = gxgp.DagGP(
-    operators=[np.add,np.negative,ignore_op,np.multiply,np.sin,np.tanh,np.reciprocal,np.exp,np.exp2,np.pow,np.sinh,np.cosh],#np.round #np.pow, #np.ldexp],
+    operators=[np.add,np.negative,ignore_op,np.multiply,np.sin,np.tanh,np.reciprocal,np.exp,np.exp2,np.pow,np.sinh,np.cosh], #np.round],  #np.round #np.pow, #np.ldexp],
     variables=x.shape[0],
     constants=[],#np.linspace(-2, 2, 500),
 )
