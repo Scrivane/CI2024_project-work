@@ -81,7 +81,7 @@ class Individual:
     genome: Node
     fitness: float = None
 
-def fitness(tree,nodefun,x, y):
+def fitness(tree,nodefun:Node,x, y):
 
 
     with np.errstate(all="raise"):          # only for the code inside
@@ -95,8 +95,14 @@ def fitness(tree,nodefun,x, y):
         return math.inf 
     
 
+    tree_length = len(nodefun)
+    penalty=5
+    res= mse_val+tree_length *penalty
+    
 
-    return mse_val
+    
+
+    return res 
     """ try :
         result=tree.mse(nodefun,x,y)
     except err:
@@ -138,14 +144,17 @@ def EAlgoithm(nproblem,gptree):
 
     ic(x.shape)
     
-    mutrate=1
+    mutrate=0.05
     nelemets=200
     pop=popInizialize(gptree,nelemets,x,y)
-    nstep=1000
+    nstep=3000
     lowest_fitness_individual = min(pop, key=lambda x: x.fitness)
     ic(lowest_fitness_individual)
     ic(str(lowest_fitness_individual.genome))
     #ic(lowest_fitness_individual.fitness)
+    mutation_functions = [
+    lambda genome: gxgp.mutation_point(genome, gptree),
+    lambda genome: gxgp.mutation_hoist(genome)]
 
     for el in tqdm(range(nstep)):
        
@@ -157,14 +166,22 @@ def EAlgoithm(nproblem,gptree):
         
         child = gxgp.xover_swap_subtree(ris1.genome,ris2.genome)  # uses partially mapped crossover
         child=Individual(genome=child,fitness=fitness(gptree,child,x,y))
+
+       
+        
      
+        mutation_functions = [
+        lambda genome: gxgp.mutation_point(genome, gptree), 
+        lambda genome: gxgp.mutation_hoist(genome)
+        ]
         if( np.random.rand()<mutrate):  # has a chance of mutating the child using inversion mutation
-            mutedgenome=gxgp.mutation_hoist(child.genome)
-            child=Individual(genome=mutedgenome,fitness=fitness(gptree,mutedgenome,x,y))
+            mutation_fn = np.random.choice(mutation_functions)
+            mutedgenome = mutation_fn(child.genome)
+            child = Individual(genome=mutedgenome, fitness=fitness(gptree, mutedgenome, x, y))
 
         
         
-        ic(fitness(gptree,child.genome,x,y))
+       # ic(fitness(gptree,child.genome,x,y))
         pop.append(child)  # add child to population
         
                 
@@ -173,7 +190,7 @@ def EAlgoithm(nproblem,gptree):
         #ic(lowest_fitness_individual.fitness)
         history.append(lowest_fitness_individual.fitness)
         
-        maxfit_ind=(max(pop, key=lambda ind: ind.fitness))  
+        maxfit_ind=(max(pop, key=lambda ind: ind.fitness))    #todo make negativ efitness and use a minimizer 
         #ic(maxfit_ind.fitness)
         pop.remove(maxfit_ind) # delete from population the wrost individual
     
@@ -195,8 +212,9 @@ y=problem['y']
 ic(y[2])
 ic(x[:,2])
 
-dag = gxgp.DagGP(
-    operators=[np.add,np.negative,ignore_op,np.multiply,np.sin,np.tanh,np.reciprocal,np.exp,np.exp2,np.pow,np.sinh,np.cosh], #np.round],  #np.round #np.pow, #np.ldexp],
+dag = gxgp.DagGP(   #problems with ldex , it's unsupported for some types   np.ldexp,
+    operators=[np.add,np.negative,ignore_op,np.multiply,np.sin,np.tanh,np.reciprocal,np.exp,np.exp2,np.pow,np.sinh,np.cosh,np.round], #np.round],  #np.round #np.pow, #np.ldexp],
+    #operators=[np.ldexp],
     variables=x.shape[0],
     constants=[],#np.linspace(-2, 2, 500),
 )

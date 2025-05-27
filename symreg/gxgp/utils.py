@@ -26,12 +26,12 @@ def arity(f: Callable) -> int:
 
             
 
-    if inspect.getfullargspec(f).varargs is not None:
+    """ if inspect.getfullargspec(f).varargs is not None:
             return None
     else:
-            return len(inspect.getfullargspec(f).args)
+            return len(inspect.getfullargspec(f).args) """
     
-"""  try:
+    try:
         if inspect.getfullargspec(f).varargs is not None:
             return None
         else:
@@ -49,7 +49,7 @@ def arity(f: Callable) -> int:
             if default==None or default==0:
                 todelete+=1 
             
-        return len(parameters)-todelete """
+        return len(parameters)-todelete 
         
 
 
