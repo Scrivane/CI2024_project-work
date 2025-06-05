@@ -61,10 +61,17 @@ def mutation_point(tree1: Node,gptree:DagGP) -> Node:  ##i have the problem that
     target = gxgp_random.choice(all_nodes)
  
     if target.is_leaf:
-        new_node = deepcopy(gxgp_random.choice(gptree._variables + gptree._constants))  
-    else:
-        possible_ops = [op for op in gptree._operators if arity(op) == target.arity ]  #con reimbussolamento
-        new_op = gxgp_random.choice(possible_ops)
+
+        possibilities=[e for e in (gptree._variables + gptree._constants) if str(e)!=str(target)]
+        new_node = deepcopy(gxgp_random.choice(possibilities))  
+
+    else:  #make so only changes
+       
+        possible_ops = [op for op in gptree._operators if arity(op) == target.arity and target.short_name!=op.__name__  ]  #con reimbussolamento
+        if len(possible_ops)>0:
+            new_op = gxgp_random.choice(possible_ops)
+        else:
+            "qui avrei errore"
         new_node = Node(new_op, target.successors)
 
 
@@ -100,6 +107,29 @@ def mutation_point(tree1: Node,gptree:DagGP) -> Node:  ##i have the problem that
 
     return new_node
     
+
+
+commutative_func=["multiply","add"]
+
+def mutation_permutations(tree1: Node) -> Node:  ##i have the problem that chainging a node changes all similar nodes
+    offspring = deepcopy(tree1)  # single deepcopy
+
+    
+    #all_nodes = list(offspring.subtree)
+    internal_nodes = [node for node in offspring.subtree if not node.is_leaf and node.arity>=2 and node.short_name not in commutative_func]  #maybe use non cummutative functions only 
+    #print(internal_nodes)
+    if (len(internal_nodes)>=1):
+    
+
+        target = gxgp_random.choice(internal_nodes)
+        successors = target.successors
+        succ1=deepcopy(successors[0])
+        succ2=deepcopy(successors[1])
+
+        target.successors=[succ2,succ1]
+    
+
+    return offspring
 
 
     """ if target_pointer == offspring:

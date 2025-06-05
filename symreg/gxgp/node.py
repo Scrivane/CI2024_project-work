@@ -14,7 +14,7 @@ from .utils import arity
 __all__ = ['Node']
 
 
-class Node:
+class Node:   #using property here allows to call those method as a paramenter doing for example .subtree instead of .subtree()
     _func: Callable
     _successors: tuple['Node']
     _arity: int
@@ -101,6 +101,45 @@ class Node:
         result = set()
         _get_subtree(result, self)
         return result
+
+    def to_np_formula(self):
+        stringa=self.long_name
+        newstringa=""
+        openbracket=0
+        for i in range(0,len(stringa)):
+            char=stringa[i]
+
+            newstringa=newstringa+stringa[i]
+            if openbracket==1:
+                newstringa=newstringa+"]"
+                openbracket=0
+
+            if( char=="x" and stringa[i+1].isdigit()):   #change back i think
+                newstringa=newstringa+"["
+                openbracket=1
+            
+
+        isfun=0
+        stringa=newstringa
+        newstringa=""
+        for i in range(0,len(stringa)):
+            char=stringa[i]
+            if( char.isalpha() and isfun==0 and stringa[i+1]!="["):
+                isfun=1
+                newstringa=newstringa+"np."
+            elif(char.isalpha()==False and ( ( i!=len(stringa)-1 and stringa[i+1]!='p') or ( i<len(stringa)-2 and stringa[i+1]=='p' and stringa[i+2]=='o'))  ):
+                isfun=0
+            newstringa=newstringa+stringa[i]
+        
+
+        newstringa = newstringa.replace("3.14159", "np.pi")
+        newstringa = newstringa.replace("0.577216", "np.euler_gamma")
+        newstringa = newstringa.replace("2.71828", "np.e")
+    
+        
+        return newstringa
+  
+
 
     def draw(self,normal_python=False):
         try:
