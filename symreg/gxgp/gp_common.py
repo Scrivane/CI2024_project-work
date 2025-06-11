@@ -109,7 +109,7 @@ def mutation_point(tree1: Node,gptree:DagGP) -> Node:  ##i have the problem that
     
 
 
-commutative_func=["multiply","add"]
+commutative_func=["multiply","add","hypot"]
 
 def mutation_permutations(tree1: Node) -> Node:  ##i have the problem that chainging a node changes all similar nodes
     offspring = deepcopy(tree1)  # single deepcopy

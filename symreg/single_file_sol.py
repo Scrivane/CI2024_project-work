@@ -93,8 +93,18 @@ class Individual:
     genome: Node
     fitness: float = None
 
+
+
+def length_penalty(length, threshold=2000, scale=1e6):
+    if length <= threshold:
+        return   0.001*length*scale#scale * 0.001 * length**2
+    else:
+        base = scale * 0.001 * threshold**2
+        blowup = np.exp((length - threshold) / 10) * scale
+        return base + blowup
+
 def fitness(tree,nodefun:Node,x, y):
-    start_time = time.perf_counter()
+    #start_time = time.perf_counter()
 
 
     with np.errstate(all="raise"):          # only for the code inside
@@ -104,12 +114,18 @@ def fitness(tree,nodefun:Node,x, y):
             return math.inf                 # numerical failure → worst fitness
 
     # Some operations may finish without raising but still yield nan/inf
-    if not np.isfinite(mse_val):
+    if not np.isfinite(mse_val) :#or len(nodefun)>2300:
+        """ if len(nodefun)>2300:
+            
+            print("aqui") """
         return math.inf 
     
 
+    
+    
 
-    tree_length = len(nodefun)
+
+    """ tree_length = len(nodefun)
     penalty=5
     res= mse_val  + tree_length *penalty
 
@@ -117,9 +133,14 @@ def fitness(tree,nodefun:Node,x, y):
     end_time = time.perf_counter()
     elapsed = end_time - start_time
     global globaltime
-    globaltime+=elapsed
+    globaltime+=elapsed """
 
-    return mse_val + penalty_coeff * (tree_length ** 2)
+
+    #depthpenalty=nodefun.depth   # it's too computationally costly
+
+    
+
+    return mse_val+length_penalty(len(nodefun),1000,np.max(y)/2)  #+ penalty_coeff * (tree_length ** 2)
     
 
     
@@ -156,17 +177,22 @@ def popInizialize(gpTree,nelements,x,y):   #probably pass neleemnts to create in
     #pop.append(Individual(genome=startgreedy(el)))
     #localnode=gpTree.create_individual(30) #was 15
     population=[] #change  i thnk here is the problem, 
+    unique_string_genomes = set()
+
     while len(population)<nelements:
         locel=gpTree.create_individual(10)
         #locel=gxgp.random.gxgp_random.choice(localnode)  #maybe non reimbussola
                                   #random.sample(population, k, *, counts=None)
         fitnesslocel=fitness(gpTree,locel,x,y)
         #if (fitnesslocel<np.inf):
-        population.append(Individual(genome=locel,fitness=fitnesslocel))
-        """    else:
-            print("malke") """
+        if (str(locel) not in unique_string_genomes):
+            unique_string_genomes.add(str(locel))
+            population.append(Individual(genome=locel,fitness=fitnesslocel))
+        
+        else:
+            print("malke") 
         #population = [Individual(genome=localnode,fitness=fitness(gpTree,localnode,x,y)) for _ in range(nelements)]
-    return population
+    return population,unique_string_genomes
 
 def tournament_sel_array(population,n=2): # tournament selection to decide which individual to crossover
 
@@ -187,6 +213,7 @@ def tournament_sel_array(population,n=2): # tournament selection to decide which
     return chosen
 
 #find a way to limit depth
+#Steady-state model
 def EAlgoithm(nproblem,gptree):  #use elitism try to preserve best ones
     problem = np.load('/home/adri/universita/magistrale/5_anno_1_sem/computational_intelligence/project_work/CI2024_project-work/data/problem_{}.npz'.format(nproblem))
     x = problem['x']
@@ -204,21 +231,35 @@ def EAlgoithm(nproblem,gptree):  #use elitism try to preserve best ones
     maxy_neg = np.max(y[y < 0]) if np.any(y < 0) else None
 
     ic(x.shape)
-    
+    MAX_TREE_LENGTH=1000
     mutrate=0.05
+    minmutrate=0.05
+    mincrossover=0.05
+    #mutrate=1
     nrestarts=5
     nelemets=100#15   #400   #was 200
+    crossOverRate=1#0.9
+    mut_increasement=1.2
     
     nstep=10000#10000#1000 #100 #2000   #usa 4000
     """  lowest_fitness_individual = min(pop, key=lambda x: x.fitness)
     ic(lowest_fitness_individual)
     ic(str(lowest_fitness_individual.genome)) """
     #ic(lowest_fitness_individual.fitness)
-    lowest_fitness_individual=popInizialize(gptree,1,x,y)[0]
+    #unique_string_genomes = set()
+    pop0,_=popInizialize(gptree,1,x,y)
+    
+    lowest_fitness_individual=pop0[0]
     for _ in range(nrestarts):
-        pop=popInizialize(gptree,nelemets,x,y)
+        unique_string_genomes=set()
+        pop,loc_unique_str_genome=popInizialize(gptree,nelemets,x,y)
+        unique_string_genomes.update(loc_unique_str_genome)
+        
+        
+
         if lowest_fitness_individual not in pop:
             pop.append(lowest_fitness_individual)
+            unique_string_genomes.add(str(lowest_fitness_individual.genome))
 
 
         for el in tqdm(range(nstep)):
@@ -233,15 +274,24 @@ def EAlgoithm(nproblem,gptree):  #use elitism try to preserve best ones
 
             """ values = [el.genome.value for el in pop]
             print(values) """
-            ris1=tournament_sel_array(pop,2)   # uses tournament selection to select 2 parent for the crossover
-            ris2=tournament_sel_array(pop,2)
 
-
-
+            if( np.random.rand()<crossOverRate):
+                ris1=tournament_sel_array(pop,2)   # uses tournament selection to select 2 parent for the crossover
+                ris2=tournament_sel_array(pop,2)
+                genome_child = gxgp.xover_swap_subtree(ris1.genome,ris2.genome)  # uses partially mapped crossover
+                #child_candidate = gxgp.xover_swap_subtree(ris1.genome, ris2.genome)
+                if len(genome_child) > MAX_TREE_LENGTH:
+                    listonepop,_=popInizialize(gptree,1,x,y)
+                    randomNewIndividual=listonepop[0]
+                    genome_child = randomNewIndividual.genome
+                
             
-            
-            child = gxgp.xover_swap_subtree(ris1.genome,ris2.genome)  # uses partially mapped crossover
-            child=Individual(genome=child,fitness=fitness(gptree,child,x,y))
+            else:
+                genome_child=(tournament_sel_array(pop,1)).genome  #select a random individual that later can be mutated
+            if len(genome_child) > 2300:
+                print("chi")
+                continue
+            #child=Individual(genome=child,fitness=fitness(gptree,child,x,y))
 
         
             
@@ -251,30 +301,96 @@ def EAlgoithm(nproblem,gptree):  #use elitism try to preserve best ones
         lambda genome: gxgp.mutation_hoist(genome),
         lambda genome: gxgp.mutation_permutations(genome)
             ]
-            gxgp.random.gxgp_random.random
-            if( np.random.rand()<mutrate):  # has a chance of mutating the child using inversion mutation
+           
+            if( np.random.rand()<mutrate):  # has a chance of mutating the child using a mutation
                 mutation_fn = np.random.choice(mutation_functions)
             
-                mutedgenome = mutation_fn(child.genome)
-                child = Individual(genome=mutedgenome, fitness=fitness(gptree, mutedgenome, x, y))
+                genome_child = mutation_fn(genome_child)
+                if len(genome_child) > 2300:
+                    print("si")
+                    continue
+                #child = Individual(genome=mutedgenome, fitness=fitness(gptree, mutedgenome, x, y))
+                
 
             
             
         # ic(fitness(gptree,child.genome,x,y))
-            pop.append(child)  # add child to population
+            if (str(genome_child) not in unique_string_genomes):
+                unique_string_genomes.add(str(genome_child))
+                child=Individual(genome=genome_child, fitness=fitness(gptree, genome_child, x, y))
+                pop.append(child)  # add child to population
+
             
+            else:  # if it  isn't new
+                
+                listonepop,_=popInizialize(gptree,1,x,y)
+                randomNewIndividual=listonepop[0]
+                while str(randomNewIndividual.genome) in unique_string_genomes:
+                    listonepop,_=popInizialize(gptree,1,x,y)
+                    randomNewIndividual=listonepop[0]
+                
+                unique_string_genomes.add(str(randomNewIndividual.genome))
+                #child=Individual(genome=randomNewGenome, fitness=fitness(gptree, randomNewGenome, x, y))
+                pop.append(randomNewIndividual)
+
+            
+
             
 
             lowest_fitness_individual = min(pop, key=lambda x: x.fitness)
+            localbestfit=lowest_fitness_individual.fitness
+
+
+            
+
+
+            """ if len(history) > 5: # Check after 5 steps to have enough history
+                # Calculate improvements within the last 5 fitness values
+                # A "strict improvement" means `el < previou_el`.
+                # Initialize improvements as 0. Each time fitness decreases, it's an improvement.
+                improvements = 0
+                # Iterate from the second element of the last 5 to compare with its predecessor
+              
+                for i in range(1, 5): # history[-5:] effectively gives us 5 elements. indices 0-4
+
+                    if history[-5 + i] < history[-5 + i - 1]:
+                        improvements += 1
+                
+                # ic(f"Step {current_step}: mutrate={mutrate:.2f}, crossOverRate={crossOverRate:.2f}, improvements={improvements}")
+
+                if improvements >= 1 :
+                    # Good progress: Decrease mutation to exploit, increase crossover for mixing good parts
+                    mutrate = min(1, mutrate * 1.01) # Corrected typo: mut_increasement to mut_increase_factor
+                    crossOverRate = max(0.05, crossOverRate * 0.99)
+                    
+                # Check for stagnation (e.g., less than 1 improvement in last 4 comparisons)
+                elif improvements < 1:
+                    # Stagnating: Increase mutation to explore, decrease crossover to preserve existing structures
+                    mutrate = max(0.05, mutrate * 0.99)
+                    crossOverRate = min(1, crossOverRate * 1.01)
+                    
+            
+            # Ensure rates stay within bounds after any adjustment
+            mutrate += np.random.normal(0, 0.01)
+            crossOverRate += np.random.normal(0, 0.01)
+            mutrate = np.clip(mutrate, 0.05, 1)
+            crossOverRate = np.clip(crossOverRate, 0.05, 1)    """
+            """ if el % 100 == 0:
+                print(f"[{el}] fitness={localbestfit:.4f} | mutrate={mutrate:.3f} | crossover={crossOverRate:.3f}") """
+
+
+                    
 
             
             
             #ic(lowest_fitness_individual.fitness)
-            history.append(lowest_fitness_individual.fitness)
+            history.append(localbestfit)
             
             maxfit_ind=(max(pop, key=lambda ind: ind.fitness))    #todo make negativ efitness and use a minimizer 
             #ic(maxfit_ind.fitness)
             pop.remove(maxfit_ind) # delete from population the wrost individual
+            unique_string_genomes.remove(str(maxfit_ind.genome))
+            
         
 
 
@@ -282,9 +398,23 @@ def EAlgoithm(nproblem,gptree):  #use elitism try to preserve best ones
         
         
 
+
+        sorted_pop = sorted(pop, key=lambda x: x.fitness)
+
+        # Get the best and second-best individuals
+        lowest_fitness_individual = sorted_pop[0]
+        formula=lowest_fitness_individual.genome.to_np_formula()
+        print(formula)
+        second_lowest_fitness_individual = sorted_pop[1]
+        formula=second_lowest_fitness_individual.genome.to_np_formula()
+        print(formula)
+
+        # Print their fitness values
+        print("Lowest fitness:", lowest_fitness_individual.fitness)
+        print("Second lowest fitness:", second_lowest_fitness_individual.fitness)
         
-        lowest_fitness_individual = min(pop, key=lambda x: x.fitness)
-        print(lowest_fitness_individual.fitness)
+        """ lowest_fitness_individual = min(pop, key=lambda x: x.fitness)
+        print(lowest_fitness_individual.fitness) """
 
         #ic(str(lowest_fitness_individual.genome))
         """ best_one=min(pop,key=lambda el: error(gptree,el.genome,x,y))
@@ -295,7 +425,7 @@ def EAlgoithm(nproblem,gptree):  #use elitism try to preserve best ones
      """
     best_one=min(pop,key=lambda el: error(gptree,el.genome,x,y))
     formula=best_one.genome.to_np_formula()
-    ic(best_one.fitness)
+    #ic(best_one.fitness)
 
     
 
@@ -306,17 +436,20 @@ def EAlgoithm(nproblem,gptree):  #use elitism try to preserve best ones
 #3197567994.386814
 #3780431286.080886
 #3241102705.3421373   mine
+#9809284786418.186  #using no len penalty
+#13597638488567.383
+#26585319369516.727
 #19040148669684.434  ###others solution 
 #3281516793.5310025  #others sol
 #1.904e+15
 
-numproblem=2
+numproblem=3
 problem = np.load('/home/adri/universita/magistrale/5_anno_1_sem/computational_intelligence/project_work/CI2024_project-work/data/problem_{}.npz'.format(numproblem))
 x = problem['x']  #3 righe 5000 colonne 
 
 y=problem['y']
-ic(y[2])  #5000 colonne
-ic(x[:,2]) # i think x[2] is never used   , 3 righe , 1 colonna, è il secondo elemento
+""" ic(y[2])  #5000 colonne
+ic(x[:,2])  """# i think x[2] is never used   , 3 righe , 1 colonna, è il secondo elemento
 
 dag = gxgp.DagGP(   #problems with ldex , it's unsupported for some types   np.ldexp,
     #safe
@@ -329,19 +462,22 @@ dag = gxgp.DagGP(   #problems with ldex , it's unsupported for some types   np.l
    # constants=[np.pi,np.e,np.euler_gamma],#[-1,0,1,np.pi,np.e,np.euler_gamma],#np.linspace(-2, 2, 500),
 )
 
-ic(np.var(y))
+#ic(np.var(y))
 formula,fit=EAlgoithm(numproblem,dag)
+print("THe formula is :")
 print(formula)
 ygen = eval(formula, {"np": np, "x": x})
 if (ygen.size==1):
     ygen = ygen * np.ones(5000)
 
-ic(ygen.shape)
+""" ic(ygen.shape)
 ic(y.shape)
-ic(x.shape)
+ic(x.shape) """
 ris= sum((a - b) ** 2 for a, b in zip(ygen, y)) / len(y) 
-ic(ris)
+#ic(ris)
 
+print("min_mse")
+print(fit)
 if ris==fit:
     print("good")
 else:
@@ -349,7 +485,7 @@ else:
 
 
 
-ic(globaltime)
+#ic(globaltime)
 plt.figure(figsize=(14, 8))
 plt.plot(
             range(len(history)),
