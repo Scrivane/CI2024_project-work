@@ -126,9 +126,16 @@ def f3(x: np.ndarray) -> np.ndarray:
      return np.add(np.hypot(np.power(np.exp(np.sin(np.hypot(x[1], np.round(np.cosh(np.round(np.e)))))), x[1]), np.add(np.hypot(np.add(np.hypot(np.i0(x[0]), np.hypot(np.exp(np.sinh(np.log1p(np.exp(np.exp(np.sin(np.hypot(x[1], np.e))))))), np.hypot(np.add(np.power(np.absolute(x[1]), np.add(np.log1p(np.exp(np.sin(x[1]))), np.log1p(np.exp(np.sinh(np.log1p(np.exp(np.sin(np.log1p(np.log1p(np.power(np.exp(np.sin(np.hypot(x[1], np.e))), x[1]))))))))))), np.i0(x[0])), np.i0(x[0])))), np.log(np.power(np.power(np.exp(np.sin(np.hypot(x[1], np.cosh(np.round(np.pi))))), x[1]), np.exp(np.sinh(np.log1p(np.exp(np.log1p(np.log1p(np.i0(x[0])))))))))), np.hypot(np.power(np.exp(np.sin(np.hypot(x[1], np.e))), x[1]), np.i0(x[0]))), np.log(np.power(np.exp(np.sin(np.hypot(x[1], np.e))), x[1])))), np.log(np.power(np.power(np.power(np.exp(np.sin(np.sin(x[1]))), x[1]), x[1]), x[1])))
 
 
-def f4(x: np.ndarray) -> np.ndarray: 
-     #4.653280870773529
+def f4(x: np.ndarray) -> np.ndarray: #as before
+
+
+     #min_mse
+     #0.3802252366701618
+
+
+     return np.add(np.sin(np.add(np.absolute(x[1]), np.hypot(np.cosh(np.log2(np.round(np.round(np.hypot(np.cosh(np.log2(np.euler_gamma)), np.cosh(np.log2(np.euler_gamma))))))), np.log2(np.euler_gamma)))), np.round(np.add(np.sin(np.add(np.absolute(x[1]), np.round(np.hypot(np.cosh(np.log2(np.euler_gamma)), np.log2(np.euler_gamma))))), np.round(np.add(np.sin(np.i0(np.round(np.add(np.absolute(x[1]), np.log1p(np.euler_gamma))))), np.add(np.sin(np.add(np.i0(np.round(x[1])), np.euler_gamma)), np.round(np.add(np.sin(np.add(np.i0(np.round(np.absolute(x[1]))), np.log1p(np.euler_gamma))), np.round(np.i0(np.round(np.add(np.sin(np.log1p(np.tanh(np.sin(np.add(np.i0(np.round(x[1])), np.log1p(np.add(np.absolute(x[1]), np.log1p(np.tanh(np.sin(np.euler_gamma)))))))))), np.round(np.round(np.hypot(np.cosh(np.log2(np.euler_gamma)), np.log2(np.euler_gamma))))))))))))))))
      
+     #4.653280870773529
      return np.multiply(np.cosh(np.pi), np.power(np.reciprocal(np.i0(np.cosh(x[1]))), np.log1p(np.cosh(x[1]))))
 
 
