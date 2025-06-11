@@ -146,7 +146,11 @@ def f5(x: np.ndarray) -> np.ndarray:
      return np.multiply(np.sin(np.pi), np.negative(x[0]))
 
 
-def f6(x: np.ndarray) -> np.ndarray: ...
+def f6(x: np.ndarray) -> np.ndarray: 
+     """ min_mse
+          0.18331680059707295 """
+
+     return np.multiply(np.add(np.tanh(np.multiply(x[0], np.log2(np.tanh(np.exp2(np.log10(np.euler_gamma)))))), x[1]), np.exp2(np.exp2(np.log10(np.log10(np.hypot(np.hypot(np.square(np.hypot(np.log2(np.tanh(np.tanh(np.i0(x[0])))), np.i0(np.log2(np.tanh(np.euler_gamma))))), np.euler_gamma), np.i0(x[0])))))))
 
 
 def f7(x: np.ndarray) -> np.ndarray: ...
