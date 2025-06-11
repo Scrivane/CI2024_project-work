@@ -139,7 +139,11 @@ def f4(x: np.ndarray) -> np.ndarray: #as before
      return np.multiply(np.cosh(np.pi), np.power(np.reciprocal(np.i0(np.cosh(x[1]))), np.log1p(np.cosh(x[1]))))
 
 
-def f5(x: np.ndarray) -> np.ndarray: ...
+def f5(x: np.ndarray) -> np.ndarray: 
+     #min_mse
+     #5.572809570693574e-18
+
+     return np.multiply(np.sin(np.pi), np.negative(x[0]))
 
 
 def f6(x: np.ndarray) -> np.ndarray: ...
