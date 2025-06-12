@@ -188,6 +188,13 @@ def f5(x: np.ndarray) -> np.ndarray: #is zero so it's good
 
 
 def f6(x: np.ndarray) -> np.ndarray:   #migliorabile
+     #long run using the while loop , div 10 fitness no scaling 
+     """ min_mse no scaling
+     0.03557585723525194 """
+
+
+
+     return np.add(x[1], np.multiply(np.hypot(x[0], np.log10(np.i0(np.add(x[1], np.multiply(np.hypot(x[0], np.hypot(np.add(x[1], np.multiply(np.hypot(np.tanh(x[1]), x[1]), np.tanh(np.negative(np.tanh(x[0]))))), np.hypot(np.multiply(np.pi, np.tanh(np.tanh(np.tanh(np.pi)))), np.pi))), np.negative(np.tanh(np.tanh(np.negative(np.add(x[0], np.add(np.multiply(np.pi, np.negative(np.tanh(np.tanh(x[0])))), x[1]))))))))))), np.negative(np.tanh(np.negative(np.add(x[1], np.multiply(np.hypot(np.tanh(np.add(x[1], np.hypot(np.tanh(np.pi), np.add(x[1], np.tanh(np.tanh(x[0])))))), np.multiply(x[1], np.tanh(x[0]))), np.negative(np.tanh(x[0])))))))))
      #long run using the while loop , div 1 fitness no scaling 
      #0.05452263550185847
 
