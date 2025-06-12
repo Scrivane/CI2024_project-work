@@ -260,6 +260,7 @@ def tournament_sel_array(population,n=2): # tournament selection to decide which
 
 
 def EA_Run(nstep,pop,crossOverRate,mutrate,MAX_TREE_LENGTH,gptree):
+        run_until_plateaux=False
 
         unique_string_genomes=set()
         for el in pop:  
@@ -271,7 +272,7 @@ def EA_Run(nstep,pop,crossOverRate,mutrate,MAX_TREE_LENGTH,gptree):
         #worst_individual = max(pop, key=lambda x: x.fitness)
         lastImprouvement=0
         originalnstep=nstep
-        while lastImprouvement<originalnstep/3:
+        while lastImprouvement<originalnstep/3 and (lastImprouvement==0 or run_until_plateaux==True):
             print(lastImprouvement)
             print(best_individual.fitness)
             
@@ -314,7 +315,8 @@ def EA_Run(nstep,pop,crossOverRate,mutrate,MAX_TREE_LENGTH,gptree):
                 mutation_functions = [
                 lambda genome: gxgp.mutation_point(genome, gptree),
                 lambda genome: gxgp.mutation_hoist(genome),
-                lambda genome: gxgp.mutation_permutations(genome)
+                lambda genome: gxgp.mutation_permutations(genome),
+                lambda genome: gxgp.mutation_collapse(genome, gptree)
                 ]
             
                 if( np.random.rand()<mutrate):  # has a chance of mutating the child using a mutation

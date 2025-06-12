@@ -11,6 +11,13 @@ from .random import gxgp_random
 from .gp_dag import DagGP
 from .utils import arity
 
+def find_parent(root, target):
+        for node in root.subtree:
+            for i, child in enumerate(node.successors):
+                if child is target:
+                    return node, i
+        return None, None
+
 def xover_swap_subtree(tree1: Node, tree2: Node) -> Node:
     offspring = deepcopy(tree1)
     internal_nodes = [node for node in offspring.subtree if not node.is_leaf]
@@ -53,6 +60,31 @@ def mutation_hoist(tree1: Node) -> Node:
 
 
 
+
+def mutation_collapse(tree1: Node,gptree:DagGP) -> Node:
+    offspring = deepcopy(tree1)
+    #ic(offspring)
+    internal_nodes = [node for node in offspring.subtree if not node.is_leaf]
+    successors = None
+    if not internal_nodes:
+        return offspring
+    
+
+
+    # Pick random internal node (i.e., a subtree)
+    target = gxgp_random.choice(internal_nodes)
+    possibilities= gptree._variables + gptree._constants  #[e for e in (gptree._variables + gptree._constants) if str(e)!=str(target)]
+    new_node = deepcopy(gxgp_random.choice(possibilities))
+
+    parent, idx = find_parent(offspring, target)
+    if parent is not None:
+        children = parent.successors
+        children[idx] = new_node
+        parent.successors = children
+
+    return offspring
+
+
 def mutation_point(tree1: Node,gptree:DagGP) -> Node:  ##i have the problem that chainging a node changes all similar nodes
     offspring = deepcopy(tree1)  # single deepcopy
     
@@ -76,12 +108,7 @@ def mutation_point(tree1: Node,gptree:DagGP) -> Node:  ##i have the problem that
 
 
 
-    def find_parent(root, target):
-        for node in root.subtree:
-            for i, child in enumerate(node.successors):
-                if child is target:
-                    return node, i
-        return None, None
+
     
 
     if target is offspring:
