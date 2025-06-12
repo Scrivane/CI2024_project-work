@@ -21,7 +21,7 @@ import s333044
 #http://tiny.cc/ci24_github
 
 globaltime=0
-tree = Node(np.multiply, [Node(np.add, [Node(10), Node('x')]), Node(2)])
+""" tree = Node(np.multiply, [Node(np.add, [Node(10), Node('x')]), Node(2)])
 #tree.draw()
 tree(x=np.array([1, 2, 3, 4, 5]))
 tree2 = Node(
@@ -33,7 +33,7 @@ tree2(x=1, y=2, z=3, foo=42)
 # Unpacking a dictionary
 vars = {'x': 1, 'y': 2, 'z': 3, 'foo': 42}
 tree2(**vars)
-str(tree)
+str(tree) """
 
 
 
@@ -97,6 +97,7 @@ class Individual:
 
 def length_penalty(length, threshold=2000, scale=1e6):
     if length <= threshold:
+        #print(0.001*length*scale)
         return   0.001*length*scale#scale * 0.001 * length**2
     else:
         base = scale * 0.001 * threshold**2
@@ -138,9 +139,10 @@ def fitness(tree,nodefun:Node,x, y):
 
     #depthpenalty=nodefun.depth   # it's too computationally costly
 
+
     
 
-    return mse_val+length_penalty(len(nodefun),1000,np.max(y)/2)  #+ penalty_coeff * (tree_length ** 2)
+    return mse_val+(length_penalty(len(nodefun),1000,maxy*sizey/(5000*2))) /100000  #+ penalty_coeff * (tree_length ** 2)
     
 
     
@@ -214,54 +216,50 @@ def tournament_sel_array(population,n=2): # tournament selection to decide which
 
 #find a way to limit depth
 #Steady-state model
-def EAlgoithm(nproblem,gptree):  #use elitism try to preserve best ones
-    problem = np.load('/home/adri/universita/magistrale/5_anno_1_sem/computational_intelligence/project_work/CI2024_project-work/data/problem_{}.npz'.format(nproblem))
-    x = problem['x']
-    y = problem['y']
 
-    minx = x.min()
-    maxx = x.max()
-    miny = y.min()
-    maxy = y.max()
-    minx_nonneg = np.min(x[x >= 0]) if np.any(x >= 0) else None
-    maxx_neg = np.max(x[x < 0]) if np.any(x < 0) else None
 
-    # For y
-    miny_nonneg = np.min(y[y >= 0]) if np.any(y >= 0) else None
-    maxy_neg = np.max(y[y < 0]) if np.any(y < 0) else None
+#failed variable mutrate and crossover
+""" if len(history) > 5: # Check after 5 steps to have enough history
+                # Calculate improvements within the last 5 fitness values
+                # A "strict improvement" means `el < previou_el`.
+                # Initialize improvements as 0. Each time fitness decreases, it's an improvement.
+                improvements = 0
+                # Iterate from the second element of the last 5 to compare with its predecessor
+              
+                for i in range(1, 5): # history[-5:] effectively gives us 5 elements. indices 0-4
 
-    ic(x.shape)
-    MAX_TREE_LENGTH=1000
-    mutrate=0.05
-    minmutrate=0.05
-    mincrossover=0.05
-    #mutrate=1
-    nrestarts=5
-    nelemets=100#15   #400   #was 200
-    crossOverRate=1#0.9
-    mut_increasement=1.2
-    
-    nstep=10000#10000#1000 #100 #2000   #usa 4000
-    """  lowest_fitness_individual = min(pop, key=lambda x: x.fitness)
-    ic(lowest_fitness_individual)
-    ic(str(lowest_fitness_individual.genome)) """
-    #ic(lowest_fitness_individual.fitness)
-    #unique_string_genomes = set()
-    pop0,_=popInizialize(gptree,1,x,y)
-    
-    lowest_fitness_individual=pop0[0]
-    for _ in range(nrestarts):
+                    if history[-5 + i] < history[-5 + i - 1]:
+                        improvements += 1
+                
+                # ic(f"Step {current_step}: mutrate={mutrate:.2f}, crossOverRate={crossOverRate:.2f}, improvements={improvements}")
+
+                if improvements >= 1 :
+                    # Good progress: Decrease mutation to exploit, increase crossover for mixing good parts
+                    mutrate = min(1, mutrate * 1.01) # Corrected typo: mut_increasement to mut_increase_factor
+                    crossOverRate = max(0.05, crossOverRate * 0.99)
+                    
+                # Check for stagnation (e.g., less than 1 improvement in last 4 comparisons)
+                elif improvements < 1:
+                    # Stagnating: Increase mutation to explore, decrease crossover to preserve existing structures
+                    mutrate = max(0.05, mutrate * 0.99)
+                    crossOverRate = min(1, crossOverRate * 1.01)
+                    
+            
+            # Ensure rates stay within bounds after any adjustment
+            mutrate += np.random.normal(0, 0.01)
+            crossOverRate += np.random.normal(0, 0.01)
+            mutrate = np.clip(mutrate, 0.05, 1)
+            crossOverRate = np.clip(crossOverRate, 0.05, 1)    """
+
+
+def EA_Run(nstep,pop,crossOverRate,mutrate,MAX_TREE_LENGTH,gptree):
+
         unique_string_genomes=set()
-        pop,loc_unique_str_genome=popInizialize(gptree,nelemets,x,y)
-        unique_string_genomes.update(loc_unique_str_genome)
-        
-        
-
-        if lowest_fitness_individual not in pop:
-            pop.append(lowest_fitness_individual)
-            unique_string_genomes.add(str(lowest_fitness_individual.genome))
-
-
+        for el in pop:  
+            localGenome=el.genome
+            unique_string_genomes.add(str(localGenome))
+        #pop,loc_unique_str_genome=popInizialize(gptree,nelemets,x,y)
+        #unique_string_genomes.update(loc_unique_str_genome)
         for el in tqdm(range(nstep)):
             """ lowest_fitness_individual = min(pop, key=lambda x: x.fitness)
             best_one=min(pop,key=lambda el: error(gptree,el.genome,x,y)) """
@@ -289,7 +287,7 @@ def EAlgoithm(nproblem,gptree):  #use elitism try to preserve best ones
             else:
                 genome_child=(tournament_sel_array(pop,1)).genome  #select a random individual that later can be mutated
             if len(genome_child) > 2300:
-                print("chi")
+                
                 continue
             #child=Individual(genome=child,fitness=fitness(gptree,child,x,y))
 
@@ -340,47 +338,6 @@ def EAlgoithm(nproblem,gptree):  #use elitism try to preserve best ones
             lowest_fitness_individual = min(pop, key=lambda x: x.fitness)
             localbestfit=lowest_fitness_individual.fitness
 
-
-            
-
-
-            """ if len(history) > 5: # Check after 5 steps to have enough history
-                # Calculate improvements within the last 5 fitness values
-                # A "strict improvement" means `el < previou_el`.
-                # Initialize improvements as 0. Each time fitness decreases, it's an improvement.
-                improvements = 0
-                # Iterate from the second element of the last 5 to compare with its predecessor
-              
-                for i in range(1, 5): # history[-5:] effectively gives us 5 elements. indices 0-4
-
-                    if history[-5 + i] < history[-5 + i - 1]:
-                        improvements += 1
-                
-                # ic(f"Step {current_step}: mutrate={mutrate:.2f}, crossOverRate={crossOverRate:.2f}, improvements={improvements}")
-
-                if improvements >= 1 :
-                    # Good progress: Decrease mutation to exploit, increase crossover for mixing good parts
-                    mutrate = min(1, mutrate * 1.01) # Corrected typo: mut_increasement to mut_increase_factor
-                    crossOverRate = max(0.05, crossOverRate * 0.99)
-                    
-                # Check for stagnation (e.g., less than 1 improvement in last 4 comparisons)
-                elif improvements < 1:
-                    # Stagnating: Increase mutation to explore, decrease crossover to preserve existing structures
-                    mutrate = max(0.05, mutrate * 0.99)
-                    crossOverRate = min(1, crossOverRate * 1.01)
-                    
-            
-            # Ensure rates stay within bounds after any adjustment
-            mutrate += np.random.normal(0, 0.01)
-            crossOverRate += np.random.normal(0, 0.01)
-            mutrate = np.clip(mutrate, 0.05, 1)
-            crossOverRate = np.clip(crossOverRate, 0.05, 1)    """
-            """ if el % 100 == 0:
-                print(f"[{el}] fitness={localbestfit:.4f} | mutrate={mutrate:.3f} | crossover={crossOverRate:.3f}") """
-
-
-                    
-
             
             
             #ic(lowest_fitness_individual.fitness)
@@ -405,25 +362,99 @@ def EAlgoithm(nproblem,gptree):  #use elitism try to preserve best ones
         lowest_fitness_individual = sorted_pop[0]
         formula=lowest_fitness_individual.genome.to_np_formula()
         print(formula)
+        print("fitness:")
+        print(lowest_fitness_individual.fitness)
         second_lowest_fitness_individual = sorted_pop[1]
         formula=second_lowest_fitness_individual.genome.to_np_formula()
-        print(formula)
-
-        # Print their fitness values
-        print("Lowest fitness:", lowest_fitness_individual.fitness)
-        print("Second lowest fitness:", second_lowest_fitness_individual.fitness)
         
-        """ lowest_fitness_individual = min(pop, key=lambda x: x.fitness)
-        print(lowest_fitness_individual.fitness) """
-
-        #ic(str(lowest_fitness_individual.genome))
-        """ best_one=min(pop,key=lambda el: error(gptree,el.genome,x,y))
-        ic(str(best_one.genome))
-        ic(best_one.fitness)
+        return [lowest_fitness_individual,second_lowest_fitness_individual]
         
-        ic(formula)
-     """
-    best_one=min(pop,key=lambda el: error(gptree,el.genome,x,y))
+
+
+
+
+def EAlgoithm(nproblem,gptree,x,y):  #use elitism try to preserve best ones
+    """ problem = np.load('/home/adri/universita/magistrale/5_anno_1_sem/computational_intelligence/project_work/CI2024_project-work/data/problem_{}.npz'.format(nproblem))
+    x = problem['x']
+    y = problem['y'] """
+
+    minx = x.min()
+    maxx = x.max()
+    miny = y.min()
+    maxy = y.max()
+    minx_nonneg = np.min(x[x >= 0]) if np.any(x >= 0) else None
+    maxx_neg = np.max(x[x < 0]) if np.any(x < 0) else None
+
+    # For y
+    miny_nonneg = np.min(y[y >= 0]) if np.any(y >= 0) else None
+    maxy_neg = np.max(y[y < 0]) if np.any(y < 0) else None
+
+    ic(x.shape)
+    MAX_TREE_LENGTH=500
+    mutrate=0.05
+    minmutrate=0.05
+    mincrossover=0.05                              
+    #mutrate=1
+    nrestarts=5  #was 5
+    nelemets=100#15   #400   #was 200
+    crossOverRate=1#0.9
+    mut_increasement=1.2
+    
+    nstep=10000 #5000#10000#1000 #100 #2000   #usa 4000
+    """  lowest_fitness_individual = min(pop, key=lambda x: x.fitness)
+    ic(lowest_fitness_individual)
+    ic(str(lowest_fitness_individual.genome)) """
+    #ic(lowest_fitness_individual.fitness)
+    #unique_string_genomes = set()
+    pop0,_=popInizialize(gptree,1,x,y)
+    
+    lowest_fitness_individual=pop0[0]
+    best_individuals_each_restart=[]
+    for _ in range(nrestarts):
+        pop,_=popInizialize(gptree,nelemets,x,y)
+        
+        top_2_individual=EA_Run(nstep,pop,crossOverRate,mutrate,MAX_TREE_LENGTH,gptree)
+        best_individuals_each_restart.extend(top_2_individual)
+
+    
+    unique_string_genomes=set()
+    pop=[]
+    for individual in best_individuals_each_restart:
+        genome_child=individual.genome
+
+
+        if (str(genome_child) not in unique_string_genomes):
+                    unique_string_genomes.add(str(genome_child))
+                    child=Individual(genome=genome_child, fitness=fitness(gptree, genome_child, x, y))
+                    pop.append(child)  # add child to population
+
+        
+
+    missing_individuals=nelemets-len(pop)
+    poploc,_=popInizialize(gptree,missing_individuals,x,y)
+    pop.extend(poploc)
+    top_2_individual=EA_Run(nstep,pop,crossOverRate,mutrate,MAX_TREE_LENGTH,gptree)
+    best_individuals_each_restart.extend(top_2_individual)
+
+
+
+                
+    """ else:  # if it  isn't new
+                    
+                    listonepop,_=popInizialize(gptree,1,x,y)
+                    randomNewIndividual=listonepop[0]
+                    while str(randomNewIndividual.genome) in unique_string_genomes:
+                        listonepop,_=popInizialize(gptree,1,x,y)
+                        randomNewIndividual=listonepop[0]
+                    
+                    unique_string_genomes.add(str(randomNewIndividual.genome))
+                    #child=Individual(genome=randomNewGenome, fitness=fitness(gptree, randomNewGenome, x, y))
+                    pop.append(randomNewIndividual) """
+
+        
+
+    #best_one=min(pop,key=lambda el: error(gptree,el.genome,x,y))
+    best_one=min(best_individuals_each_restart,key=lambda el: error(gptree,el.genome,x,y))
     formula=best_one.genome.to_np_formula()
     #ic(best_one.fitness)
 
@@ -443,14 +474,55 @@ def EAlgoithm(nproblem,gptree):  #use elitism try to preserve best ones
 #3281516793.5310025  #others sol
 #1.904e+15
 
-numproblem=3
+def normalization(y,range=(0,5)):
+    y_min = np.min(y)
+    y_max = np.max(y)
+   
+
+    offset=y_min
+    mulCoefficient=(range[1] -range[0])/(y_max-y_min)
+
+    yscaled=(y-offset)*mulCoefficient+range[0]
+
+    return yscaled,mulCoefficient,offset,range[0]
+
+
+
+numproblem=5
 problem = np.load('/home/adri/universita/magistrale/5_anno_1_sem/computational_intelligence/project_work/CI2024_project-work/data/problem_{}.npz'.format(numproblem))
 x = problem['x']  #3 righe 5000 colonne 
 
 y=problem['y']
+#fixxx
+""" def trying_f5_rescaled(x:np.ndarray,offset,mul,y:np.ndarray):
+     yset=np.add(np.exp2(np.tanh(np.square(np.hypot(np.sin(np.hypot(np.hypot(np.pi, x[1]), np.e)), np.tanh(np.add(np.tanh(x[1]), np.sin(x[0]))))))), np.pi)
+     yreset=np.add(np.divide(np.subtract(yset , np.min(x)),  mul) , offset)
+
+     ris=sum((a - b) ** 2 for a, b in zip(y, yreset)) / len(y)
+     print("real result:")
+     print(ris)
+     return yreset """
+
+y_scaled,mulCof,offset,_=normalization(y)
+#trying_f5_rescaled(x,offset,mulCof,y)
+y=y_scaled 
+sizey=np.size(y)
+maxy=np.max(y)
+
 """ ic(y[2])  #5000 colonne
 ic(x[:,2])  """# i think x[2] is never used   , 3 righe , 1 colonna, è il secondo elemento
 
+
+""" x_T = x.T
+
+# Reshape y to (5000, 1)
+y_col = y.reshape(-1, 1)
+
+# Concatenate x and y horizontally: shape (5000, 4)
+xy = np.hstack((x_T, y_col))
+
+# Save to file
+np.savetxt(f'problem_{numproblem}.txt', xy, delimiter=' ', fmt='%.6f') """
 dag = gxgp.DagGP(   #problems with ldex , it's unsupported for some types   np.ldexp,
     #safe
     #operators=[np.pow],
@@ -463,7 +535,8 @@ dag = gxgp.DagGP(   #problems with ldex , it's unsupported for some types   np.l
 )
 
 #ic(np.var(y))
-formula,fit=EAlgoithm(numproblem,dag)
+formula,fit=EAlgoithm(numproblem,dag,x,y)
+
 print("THe formula is :")
 print(formula)
 ygen = eval(formula, {"np": np, "x": x})
@@ -482,6 +555,20 @@ if ris==fit:
     print("good")
 else:
     print("wrong") 
+
+
+denormalizedFromula=f"np.add(np.divide({formula}, {mulCof.item()}), {offset.item()})"
+y_denormalized=eval(denormalizedFromula, {"np": np, "x": x})
+if (y_denormalized.size==1):
+    y_denormalized = y_denormalized * np.ones(5000)
+y=problem['y']
+ris= sum((a - b) ** 2 for a, b in zip(y_denormalized, y)) / len(y) 
+
+print("min_mse: ")
+print(ris) 
+
+
+
 
 
 
