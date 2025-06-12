@@ -139,10 +139,14 @@ def fitness(tree,nodefun:Node,x, y):
 
     #depthpenalty=nodefun.depth   # it's too computationally costly
 
-    if numproblem==4:
-        div=10000
+    if numproblem==5: #useless
+        div=10
+    elif numproblem==7:
+        div=10
+    elif numproblem==6:
+        div=10
     else:
-        div=1
+        div=1 
     
 
     return mse_val+(length_penalty(len(nodefun),1000,maxy*sizey/(5000*2))) /div  #+ penalty_coeff * (tree_length ** 2)
@@ -263,93 +267,113 @@ def EA_Run(nstep,pop,crossOverRate,mutrate,MAX_TREE_LENGTH,gptree):
             unique_string_genomes.add(str(localGenome))
         #pop,loc_unique_str_genome=popInizialize(gptree,nelemets,x,y)
         #unique_string_genomes.update(loc_unique_str_genome)
-        for el in tqdm(range(nstep)):
-            """ lowest_fitness_individual = min(pop, key=lambda x: x.fitness)
-            best_one=min(pop,key=lambda el: error(gptree,el.genome,x,y)) """
-            #apply elitism
-            """ if min(pop, key=lambda x: x.fitness).fitness==max(pop, key=lambda ind: ind.fitness).fitness:  #reached steady state
-                break """
+        best_individual = min(pop, key=lambda x: x.fitness)
+        #worst_individual = max(pop, key=lambda x: x.fitness)
+        lastImprouvement=0
+        originalnstep=nstep
+        while lastImprouvement<originalnstep/3:
+            print(lastImprouvement)
+            print(best_individual.fitness)
             
+            for el in tqdm(range(nstep)):
+                lastImprouvement+=1
 
-            
-
-            """ values = [el.genome.value for el in pop]
-            print(values) """
-
-            if( np.random.rand()<crossOverRate):
-                ris1=tournament_sel_array(pop,2)   # uses tournament selection to select 2 parent for the crossover
-                ris2=tournament_sel_array(pop,2)
-                genome_child = gxgp.xover_swap_subtree(ris1.genome,ris2.genome)  # uses partially mapped crossover
-                #child_candidate = gxgp.xover_swap_subtree(ris1.genome, ris2.genome)
-                if len(genome_child) > MAX_TREE_LENGTH:
-                    listonepop,_=popInizialize(gptree,1,x,y)
-                    randomNewIndividual=listonepop[0]
-                    genome_child = randomNewIndividual.genome
+                """ lowest_fitness_individual = min(pop, key=lambda x: x.fitness)
+                best_one=min(pop,key=lambda el: error(gptree,el.genome,x,y)) """
+                #apply elitism
+                """ if min(pop, key=lambda x: x.fitness).fitness==max(pop, key=lambda ind: ind.fitness).fitness:  #reached steady state
+                    break """
                 
-            
-            else:
-                genome_child=(tournament_sel_array(pop,1)).genome  #select a random individual that later can be mutated
-            if len(genome_child) > 2300:
-                
-                continue
-            #child=Individual(genome=child,fitness=fitness(gptree,child,x,y))
 
-        
-            
-        
-            mutation_functions = [
-            lambda genome: gxgp.mutation_point(genome, gptree),
-        lambda genome: gxgp.mutation_hoist(genome),
-        lambda genome: gxgp.mutation_permutations(genome)
-            ]
-           
-            if( np.random.rand()<mutrate):  # has a chance of mutating the child using a mutation
-                mutation_fn = np.random.choice(mutation_functions)
-            
-                genome_child = mutation_fn(genome_child)
+                
+
+                """ values = [el.genome.value for el in pop]
+                print(values) """
+
+                if( np.random.rand()<crossOverRate):
+                    ris1=tournament_sel_array(pop,2)   # uses tournament selection to select 2 parent for the crossover
+                    ris2=tournament_sel_array(pop,2)
+                    genome_child = gxgp.xover_swap_subtree(ris1.genome,ris2.genome)  # uses partially mapped crossover
+                    #child_candidate = gxgp.xover_swap_subtree(ris1.genome, ris2.genome)
+                    if len(genome_child) > MAX_TREE_LENGTH:
+                        listonepop,_=popInizialize(gptree,1,x,y)
+                        randomNewIndividual=listonepop[0]
+                        genome_child = randomNewIndividual.genome
+                    
+                
+                else:
+                    genome_child=(tournament_sel_array(pop,1)).genome  #select a random individual that later can be mutated
                 if len(genome_child) > 2300:
-                    print("si")
+                    
                     continue
-                #child = Individual(genome=mutedgenome, fitness=fitness(gptree, mutedgenome, x, y))
-                
+                #child=Individual(genome=child,fitness=fitness(gptree,child,x,y))
 
             
-            
-        # ic(fitness(gptree,child.genome,x,y))
-            if (str(genome_child) not in unique_string_genomes):
-                unique_string_genomes.add(str(genome_child))
-                child=Individual(genome=genome_child, fitness=fitness(gptree, genome_child, x, y))
-                pop.append(child)  # add child to population
-
-            
-            else:  # if it  isn't new
                 
-                listonepop,_=popInizialize(gptree,1,x,y)
-                randomNewIndividual=listonepop[0]
-                while str(randomNewIndividual.genome) in unique_string_genomes:
+            
+                mutation_functions = [
+                lambda genome: gxgp.mutation_point(genome, gptree),
+                lambda genome: gxgp.mutation_hoist(genome),
+                lambda genome: gxgp.mutation_permutations(genome)
+                ]
+            
+                if( np.random.rand()<mutrate):  # has a chance of mutating the child using a mutation
+                    mutation_fn = np.random.choice(mutation_functions)
+                
+                    genome_child = mutation_fn(genome_child)
+                    if len(genome_child) > 2300:
+                        print("si")
+                        continue
+                    #child = Individual(genome=mutedgenome, fitness=fitness(gptree, mutedgenome, x, y))
+                    
+
+                
+                
+                # ic(fitness(gptree,child.genome,x,y))
+                if (str(genome_child) not in unique_string_genomes):
+                    unique_string_genomes.add(str(genome_child))
+                    child=Individual(genome=genome_child, fitness=fitness(gptree, genome_child, x, y))
+                    pop.append(child)  # add child to population
+                    newIndividual=child
+
+                
+                else:  # if it  isn't new
+                    
                     listonepop,_=popInizialize(gptree,1,x,y)
                     randomNewIndividual=listonepop[0]
+                    while str(randomNewIndividual.genome) in unique_string_genomes:
+                        listonepop,_=popInizialize(gptree,1,x,y)
+                        randomNewIndividual=listonepop[0]
+                    
+                    unique_string_genomes.add(str(randomNewIndividual.genome))
+                    #child=Individual(genome=randomNewGenome, fitness=fitness(gptree, randomNewGenome, x, y))
+                    pop.append(randomNewIndividual)
+                    newIndividual=randomNewIndividual
+
                 
-                unique_string_genomes.add(str(randomNewIndividual.genome))
-                #child=Individual(genome=randomNewGenome, fitness=fitness(gptree, randomNewGenome, x, y))
-                pop.append(randomNewIndividual)
+
+
+                if(newIndividual.fitness<best_individual.fitness):
+                    best_individual=newIndividual
+                    lastImprouvement=0
+                
 
             
 
-            
+                
 
-            lowest_fitness_individual = min(pop, key=lambda x: x.fitness)
-            localbestfit=lowest_fitness_individual.fitness
+                #lowest_fitness_individual = min(pop, key=lambda x: x.fitness)
+                localbestfit=best_individual.fitness
 
-            
-            
-            #ic(lowest_fitness_individual.fitness)
-            history.append(localbestfit)
-            
-            maxfit_ind=(max(pop, key=lambda ind: ind.fitness))    #todo make negativ efitness and use a minimizer 
-            #ic(maxfit_ind.fitness)
-            pop.remove(maxfit_ind) # delete from population the wrost individual
-            unique_string_genomes.remove(str(maxfit_ind.genome))
+                
+                
+                #ic(lowest_fitness_individual.fitness)
+                history.append(localbestfit)
+                
+                maxfit_ind=(max(pop, key=lambda ind: ind.fitness))    #todo make negativ efitness and use a minimizer 
+                #ic(maxfit_ind.fitness)
+                pop.remove(maxfit_ind) # delete from population the wrost individual
+                unique_string_genomes.remove(str(maxfit_ind.genome))
             
         
 
@@ -394,18 +418,18 @@ def EAlgoithm(nproblem,gptree,x,y):  #use elitism try to preserve best ones
     maxy_neg = np.max(y[y < 0]) if np.any(y < 0) else None
 
     ic(x.shape)
-    final_run_long=False
+    final_run_long=True
     MAX_TREE_LENGTH=500
     mutrate=0.05
     minmutrate=0.05
     mincrossover=0.05                              
     #mutrate=1
-    nrestarts=10  #was 5
+    nrestarts=5  #was 5
     nelemets=100#15   #400   #was 200
     crossOverRate=1#0.9
     mut_increasement=1.2
     
-    nstep=5000 #5000#10000#1000 #100 #2000   #usa 4000
+    nstep=10000 #5000#10000#1000 #100 #2000   #usa 4000
     """  lowest_fitness_individual = min(pop, key=lambda x: x.fitness)
     ic(lowest_fitness_individual)
     ic(str(lowest_fitness_individual.genome)) """
@@ -497,7 +521,8 @@ def normalization(y,range=(0,5)):
 
 
 
-numproblem=5
+numproblem=6
+scaling=False
 problem = np.load('/home/adri/universita/magistrale/5_anno_1_sem/computational_intelligence/project_work/CI2024_project-work/data/problem_{}.npz'.format(numproblem))
 x = problem['x']  #3 righe 5000 colonne 
 
@@ -512,9 +537,11 @@ y=problem['y']
      print(ris)
      return yreset """
 
-y_scaled,mulCof,offset,_=normalization(y)
-#trying_f5_rescaled(x,offset,mulCof,y)
-y=y_scaled 
+if(scaling==True):
+
+    y_scaled,mulCof,offset,_=normalization(y)
+    #trying_f5_rescaled(x,offset,mulCof,y)
+    y=y_scaled 
 sizey=np.size(y)
 maxy=np.max(y)
 
@@ -550,7 +577,7 @@ print("THe formula is :")
 #print(formula)
 ygen = eval(formula, {"np": np, "x": x})
 if (ygen.size==1):
-    ygen = ygen * np.ones(5000)
+    ygen = ygen * np.ones(np.size(y))  #checkl
 
 """ ic(ygen.shape)
 ic(y.shape)
@@ -558,24 +585,24 @@ ic(x.shape) """
 ris= sum((a - b) ** 2 for a, b in zip(ygen, y)) / len(y) 
 #ic(ris)
 
-print("min_mse")
+print("min_mse no scaling")
 print(fit)
 if ris==fit:
     print("good")
 else:
     print("wrong") 
 
+if scaling==True:
+    denormalizedFromula=f"np.add(np.divide({formula}, {mulCof.item()}), {offset.item()})"
+    print(denormalizedFromula)
+    y_denormalized=eval(denormalizedFromula, {"np": np, "x": x})
+    if (y_denormalized.size==1):
+        y_denormalized = y_denormalized *np.ones(np.size(y))  #checkl
+    y=problem['y']
+    ris= sum((a - b) ** 2 for a, b in zip(y_denormalized, y)) / len(y) 
 
-denormalizedFromula=f"np.add(np.divide({formula}, {mulCof.item()}), {offset.item()})"
-print(denormalizedFromula)
-y_denormalized=eval(denormalizedFromula, {"np": np, "x": x})
-if (y_denormalized.size==1):
-    y_denormalized = y_denormalized * np.ones(5000)
-y=problem['y']
-ris= sum((a - b) ** 2 for a, b in zip(y_denormalized, y)) / len(y) 
-
-print("min_mse: ")
-print(ris) 
+    print("min_mse using scaling: ")
+    print(ris) 
 
 
 

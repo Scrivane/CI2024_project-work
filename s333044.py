@@ -151,8 +151,20 @@ def trying_f5_rescaled(x:np.ndarray,offset,mul,y:np.ndarray):
      
 
 def f5(x: np.ndarray) -> np.ndarray: #is zero so it's good
+
+     #rescaling ,with final long run 5 43start 10000 steps
+     #fitness= mse_val+(length_penalty(len(nodefun),1000,maxy*sizey/(50000*2))) /div
+     """     min_mse: 
+     1.3036406406056244e-18 """
+     return np.add(np.divide(np.multiply(np.power(np.power(np.tanh(np.e), x[0]), np.round(np.reciprocal(np.multiply(np.cosh(np.power(np.power(np.tanh(np.e), x[0]), np.round(np.reciprocal(np.multiply(np.cosh(np.tanh(np.round(np.round(np.euler_gamma)))), np.power(np.multiply(np.cosh(np.reciprocal(np.cosh(np.log2(np.e)))), np.euler_gamma), np.round(np.reciprocal(np.multiply(np.cosh(np.tanh(np.cosh(np.log2(np.e)))), np.power(np.multiply(np.cosh(np.reciprocal(np.cosh(np.log2(np.cosh(np.log2(x[0])))))), np.euler_gamma), x[1])))))))))), np.power(np.multiply(np.cosh(np.reciprocal(np.round(np.add(np.cosh(np.log2(np.cosh(np.log2(np.cosh(np.log2(x[0])))))), np.euler_gamma)))), np.euler_gamma), x[1]))))), np.add(np.cosh(np.log2(np.e)), np.round(np.round(np.e)))), 174318497.75735644), -2.8520706810421616e-08)
+
+
+
+
+
+
      #trying rescaling
-     #with low oenalty on fitness for long and no final long step and 20 restarts
+     #with low oenalty on fitness for long and no final long step and 20 restarts adn 5000 speps each run
 
      #min_mse 1.4526349340721968e-18
      return np.add(np.divide(np.add(np.pi, np.multiply(np.absolute(np.cosh(np.euler_gamma)), np.exp2(np.sin(np.log1p(np.round(np.hypot(np.add(np.round(np.hypot(np.power(np.multiply(np.pi, np.sin(np.log1p(np.euler_gamma))), np.round(np.add(np.log2(np.tanh(np.hypot(np.power(np.multiply(np.pi, np.sin(np.log2(np.tanh(np.hypot(np.add(np.round(np.hypot(np.add(np.tanh(np.cosh(np.log1p(x[1]))), x[1]), np.cosh(np.log1p(np.pi)))), np.cosh(np.hypot(np.cosh(np.pi), np.euler_gamma))), np.add(np.euler_gamma, np.pi)))))), np.e), np.log10(np.add(np.hypot(np.square(np.log1p(np.e)), np.exp2(np.e)), np.round(np.power(np.cosh(np.log1p(x[1])), np.cosh(np.log1p(x[1]))))))))), np.multiply(np.cosh(np.log10(np.add(np.add(np.log2(np.tanh(np.hypot(np.power(np.multiply(np.pi, np.sin(np.log1p(x[1]))), np.round(np.add(np.log2(np.e), np.multiply(np.cosh(np.euler_gamma), np.e)))), np.add(np.euler_gamma, np.pi)))), np.multiply(np.cosh(np.log10(np.add(np.hypot(np.square(np.log1p(np.e)), np.exp2(np.e)), np.round(np.power(np.cosh(np.log1p(x[1])), x[0]))))), np.e)), np.round(np.power(np.cosh(np.log1p(x[1])), x[0]))))), np.e)))), np.add(np.euler_gamma, np.pi))), np.cosh(np.hypot(np.cosh(np.log1p(np.pi)), np.euler_gamma))), np.hypot(np.cosh(np.log1p(np.pi)), np.euler_gamma)))))))), 174318497.75735644), -2.8520706810421616e-08)
@@ -176,13 +188,25 @@ def f5(x: np.ndarray) -> np.ndarray: #is zero so it's good
 
 
 def f6(x: np.ndarray) -> np.ndarray:   #migliorabile
+     #long run using the while loop , div 1 fitness no scaling 
+     #0.05452263550185847
+
+     return np.add(np.multiply(np.tanh(np.add(np.tanh(x[0]), np.add(np.absolute(np.multiply(x[1], np.exp2(np.tanh(np.tanh(x[1]))))), np.add(np.tanh(x[1]), np.negative(x[0]))))), np.log1p(np.absolute(np.add(np.sin(x[0]), np.add(np.absolute(np.multiply(x[1], np.exp2(np.tanh(x[1])))), np.add(np.tanh(x[1]), np.negative(x[0]))))))), np.add(np.tanh(np.negative(x[0])), np.log1p(np.tanh(x[1]))))
+
+
+
      """ min_mse
           0.18331680059707295 """
 
      return np.multiply(np.add(np.tanh(np.multiply(x[0], np.log2(np.tanh(np.exp2(np.log10(np.euler_gamma)))))), x[1]), np.exp2(np.exp2(np.log10(np.log10(np.hypot(np.hypot(np.square(np.hypot(np.log2(np.tanh(np.tanh(np.i0(x[0])))), np.i0(np.log2(np.tanh(np.euler_gamma))))), np.euler_gamma), np.i0(x[0])))))))
 
 
-def f7(x: np.ndarray) -> np.ndarray: ...
+def f7(x: np.ndarray) -> np.ndarray: 
+     #long run using the while loop , div 10 fitness no scaling 
+     #186.37582307610336
+
+
+     return np.hypot(np.power(np.tanh(np.tanh(np.tanh(np.tanh(np.tanh(np.exp(x[1])))))), np.round(np.add(np.add(np.round(np.tanh(x[1])), np.tanh(np.add(np.add(np.add(np.add(np.power(np.tanh(np.exp(x[1])), np.round(np.add(np.add(np.add(np.add(np.power(np.exp(x[1]), np.round(np.tanh(np.add(np.add(np.add(np.add(np.power(np.exp(x[1]), np.round(np.tanh(x[1]))), x[0]), x[0]), np.round(x[0])), x[0])))), x[1]), x[0]), x[0]), x[0]))), x[0]), x[0]), np.add(np.add(np.add(np.round(np.tanh(x[1])), np.tanh(np.add(np.power(np.exp(x[0]), x[0]), x[0]))), np.tanh(np.tanh(np.tanh(np.tanh(np.tanh(np.round(np.tanh(np.round(np.tanh(np.tanh(np.add(np.tanh(np.power(np.exp(x[1]), np.round(x[1]))), x[0])))))))))))), np.tanh(x[1]))), x[0]))), np.tanh(x[0])))), np.hypot(np.multiply(np.multiply(np.power(np.exp(x[1]), x[0]), x[0]), x[1]), np.hypot(np.add(np.power(np.exp(np.tanh(x[1])), np.add(np.add(np.add(np.round(np.tanh(np.tanh(np.tanh(np.tanh(x[0]))))), np.tanh(np.add(np.add(np.add(np.add(np.power(np.exp(np.add(np.add(np.add(np.power(np.exp(x[1]), np.round(np.tanh(np.add(np.add(np.add(np.add(np.power(np.exp(x[1]), np.round(np.tanh(x[1]))), x[1]), x[0]), x[0]), x[0])))), np.round(x[0])), x[0]), x[0])), x[0]), np.tanh(x[1])), x[0]), x[0]), np.tanh(x[0])))), np.tanh(x[0])), np.tanh(x[0]))), np.tanh(np.power(np.exp(np.tanh(x[1])), x[0]))), np.hypot(np.round(np.power(np.exp(np.round(x[1])), np.round(np.round(x[0])))), np.hypot(np.tanh(np.exp(np.round(x[0]))), np.hypot(np.round(np.power(np.tanh(np.tanh(np.tanh(np.tanh(np.exp(x[1]))))), np.round(np.add(np.add(np.round(np.tanh(x[1])), np.tanh(np.add(np.add(np.add(np.add(np.power(np.tanh(np.exp(x[1])), np.round(np.add(np.add(np.add(np.add(np.power(np.exp(x[1]), np.round(np.round(np.tanh(np.add(np.add(np.add(np.add(np.power(np.exp(x[1]), np.round(np.tanh(x[1]))), x[0]), x[0]), x[0]), x[0]))))), x[0]), x[0]), x[0]), x[0]))), x[0]), x[0]), np.add(np.add(np.add(np.round(np.tanh(np.tanh(x[1]))), np.tanh(np.add(np.power(np.exp(x[0]), x[0]), x[0]))), np.tanh(np.tanh(np.tanh(np.tanh(np.tanh(x[1])))))), np.tanh(np.add(np.add(np.add(np.add(np.power(np.exp(x[1]), np.round(np.tanh(x[1]))), x[0]), x[0]), x[1]), x[0])))), x[0]))), np.tanh(x[0]))))), np.tanh(np.tanh(x[0]))))))))
 
 
 def f8(x: np.ndarray) -> np.ndarray: #good
