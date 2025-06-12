@@ -142,7 +142,7 @@ def fitness(tree,nodefun:Node,x, y):
 
     
 
-    return mse_val+(length_penalty(len(nodefun),1000,maxy*sizey/(5000*2))) /100000  #+ penalty_coeff * (tree_length ** 2)
+    return mse_val+(length_penalty(len(nodefun),1000,maxy*sizey/(5000*2))) /10000  #+ penalty_coeff * (tree_length ** 2)
     
 
     
@@ -377,6 +377,7 @@ def EAlgoithm(nproblem,gptree,x,y):  #use elitism try to preserve best ones
     """ problem = np.load('/home/adri/universita/magistrale/5_anno_1_sem/computational_intelligence/project_work/CI2024_project-work/data/problem_{}.npz'.format(nproblem))
     x = problem['x']
     y = problem['y'] """
+    
 
     minx = x.min()
     maxx = x.max()
@@ -390,17 +391,18 @@ def EAlgoithm(nproblem,gptree,x,y):  #use elitism try to preserve best ones
     maxy_neg = np.max(y[y < 0]) if np.any(y < 0) else None
 
     ic(x.shape)
+    final_run_long=False
     MAX_TREE_LENGTH=500
     mutrate=0.05
     minmutrate=0.05
     mincrossover=0.05                              
     #mutrate=1
-    nrestarts=5  #was 5
+    nrestarts=10  #was 5
     nelemets=100#15   #400   #was 200
     crossOverRate=1#0.9
     mut_increasement=1.2
     
-    nstep=10000 #5000#10000#1000 #100 #2000   #usa 4000
+    nstep=5000 #5000#10000#1000 #100 #2000   #usa 4000
     """  lowest_fitness_individual = min(pop, key=lambda x: x.fitness)
     ic(lowest_fitness_individual)
     ic(str(lowest_fitness_individual.genome)) """
@@ -417,24 +419,28 @@ def EAlgoithm(nproblem,gptree,x,y):  #use elitism try to preserve best ones
         best_individuals_each_restart.extend(top_2_individual)
 
     
-    unique_string_genomes=set()
-    pop=[]
-    for individual in best_individuals_each_restart:
-        genome_child=individual.genome
+
+    if final_run_long==True:
+
+    
+        unique_string_genomes=set()
+        pop=[]
+        for individual in best_individuals_each_restart:
+            genome_child=individual.genome
 
 
-        if (str(genome_child) not in unique_string_genomes):
-                    unique_string_genomes.add(str(genome_child))
-                    child=Individual(genome=genome_child, fitness=fitness(gptree, genome_child, x, y))
-                    pop.append(child)  # add child to population
+            if (str(genome_child) not in unique_string_genomes):
+                        unique_string_genomes.add(str(genome_child))
+                        child=Individual(genome=genome_child, fitness=fitness(gptree, genome_child, x, y))
+                        pop.append(child)  # add child to population
 
-        
+            
 
-    missing_individuals=nelemets-len(pop)
-    poploc,_=popInizialize(gptree,missing_individuals,x,y)
-    pop.extend(poploc)
-    top_2_individual=EA_Run(nstep,pop,crossOverRate,mutrate,MAX_TREE_LENGTH,gptree)
-    best_individuals_each_restart.extend(top_2_individual)
+        missing_individuals=nelemets-len(pop)
+        poploc,_=popInizialize(gptree,missing_individuals,x,y)
+        pop.extend(poploc)
+        top_2_individual=EA_Run(nstep,pop,crossOverRate,mutrate,MAX_TREE_LENGTH,gptree)
+        best_individuals_each_restart.extend(top_2_individual)
 
 
 
@@ -538,7 +544,7 @@ dag = gxgp.DagGP(   #problems with ldex , it's unsupported for some types   np.l
 formula,fit=EAlgoithm(numproblem,dag,x,y)
 
 print("THe formula is :")
-print(formula)
+#print(formula)
 ygen = eval(formula, {"np": np, "x": x})
 if (ygen.size==1):
     ygen = ygen * np.ones(5000)
@@ -558,6 +564,7 @@ else:
 
 
 denormalizedFromula=f"np.add(np.divide({formula}, {mulCof.item()}), {offset.item()})"
+print(denormalizedFromula)
 y_denormalized=eval(denormalizedFromula, {"np": np, "x": x})
 if (y_denormalized.size==1):
     y_denormalized = y_denormalized * np.ones(5000)
