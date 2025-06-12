@@ -139,10 +139,13 @@ def fitness(tree,nodefun:Node,x, y):
 
     #depthpenalty=nodefun.depth   # it's too computationally costly
 
-
+    if numproblem==4:
+        div=10000
+    else:
+        div=1
     
 
-    return mse_val+(length_penalty(len(nodefun),1000,maxy*sizey/(5000*2))) /10000  #+ penalty_coeff * (tree_length ** 2)
+    return mse_val+(length_penalty(len(nodefun),1000,maxy*sizey/(5000*2))) /div  #+ penalty_coeff * (tree_length ** 2)
     
 
     
