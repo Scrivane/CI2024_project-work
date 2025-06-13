@@ -152,6 +152,15 @@ def trying_f5_rescaled(x:np.ndarray,offset,mul,y:np.ndarray):
 
 def f5(x: np.ndarray) -> np.ndarray: #is zero so it's good
 
+     #using rescaling 15000 steps and run until the plateaux 
+     #MSE: 5.512898055429115e-19
+     return np.add(np.divide(np.add(np.sin(np.hypot(np.power(np.hypot(np.power(np.hypot(np.power(x[0], np.negative(np.sin(x[0]))), np.euler_gamma), np.negative(np.sin(np.round(x[1])))), np.arctan(x[0])), np.negative(np.sin(x[1]))), np.arctan(np.pi))), np.add(np.tanh(np.i0(np.tanh(np.power(np.exp2(x[1]), np.sin(x[0]))))), np.pi)), 174318497.75735644), -2.8520706810421616e-08)
+
+
+     #using rescaling  15000 steps
+     #6.229062672792087e-19
+     return np.add(np.divide(np.add(np.add(np.cbrt(np.log1p(np.cbrt(np.log1p(np.round(np.cbrt(np.reciprocal(np.power(np.hypot(np.round(np.euler_gamma), np.log10(np.i0(x[1]))), x[0])))))))), np.pi), np.remainder(np.reciprocal(np.power(np.hypot(np.round(np.euler_gamma), np.log10(np.reciprocal(np.power(np.hypot(np.round(np.euler_gamma), np.log10(np.i0(np.power(np.hypot(np.round(np.round(np.euler_gamma)), np.log10(np.i0(x[1]))), x[0])))), x[0])))), x[0])), np.power(np.pi, np.e))), 174318497.75735644), -2.8520706810421616e-08)
+
      #rescaling ,with final long run 5 43start 10000 steps
      #fitness= mse_val+(length_penalty(len(nodefun),1000,maxy*sizey/(50000*2))) /div
      """     min_mse: 
