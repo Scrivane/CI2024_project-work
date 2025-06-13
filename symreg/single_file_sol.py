@@ -144,7 +144,8 @@ def fitness(tree,nodefun:Node,x, y):
     elif numproblem==7:
         div=10
     elif numproblem==6:
-        div=10
+        #div=10
+        div=6
     else:
         div=1 
     
@@ -270,30 +271,46 @@ def EA_Run(nstep,pop,crossOverRate,mutrate,MAX_TREE_LENGTH,gptree):
         #unique_string_genomes.update(loc_unique_str_genome)
         best_individual = min(pop, key=lambda x: x.fitness)
         #worst_individual = max(pop, key=lambda x: x.fitness)
-        lastImprouvement=0
+        lastImprouvement=-1
         originalnstep=nstep
-        while lastImprouvement<originalnstep/3 and (lastImprouvement==0 or run_until_plateaux==True):
+        while lastImprouvement<originalnstep/3 and (lastImprouvement==-1 or run_until_plateaux==True):
+            if lastImprouvement==-1:
+                lastImprouvement=0
             print(lastImprouvement)
             print(best_individual.fitness)
             
             for el in tqdm(range(nstep)):
                 lastImprouvement+=1
 
-                """ lowest_fitness_individual = min(pop, key=lambda x: x.fitness)
-                best_one=min(pop,key=lambda el: error(gptree,el.genome,x,y)) """
-                #apply elitism
-                """ if min(pop, key=lambda x: x.fitness).fitness==max(pop, key=lambda ind: ind.fitness).fitness:  #reached steady state
-                    break """
-                
+     
+                topPoptreshold=0.24  #1500   #pop 1000 =0.16    #pop 2000  0.32
+                getting_From_Top=0.8 
 
-                
+                """ topPoptreshold=1   #not using overpopulatin parameters
 
-                """ values = [el.genome.value for el in pop]
-                print(values) """
+                getting_From_Top=1 """
 
-                if( np.random.rand()<crossOverRate):
-                    ris1=tournament_sel_array(pop,2)   # uses tournament selection to select 2 parent for the crossover
-                    ris2=tournament_sel_array(pop,2)
+
+
+                if(crossOverRate==1 or  np.random.rand()<crossOverRate):
+                    sorted_pop = sorted(pop, key=lambda x: x.fitness)
+                    best_pop=sorted_pop[:int(topPoptreshold*len(sorted_pop))]
+                    worst_pop=sorted_pop[int(topPoptreshold*len(sorted_pop)):]
+
+                    if np.random.rand()<getting_From_Top:
+
+                        ris1=tournament_sel_array(best_pop,2)   # uses tournament selection to select 2 parent for the crossover
+                    else:
+                        ris1=tournament_sel_array(worst_pop,2)   # uses tournament selection to select 2 parent for the crossover
+
+
+                    if np.random.rand()<getting_From_Top:
+
+                        ris2=tournament_sel_array(best_pop,2)   # uses tournament selection to select 2 parent for the crossover
+                    else:
+                        ris2=tournament_sel_array(worst_pop,2)  
+                    
+                    #ris2=tournament_sel_array(pop,2)
                     genome_child = gxgp.xover_swap_subtree(ris1.genome,ris2.genome)  # uses partially mapped crossover
                     #child_candidate = gxgp.xover_swap_subtree(ris1.genome, ris2.genome)
                     if len(genome_child) > MAX_TREE_LENGTH:
@@ -316,7 +333,9 @@ def EA_Run(nstep,pop,crossOverRate,mutrate,MAX_TREE_LENGTH,gptree):
                 lambda genome: gxgp.mutation_point(genome, gptree),
                 lambda genome: gxgp.mutation_hoist(genome),
                 lambda genome: gxgp.mutation_permutations(genome),
-                lambda genome: gxgp.mutation_collapse(genome, gptree)
+                lambda genome: gxgp.mutation_collapse(genome, gptree),
+                lambda genome: gxgp.mutation_delete_unirary(genome),
+                lambda genome: gxgp.mutation_add_unirary(genome,gptree)
                 ]
             
                 if( np.random.rand()<mutrate):  # has a chance of mutating the child using a mutation
@@ -422,16 +441,16 @@ def EAlgoithm(nproblem,gptree,x,y):  #use elitism try to preserve best ones
     ic(x.shape)
     final_run_long=True
     MAX_TREE_LENGTH=500
-    mutrate=0.05
+    mutrate=0.055  #0.1#
     minmutrate=0.05
     mincrossover=0.05                              
     #mutrate=1
-    nrestarts=5  #was 5
-    nelemets=100#15   #400   #was 200
+    nrestarts=6  #was 5
+    nelemets=1500  #was 2000    #1000#15   #400   #was 200
     crossOverRate=1#0.9
     mut_increasement=1.2
     
-    nstep=10000 #5000#10000#1000 #100 #2000   #usa 4000
+    nstep=15000 #12000 #5000#10000#1000 #100 #2000   #usa 4000
     """  lowest_fitness_individual = min(pop, key=lambda x: x.fitness)
     ic(lowest_fitness_individual)
     ic(str(lowest_fitness_individual.genome)) """
@@ -462,6 +481,35 @@ def EAlgoithm(nproblem,gptree,x,y):  #use elitism try to preserve best ones
                         unique_string_genomes.add(str(genome_child))
                         child=Individual(genome=genome_child, fitness=fitness(gptree, genome_child, x, y))
                         pop.append(child)  # add child to population
+
+            
+            mutation_functions = [
+                lambda genome: gxgp.mutation_point(genome, gptree),
+                lambda genome: gxgp.mutation_hoist(genome),
+                lambda genome: gxgp.mutation_permutations(genome),
+                lambda genome: gxgp.mutation_collapse(genome, gptree),
+                lambda genome: gxgp.mutation_delete_unirary(genome),
+                lambda genome: gxgp.mutation_add_unirary(genome,gptree)
+                ]
+
+            for i in range(int(0.4*nelemets/len(best_individuals_each_restart))):
+                mutation_fn = np.random.choice(mutation_functions)
+                mutated_genome = mutation_fn(genome_child)
+
+                if str(mutated_genome) not in unique_string_genomes:
+                    unique_string_genomes.add(str(mutated_genome))
+                    mutated_child = Individual(genome=mutated_genome, fitness=fitness(gptree, mutated_genome, x, y))
+                    pop.append(mutated_child)
+            
+        for _ in range(int(0.15*nelemets)):
+                p1=tournament_sel_array(best_individuals_each_restart,2)   # uses tournament selection to select 2 parent for the crossover
+                p2=tournament_sel_array(best_individuals_each_restart,2)
+
+                crossed = gxgp.xover_swap_subtree(p1.genome, p2.genome)
+                if str(crossed) not in unique_string_genomes:
+                    unique_string_genomes.add(str(crossed))
+                    child = Individual(genome=crossed, fitness=fitness(gptree, crossed, x, y))
+                    pop.append(child)
 
             
 
@@ -564,8 +612,9 @@ np.savetxt(f'problem_{numproblem}.txt', xy, delimiter=' ', fmt='%.6f') """
 dag = gxgp.DagGP(   #problems with ldex , it's unsupported for some types   np.ldexp,
     #safe
     #operators=[np.pow],
-
-    operators=[np.add,np.negative,np.multiply,np.sin,np.tanh,np.reciprocal,np.exp,np.exp2,np.pow,np.sinh,np.cosh,np.round,np.cosh,np.hypot,np.i0,np.absolute,np.square,np.log1p,np.log2,np.log10,np.log],  #np.acos], #ignore_op#np.round],  #np.round #np.pow, #np.ldexp],
+    #operators =[np.mod,np.arctan,np.sinc,np.sqrt,np.cbrt,np.add,np.negative,np.multiply,np.sin,np.tanh,np.reciprocal,np.exp,np.exp2,np.pow,np.sinh,np.round,np.cosh,np.hypot,np.i0,np.absolute,np.square,np.log1p,np.log2,np.log10,np.log], 
+    #operators=[np.multiply,np.cbrt,np.sqrt,np.negative,np.add,np.subtract,np.sin,np.cos,np.cosh,np.sinc,np.log10,np.log2,np.log1p,np.round,np.hypot,np.mod,np.log,np.arctan,np.ceil],
+    operators=[np.mod,np.arctan,np.sinc,np.sqrt,np.cbrt,np.add,np.negative,np.multiply,np.sin,np.tanh,np.reciprocal,np.exp,np.exp2,np.pow,np.sinh,np.round,np.cosh,np.hypot,np.i0,np.absolute,np.square,np.log1p,np.log2,np.log10,np.log],  #np.acos], #ignore_op#np.round],  #np.round #np.pow, #np.ldexp],
     #operators=[np.log1p,np.exp2,np.i0,np.sin],
     variables=x.shape[0],
     constants=[np.pi,np.e,np.euler_gamma],
@@ -576,7 +625,7 @@ dag = gxgp.DagGP(   #problems with ldex , it's unsupported for some types   np.l
 formula,fit=EAlgoithm(numproblem,dag,x,y)
 
 print("THe formula is :")
-#print(formula)
+print(formula)
 ygen = eval(formula, {"np": np, "x": x})
 if (ygen.size==1):
     ygen = ygen * np.ones(np.size(y))  #checkl
@@ -609,6 +658,22 @@ if scaling==True:
 
 
 
+results_file = "gp_results_log.txt"
+with open(results_file, "a") as f:
+    f.write("="*60 + "\n")
+
+    f.write(f"Problem Number: {numproblem}\n")
+    f.write(f"Scaling Used: {scaling}\n")
+   
+    
+    if scaling:
+        f.write(f"Formula: {denormalizedFromula}\n")
+    else:
+        f.write(f"Formula: {formula}\n")
+
+    
+    f.write(f"MSE: {ris}\n")
+    f.write("="*60 + "\n\n")
 
 
 #ic(globaltime)

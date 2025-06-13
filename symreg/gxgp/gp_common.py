@@ -43,7 +43,7 @@ def xover_swap_subtree(tree1: Node, tree2: Node) -> Node:
 def mutation_hoist(tree1: Node) -> Node:
     offspring = deepcopy(tree1)
     #ic(offspring)
-    internal_nodes = [node for node in offspring.subtree if not node.is_leaf]
+    internal_nodes = [node for node in offspring.subtree if not node.is_leaf and node is not offspring]
     successors = None
     if not internal_nodes:
         return offspring
@@ -84,6 +84,67 @@ def mutation_collapse(tree1: Node,gptree:DagGP) -> Node:
 
     return offspring
 
+
+
+
+def mutation_delete_unirary(tree1: Node) -> Node:
+    offspring = deepcopy(tree1)
+    #ic(offspring)
+    internal_nodes_arity_1 = [node for node in offspring.subtree if not node.is_leaf and node.arity==1]
+    if not internal_nodes_arity_1:
+        return offspring
+    
+
+
+    # Pick random internal node (i.e., a subtree)
+    target = gxgp_random.choice(internal_nodes_arity_1)
+    #possibilities= gptree._variables + gptree._constants  #[e for e in (gptree._variables + gptree._constants) if str(e)!=str(target)]
+    #new_node = deepcopy(gxgp_random.choice(possibilities))
+
+    parent, idx = find_parent(offspring, target)
+
+    if parent is not None:
+        child = target.successors[0]  #it's unirary so there is only the first 
+        #children[idx] = new_node
+        succs = parent.successors  # This is a copy of the list done in successors , i need later to replace it whole otherwise no update
+        succs[idx] = child         
+        parent.successors = succs 
+    
+    else:  # i'm the root and i return the child
+        return deepcopy(target.successors[0])
+    return offspring
+
+
+
+
+
+def mutation_add_unirary(tree1: Node, gptree: DagGP) -> Node:
+    offspring = deepcopy(tree1)
+
+    all_nodes = list(offspring.subtree)
+    unary_ops = [op for op in gptree._operators if arity(op) == 1]
+
+    if not unary_ops or not all_nodes:
+        return offspring  
+
+    target = gxgp_random.choice(all_nodes)
+    op = gxgp_random.choice(unary_ops)
+    up_node = Node(op, [target])
+
+
+    if target is offspring:
+        
+        return up_node
+
+    parent, idx = find_parent(offspring, target)
+    if parent is not None:
+        succs = parent.successors
+        succs[idx] = up_node
+        parent.successors = succs
+    
+
+
+    return offspring
 
 def mutation_point(tree1: Node,gptree:DagGP) -> Node:  ##i have the problem that chainging a node changes all similar nodes
     offspring = deepcopy(tree1)  # single deepcopy

@@ -1,0 +1,22 @@
+============================================================
+Problem Number: 6
+Scaling Used: False
+Formula: np.remainder(np.arctan(np.add(np.remainder(np.cbrt(np.subtract(np.cbrt(x[1]), x[0])), x[0]), np.subtract(np.log1p(np.log1p(np.multiply(np.cbrt(x[1]), np.remainder(np.cbrt(np.cos(np.sinc(np.cbrt(np.subtract(x[1], x[0]))))), np.sin(np.hypot(np.e, np.remainder(x[1], x[0]))))))), x[1]))), np.subtract(np.multiply(x[1], np.subtract(np.e, np.sinc(np.sin(np.subtract(np.subtract(np.subtract(np.e, np.sinc(np.hypot(np.subtract(np.e, np.sinc(np.sin(np.sinc(np.sinc(np.hypot(np.e, x[1])))))), np.cbrt(np.subtract(x[1], x[0]))))), np.sinc(np.hypot(np.e, np.remainder(np.cbrt(np.negative(np.subtract(np.cbrt(x[1]), x[0]))), x[0])))), np.sinc(np.hypot(np.subtract(np.e, np.sinc(np.e)), np.remainder(np.cbrt(np.subtract(x[1], x[0])), np.subtract(x[1], x[0]))))))))), x[0]))
+Formula: np.remainder(np.arctan(np.add(np.remainder(np.cbrt(np.subtract(np.cbrt(x[1]), x[0])), x[0]), np.subtract(np.log1p(np.log1p(np.multiply(np.cbrt(x[1]), np.remainder(np.cbrt(np.cos(np.sinc(np.cbrt(np.subtract(x[1], x[0]))))), np.sin(np.hypot(np.e, np.remainder(x[1], x[0]))))))), x[1]))), np.subtract(np.multiply(x[1], np.subtract(np.e, np.sinc(np.sin(np.subtract(np.subtract(np.subtract(np.e, np.sinc(np.hypot(np.subtract(np.e, np.sinc(np.sin(np.sinc(np.sinc(np.hypot(np.e, x[1])))))), np.cbrt(np.subtract(x[1], x[0]))))), np.sinc(np.hypot(np.e, np.remainder(np.cbrt(np.negative(np.subtract(np.cbrt(x[1]), x[0]))), x[0])))), np.sinc(np.hypot(np.subtract(np.e, np.sinc(np.e)), np.remainder(np.cbrt(np.subtract(x[1], x[0])), np.subtract(x[1], x[0]))))))))), x[0]))
+MSE: 0.02524479912547275
+============================================================
+
+============================================================
+Problem Number: 6
+Scaling Used: False
+Formula: np.add(np.subtract(np.multiply(np.cbrt(np.pi), x[1]), x[0]), np.log(np.cosh(np.euler_gamma)))
+MSE: 0.5999747538246458
+============================================================
+
+============================================================
+Problem Number: 6
+Scaling Used: False
+Formula: np.add(np.multiply(np.arctan(np.cbrt(np.euler_gamma)), np.add(x[1], np.negative(x[0]))), x[1])
+MSE: 7.145589969138924e-07
+============================================================
+

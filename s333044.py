@@ -188,6 +188,34 @@ def f5(x: np.ndarray) -> np.ndarray: #is zero so it's good
 
 
 def f6(x: np.ndarray) -> np.ndarray:   #migliorabile
+
+     # popsize 1500 , using suggested overselections parameters for overpopulation  #and no run_until_plateaux
+     #7.145589969138924e-07
+
+     return np.add(np.multiply(np.arctan(np.cbrt(np.euler_gamma)), np.add(x[1], np.negative(x[0]))), x[1])
+
+
+
+
+
+     #popsize 1000 , using suggested overselections parameters for overpopulation  #and no run_until_plateaux
+     """ min_mse no scaling
+     0.0012425233639984457 """
+
+
+     return np.add(np.multiply(np.log10(np.log10(np.log(np.absolute(np.add(np.cosh(np.log1p(np.exp2(np.tanh(np.e)))), np.pi))))), x[0]), np.multiply(x[1], np.log1p(np.add(np.cosh(np.tanh(np.tanh(np.cosh(np.pi)))), np.pi)))) 
+     
+
+
+     ###changed using pop 2000 and mor eoperands 
+     """ min_mse no scaling
+     0.003157777848447691 """
+     return np.add(np.remainder(np.multiply(x[1], np.e), x[1]), np.add(x[1], np.multiply(np.exp2(np.remainder(np.euler_gamma, np.arctan(np.multiply(np.log2(np.tanh(np.arctan(np.sin(np.cosh(np.euler_gamma))))), np.pi)))), np.negative(x[0]))))
+     """      min_mse no scaling
+     0.00251533612410414 """
+     return np.add(np.add(np.multiply(np.log10(np.euler_gamma), x[0]), np.multiply(x[1], np.tanh(np.exp(np.euler_gamma)))), np.add(np.multiply(np.log10(np.square(np.euler_gamma)), x[0]), np.multiply(x[1], np.sin(np.sin(np.tanh(np.pi))))))
+
+
      #long run using the while loop , div 10 fitness no scaling 
      """ min_mse no scaling
      0.03557585723525194 """
