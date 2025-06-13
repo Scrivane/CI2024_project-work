@@ -262,7 +262,7 @@ def tournament_sel_array(population,n=2): # tournament selection to decide which
 
 
 def EA_Run(nstep,pop,crossOverRate,mutrate,MAX_TREE_LENGTH,gptree):
-        run_until_plateaux=True
+        run_until_plateaux=False
 
         unique_string_genomes=set()
         for el in pop:  
@@ -315,6 +315,7 @@ def EA_Run(nstep,pop,crossOverRate,mutrate,MAX_TREE_LENGTH,gptree):
                     genome_child = gxgp.xover_swap_subtree(ris1.genome,ris2.genome)  # uses partially mapped crossover
                     #child_candidate = gxgp.xover_swap_subtree(ris1.genome, ris2.genome)
                     if len(genome_child) > MAX_TREE_LENGTH:
+                        print("generated new one because too long")
                         listonepop,_=popInizialize(gptree,1,x,y)
                         randomNewIndividual=listonepop[0]
                         genome_child = randomNewIndividual.genome
@@ -323,6 +324,7 @@ def EA_Run(nstep,pop,crossOverRate,mutrate,MAX_TREE_LENGTH,gptree):
                 else:
                     genome_child=(tournament_sel_array(pop,1)).genome  #select a random individual that later can be mutated
                 if len(genome_child) > 2300:
+                    print("aqui")
                     
                     continue
                 #child=Individual(genome=child,fitness=fitness(gptree,child,x,y))
@@ -572,7 +574,7 @@ def normalization(y,range=(0,5)):
 
 
 
-numproblem=7
+numproblem=8
 scaling=False
 problem = np.load('/home/adri/universita/magistrale/5_anno_1_sem/computational_intelligence/project_work/CI2024_project-work/data/problem_{}.npz'.format(numproblem))
 x = problem['x']  #3 righe 5000 colonne 
@@ -624,17 +626,13 @@ dag = gxgp.DagGP(   #problems with ldex , it's unsupported for some types   np.l
 
 #ic(np.var(y))
 formula,fit=EAlgoithm(numproblem,dag,x,y)
-
 print("THe formula is :")
 print(formula)
 ygen = eval(formula, {"np": np, "x": x})
 if (ygen.size==1):
     ygen = ygen * np.ones(np.size(y))  #checkl
 
-""" ic(ygen.shape)
-ic(y.shape)
-ic(x.shape) """
-ris= sum((a - b) ** 2 for a, b in zip(ygen, y)) / len(y) 
+ris= np.mean((y.astype(np.float64) - ygen.astype(np.float64)) ** 2)#sum((a - b) ** 2 for a, b in zip(ygen, y)) / len(y) 
 #ic(ris)
 
 print("min_mse no scaling")
@@ -642,6 +640,9 @@ print(fit)
 if ris==fit:
     print("good")
 else:
+    print("la differenxza")
+    print(ris)
+    print(fit)
     print("wrong") 
 
 if scaling==True:
@@ -651,6 +652,9 @@ if scaling==True:
     if (y_denormalized.size==1):
         y_denormalized = y_denormalized *np.ones(np.size(y))  #checkl
     y=problem['y']
+    ris= np.mean((y.astype(np.float64) - y_denormalized.astype(np.float64)) ** 2)#sum((a - b) ** 2 for a, b in zip(ygen, y)) / len(y) 
+
+    
     ris= sum((a - b) ** 2 for a, b in zip(y_denormalized, y)) / len(y) 
 
     print("min_mse using scaling: ")

@@ -134,7 +134,9 @@ class DagGP:
     def mse(individual: Node, X, y, variable_names=None):
         y_pred = DagGP.evaluate2(individual, X, variable_names)
         #y_pred = DagGP.evaluate(individual, X, variable_names)
-        ris=sum((a - b) ** 2 for a, b in zip(y, y_pred)) / len(y)
+
+        ris=np.mean((y.astype(np.float64) - y_pred.astype(np.float64)) ** 2)
+        #ris=sum((a - b) ** 2 for a, b in zip(y, y_pred)) / len(y)
         return  ris
 
 
