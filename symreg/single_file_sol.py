@@ -70,23 +70,6 @@ def safe_factorial(x):
 def ignore_op(x):
     return 0.0
 
-def tournament_sel_array(population,n=2): # tournament selection to decide which individual to crossover
-
-
-
-    # Choose n elements at random from the specified row
-    fitness_list=[]
-    random_elements_indexes = np.random.choice(len(population), size=n, replace=True)
-    for el in random_elements_indexes:
-        fitness_list.append((population[el]).fitness)
-
-
-    bestIndex=np.argmin(fitness_list)
-    bestValue=fitness_list[bestIndex]
-    
-    chosen=population[random_elements_indexes[bestIndex]]
-
-    return chosen
 
 @dataclass
 class Individual:
@@ -112,14 +95,14 @@ def fitness(tree,nodefun:Node,x, y):
         try:
             mse_val = tree.mse(nodefun, x.T, y)   #check this x.T
         except (FloatingPointError, ZeroDivisionError, ValueError):
-            return math.inf                 # numerical failure → worst fitness
+            return -math.inf                 # numerical failure → worst fitness
 
     # Some operations may finish without raising but still yield nan/inf
     if not np.isfinite(mse_val) :#or len(nodefun)>2300:
         """ if len(nodefun)>2300:
             
             print("aqui") """
-        return math.inf 
+        return -math.inf 
     
 
     
@@ -149,9 +132,9 @@ def fitness(tree,nodefun:Node,x, y):
         div=6
     else:
         div=1 
-    
+        
 
-    return mse_val+(length_penalty(len(nodefun),1000,maxy*sizey/(5000*2))) /div  #+ penalty_coeff * (tree_length ** 2)
+    return -mse_val-((length_penalty(len(nodefun),1000,maxy*sizey/(5000*2))) /div)  #+ penalty_coeff * (tree_length ** 2)
     
 
     
@@ -216,7 +199,7 @@ def tournament_sel_array(population,n=2): # tournament selection to decide which
         fitness_list.append((population[el]).fitness)
 
 
-    bestIndex=np.argmin(fitness_list)
+    bestIndex=np.argmax(fitness_list)
     bestValue=fitness_list[bestIndex]
     
     chosen=population[random_elements_indexes[bestIndex]]
@@ -270,7 +253,7 @@ def EA_Run(nstep,pop,crossOverRate,mutrate,MAX_TREE_LENGTH,gptree):
             unique_string_genomes.add(str(localGenome))
         #pop,loc_unique_str_genome=popInizialize(gptree,nelemets,x,y)
         #unique_string_genomes.update(loc_unique_str_genome)
-        best_individual = min(pop, key=lambda x: x.fitness)
+        best_individual = max(pop, key=lambda x: x.fitness)
         #worst_individual = max(pop, key=lambda x: x.fitness)
         lastImprouvement=-1
         originalnstep=nstep
@@ -294,9 +277,12 @@ def EA_Run(nstep,pop,crossOverRate,mutrate,MAX_TREE_LENGTH,gptree):
 
 
                 if(crossOverRate==1 or  np.random.rand()<crossOverRate):
-                    sorted_pop = sorted(pop, key=lambda x: x.fitness)
+                    sorted_pop = sorted(pop, key=lambda x: x.fitness,reverse=True)
                     best_pop=sorted_pop[:int(topPoptreshold*len(sorted_pop))]
                     worst_pop=sorted_pop[int(topPoptreshold*len(sorted_pop)):]
+                    """ print("best:"+str(sorted_pop[0].fitness))
+                
+                    print("worst:"+str(worst_pop[-1].fitness)) """
 
                     if np.random.rand()<getting_From_Top:
 
@@ -315,7 +301,7 @@ def EA_Run(nstep,pop,crossOverRate,mutrate,MAX_TREE_LENGTH,gptree):
                     genome_child = gxgp.xover_swap_subtree(ris1.genome,ris2.genome)  # uses partially mapped crossover
                     #child_candidate = gxgp.xover_swap_subtree(ris1.genome, ris2.genome)
                     if len(genome_child) > MAX_TREE_LENGTH:
-                        print("generated new one because too long")
+                        #print("generated new one because too long")
                         listonepop,_=popInizialize(gptree,1,x,y)
                         randomNewIndividual=listonepop[0]
                         genome_child = randomNewIndividual.genome
@@ -377,7 +363,7 @@ def EA_Run(nstep,pop,crossOverRate,mutrate,MAX_TREE_LENGTH,gptree):
                 
 
 
-                if(newIndividual.fitness<best_individual.fitness):
+                if(newIndividual.fitness>best_individual.fitness):
                     best_individual=newIndividual
                     lastImprouvement=0
                 
@@ -394,10 +380,10 @@ def EA_Run(nstep,pop,crossOverRate,mutrate,MAX_TREE_LENGTH,gptree):
                 #ic(lowest_fitness_individual.fitness)
                 history.append(localbestfit)
                 
-                maxfit_ind=(max(pop, key=lambda ind: ind.fitness))    #todo make negativ efitness and use a minimizer 
+                worst_fit_ind=(min(pop, key=lambda ind: ind.fitness))    #todo make negativ efitness and use a minimizer 
                 #ic(maxfit_ind.fitness)
-                pop.remove(maxfit_ind) # delete from population the wrost individual
-                unique_string_genomes.remove(str(maxfit_ind.genome))
+                pop.remove(worst_fit_ind) # delete from population the wrost individual
+                unique_string_genomes.remove(str(worst_fit_ind.genome))
             
         
 
@@ -407,7 +393,7 @@ def EA_Run(nstep,pop,crossOverRate,mutrate,MAX_TREE_LENGTH,gptree):
         
 
 
-        sorted_pop = sorted(pop, key=lambda x: x.fitness)
+        sorted_pop = sorted(pop, key=lambda x: x.fitness,reverse=True)
 
         # Get the best and second-best individuals
         lowest_fitness_individual = sorted_pop[0]
@@ -453,7 +439,7 @@ def EAlgoithm(nproblem,gptree,x,y):  #use elitism try to preserve best ones
     crossOverRate=1#0.9
     mut_increasement=1.2
     
-    nstep=15000 #12000 #5000#10000#1000 #100 #2000   #usa 4000
+    nstep=50000#15000 #12000 #5000#10000#1000 #100 #2000   #usa 4000
     """  lowest_fitness_individual = min(pop, key=lambda x: x.fitness)
     ic(lowest_fitness_individual)
     ic(str(lowest_fitness_individual.genome)) """
@@ -685,7 +671,7 @@ with open(results_file, "a") as f:
 plt.figure(figsize=(14, 8))
 plt.plot(
             range(len(history)),
-            list(accumulate(history, min)),
+            list(accumulate(history, max)),
             color="red",
         )
 _ = plt.scatter(range(len(history)), history, marker=".")

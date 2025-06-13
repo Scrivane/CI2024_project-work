@@ -256,6 +256,10 @@ def f7(x: np.ndarray) -> np.ndarray:
       """
 
 def f8(x: np.ndarray) -> np.ndarray: #good
+     #min_mse
+     #
+     #166579.13617635533
+     return np.add(np.multiply(np.add(np.add(x[5], np.round(np.cbrt(np.negative(np.exp2(np.cbrt(np.negative(np.exp2(np.hypot(np.round(np.cbrt(np.negative(np.square(np.arctan(np.add(np.multiply(np.square(np.multiply(x[5], np.add(x[5], x[5]))), np.e), np.cbrt(np.remainder(np.arctan(np.negative(np.hypot(np.euler_gamma, np.square(np.remainder(np.arctan(np.negative(np.exp2(np.hypot(x[4], np.pi)))), np.negative(np.add(x[5], x[5]))))))), np.multiply(np.multiply(x[5], np.add(x[5], x[5])), np.add(x[5], x[5])))))))))), np.pi))))))))), x[5]), np.multiply(np.hypot(np.e, x[5]), np.multiply(x[5], np.add(x[5], x[5])))), np.add(np.multiply(np.square(np.multiply(x[5], np.add(x[5], x[5]))), x[5]), np.negative(np.square(np.hypot(np.exp2(np.hypot(np.hypot(np.euler_gamma, np.pi), x[4])), np.round(x[5]))))))
 
     #run until plateaux , no restarts , no scaling
      #mse 371401.4112070473
