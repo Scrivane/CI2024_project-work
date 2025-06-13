@@ -20,3 +20,17 @@ Formula: np.add(np.multiply(np.arctan(np.cbrt(np.euler_gamma)), np.add(x[1], np.
 MSE: 7.145589969138924e-07
 ============================================================
 
+============================================================
+Problem Number: 6
+Scaling Used: False
+Formula: np.add(np.negative(np.multiply(np.add(x[0], np.arctan(np.negative(np.add(np.negative(np.multiply(np.multiply(x[0], np.euler_gamma), np.euler_gamma)), np.multiply(x[1], np.cosh(np.arctan(x[0]))))))), np.euler_gamma)), np.multiply(x[1], np.cosh(np.tanh(np.multiply(np.add(x[1], np.negative(np.multiply(np.multiply(x[0], np.euler_gamma), np.log1p(np.log1p(np.i0(x[1])))))), np.euler_gamma)))))
+MSE: 0.010331195518242917
+============================================================
+
+============================================================
+Problem Number: 7
+Scaling Used: False
+Formula: np.hypot(np.pi, np.multiply(np.add(np.log2(np.power(np.exp(x[1]), np.sin(x[0]))), np.hypot(np.multiply(np.hypot(np.exp(np.pi), np.power(np.exp(x[1]), x[0])), np.multiply(np.sinc(np.hypot(np.multiply(np.sinc(np.multiply(np.pi, np.tanh(np.tanh(np.multiply(np.sinc(np.hypot(np.i0(np.negative(np.log2(np.power(np.exp(x[1]), np.sin(np.log(np.hypot(np.i0(x[1]), np.power(np.hypot(x[0], np.exp(np.pi)), np.sin(np.log(np.hypot(np.i0(np.negative(np.log2(np.power(np.exp(x[1]), np.sin(np.log(np.hypot(x[1], np.power(np.hypot(np.arctan(np.pi), np.exp(np.pi)), np.sin(np.log(np.hypot(x[0], np.arctan(np.round(np.arctan(np.exp(np.pi))))))))))))))), np.arctan(x[1])))))))))))), np.multiply(np.arctan(np.exp(np.hypot(np.i0(np.hypot(x[0], np.absolute(np.sin(x[0])))), np.sin(x[1])))), np.absolute(np.sin(x[1]))))), np.round(np.pi)))))), x[0]), np.round(np.i0(np.negative(np.log2(np.power(np.exp(x[1]), np.sin(np.log(np.hypot(x[1], np.power(np.hypot(np.i0(x[1]), x[1]), np.sin(np.log(np.hypot(np.hypot(np.i0(x[1]), x[1]), np.arctan(x[0]))))))))))))))), np.hypot(x[1], np.power(np.hypot(np.sinc(np.exp(np.pi)), np.multiply(np.negative(np.log2(np.power(np.exp(np.negative(np.hypot(np.i0(x[1]), x[1]))), np.sin(np.power(np.exp(x[1]), np.sin(x[0])))))), np.sinc(np.multiply(np.pi, np.multiply(np.sinc(np.hypot(np.i0(np.negative(np.log2(np.power(np.exp(x[0]), np.sin(np.log(np.hypot(np.arctan(np.absolute(np.round(np.arctan(x[1])))), np.power(np.hypot(x[1], np.exp(np.pi)), np.sin(np.log(np.hypot(np.i0(np.negative(np.log2(np.power(np.exp(x[1]), np.sin(np.log(np.hypot(np.hypot(x[0], x[0]), np.power(np.hypot(np.exp(x[1]), np.exp(np.pi)), np.sin(np.log(np.hypot(x[0], np.arctan(np.round(np.arctan(np.exp(np.pi))))))))))))))), np.arctan(x[1])))))))))))), np.multiply(np.arctan(np.exp(np.hypot(np.i0(x[1]), np.arctan(x[1])))), np.sin(x[0])))), np.negative(np.log2(np.power(np.exp(np.negative(np.log2(np.power(np.exp(np.hypot(x[0], x[0])), np.arctan(np.pi))))), np.sin(np.power(np.exp(x[1]), np.sin(x[0]))))))))))), np.arctan(np.exp(np.pi)))))), np.round(np.arctan(np.log2(np.sin(np.absolute(np.arctan(x[1])))))))), np.hypot(np.power(np.exp(x[1]), np.sin(np.log2(np.power(np.exp(x[0]), np.sin(np.log(np.hypot(np.arctan(x[1]), np.power(np.hypot(np.arctan(np.exp(np.log2(np.exp(x[1])))), np.exp(np.pi)), np.sin(np.log(np.hypot(np.i0(np.negative(np.log2(np.power(np.exp(x[1]), np.sin(x[1]))))), np.arctan(np.i0(x[1]))))))))))))), np.power(np.exp(x[1]), x[0]))))
+MSE: 64.10785620740353
+============================================================
+

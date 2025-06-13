@@ -142,7 +142,8 @@ def fitness(tree,nodefun:Node,x, y):
     if numproblem==5: #useless
         div=10
     elif numproblem==7:
-        div=10
+        div=8
+        #div=10
     elif numproblem==6:
         #div=10
         div=6
@@ -261,7 +262,7 @@ def tournament_sel_array(population,n=2): # tournament selection to decide which
 
 
 def EA_Run(nstep,pop,crossOverRate,mutrate,MAX_TREE_LENGTH,gptree):
-        run_until_plateaux=False
+        run_until_plateaux=True
 
         unique_string_genomes=set()
         for el in pop:  
@@ -571,7 +572,7 @@ def normalization(y,range=(0,5)):
 
 
 
-numproblem=6
+numproblem=7
 scaling=False
 problem = np.load('/home/adri/universita/magistrale/5_anno_1_sem/computational_intelligence/project_work/CI2024_project-work/data/problem_{}.npz'.format(numproblem))
 x = problem['x']  #3 righe 5000 colonne 
