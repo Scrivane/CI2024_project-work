@@ -130,9 +130,11 @@ def fitness(tree,nodefun:Node,x, y):
     elif numproblem==6:
         #div=10
         div=6
+    elif numproblem==3:
+        div=0.8
     else:
         div=1 
-        
+
 
     return -mse_val-((length_penalty(len(nodefun),1000,maxy*sizey/(5000*2))) /div)  #+ penalty_coeff * (tree_length ** 2)
     
@@ -434,12 +436,12 @@ def EAlgoithm(nproblem,gptree,x,y):  #use elitism try to preserve best ones
     minmutrate=0.05
     mincrossover=0.05                              
     #mutrate=1
-    nrestarts=6  #was 5
+    nrestarts=6  # was 10 for probl 4 #was 5
     nelemets=1500  #was 2000    #1000#15   #400   #was 200
     crossOverRate=1#0.9
     mut_increasement=1.2
     
-    nstep=50000#15000 #12000 #5000#10000#1000 #100 #2000   #usa 4000
+    nstep=15000#50000#15000 #12000 #5000#10000#1000 #100 #2000   #usa 4000
     """  lowest_fitness_individual = min(pop, key=lambda x: x.fitness)
     ic(lowest_fitness_individual)
     ic(str(lowest_fitness_individual.genome)) """
@@ -560,7 +562,7 @@ def normalization(y,range=(0,5)):
 
 
 
-numproblem=8
+numproblem=1
 scaling=False
 problem = np.load('/home/adri/universita/magistrale/5_anno_1_sem/computational_intelligence/project_work/CI2024_project-work/data/problem_{}.npz'.format(numproblem))
 x = problem['x']  #3 righe 5000 colonne 

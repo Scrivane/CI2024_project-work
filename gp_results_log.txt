@@ -76,3 +76,157 @@ Formula: np.multiply(np.hypot(np.remainder(np.hypot(np.add(np.square(np.absolute
 MSE: 3969509.031737906
 ============================================================
 
+============================================================
+Problem Number: 8
+Scaling Used: False
+Formula: np.add(np.multiply(np.add(np.add(x[5], np.round(np.cbrt(np.negative(np.exp2(np.cbrt(np.negative(np.exp2(np.hypot(np.round(np.cbrt(np.negative(np.square(np.arctan(np.add(np.multiply(np.square(np.multiply(x[5], np.add(x[5], x[5]))), np.e), np.cbrt(np.remainder(np.arctan(np.negative(np.hypot(np.euler_gamma, np.square(np.remainder(np.arctan(np.negative(np.exp2(np.hypot(x[4], np.pi)))), np.negative(np.add(x[5], x[5]))))))), np.multiply(np.multiply(x[5], np.add(x[5], x[5])), np.add(x[5], x[5])))))))))), np.pi))))))))), x[5]), np.multiply(np.hypot(np.e, x[5]), np.multiply(x[5], np.add(x[5], x[5])))), np.add(np.multiply(np.square(np.multiply(x[5], np.add(x[5], x[5]))), x[5]), np.negative(np.square(np.hypot(np.exp2(np.hypot(np.hypot(np.euler_gamma, np.pi), x[4])), np.round(x[5]))))))
+MSE: 166579.13617635533
+============================================================
+
+============================================================
+Problem Number: 8
+Scaling Used: False
+Formula: np.multiply(np.hypot(np.multiply(np.exp(np.hypot(np.e, np.pi)), np.e), np.add(np.sinh(x[5]), np.sinh(x[5]))), np.add(np.add(np.sinh(x[5]), np.arctan(np.add(np.sin(np.hypot(x[5], x[4])), np.negative(np.square(np.negative(np.square(np.add(np.hypot(x[5], x[4]), x[5])))))))), np.arctan(np.add(np.add(np.sinh(np.pi), np.multiply(x[5], np.e)), np.negative(np.square(np.add(np.hypot(np.hypot(x[5], x[4]), x[4]), x[5])))))))
+MSE: 465575.06028693164
+============================================================
+
+============================================================
+Problem Number: 8
+Scaling Used: False
+Formula: np.multiply(np.add(x[5], np.tanh(np.tanh(np.remainder(np.e, np.remainder(np.reciprocal(np.multiply(np.pi, np.exp(np.pi))), x[5]))))), np.hypot(np.multiply(x[5], np.multiply(np.cosh(np.multiply(np.absolute(x[5]), np.euler_gamma)), np.exp(np.add(np.e, np.remainder(np.exp(np.pi), np.e))))), np.e))
+MSE: 754318.8900874223
+============================================================
+
+============================================================
+Problem Number: 8
+Scaling Used: False
+Formula: np.add(np.exp(np.negative(np.multiply(x[5], np.arctan(np.exp(np.exp(np.cbrt(np.hypot(x[4], np.arctan(np.add(np.euler_gamma, np.tanh(x[5]))))))))))), np.add(np.negative(np.add(np.exp(np.exp(np.reciprocal(np.euler_gamma))), np.add(np.exp(np.hypot(x[4], np.hypot(x[4], np.e))), np.multiply(x[5], np.square(np.square(np.add(np.euler_gamma, x[5]))))))), np.multiply(np.add(np.add(np.absolute(np.arctan(np.add(x[5], x[5]))), np.euler_gamma), np.add(np.euler_gamma, np.multiply(x[5], np.cosh(x[5])))), np.exp(np.exp(np.cbrt(np.e))))))
+MSE: 169202.81966785432
+============================================================
+
+============================================================
+Problem Number: 8
+Scaling Used: False
+Formula: np.multiply(x[5], np.absolute(np.multiply(np.sinh(x[5]), np.sinh(np.exp2(np.exp(np.sin(np.reciprocal(np.cosh(np.sin(np.absolute(np.arctan(np.multiply(np.log10(np.hypot(np.round(x[5]), np.cbrt(np.hypot(np.multiply(np.sinh(x[5]), np.sinh(np.exp2(np.exp2(np.exp(np.sin(np.reciprocal(x[5]))))))), np.reciprocal(x[5]))))), np.sinc(np.euler_gamma))))))))))))))
+MSE: 645047.7044224436
+============================================================
+
+============================================================
+Problem Number: 8
+Scaling Used: False
+Formula: np.multiply(np.add(np.log2(np.sinc(np.tanh(np.negative(np.multiply(np.absolute(x[4]), np.absolute(x[4])))))), np.add(np.log2(np.sinc(np.tanh(np.negative(np.multiply(np.log2(np.exp(np.absolute(x[4]))), np.pi))))), np.multiply(x[5], np.add(np.square(np.add(np.sinc(np.tanh(np.tanh(np.square(np.add(np.pi, x[5]))))), np.add(x[5], x[5]))), np.log2(np.exp(np.absolute(x[5]))))))), np.add(np.square(np.add(np.sinc(np.add(np.log2(np.sinc(np.tanh(np.negative(np.multiply(np.log2(np.exp(np.tanh(np.tanh(np.negative(np.negative(np.multiply(x[5], np.tanh(x[5])))))))), np.tanh(np.multiply(np.log2(np.exp(np.absolute(x[4]))), np.round(np.log2(np.absolute(x[4])))))))))), x[5])), np.add(np.sinc(np.round(np.round(np.tanh(np.round(np.round(np.tanh(x[5]))))))), np.add(np.sinc(np.round(np.round(np.tanh(np.add(np.negative(np.multiply(x[5], np.tanh(np.multiply(np.log2(np.exp(np.tanh(np.tanh(np.negative(np.negative(np.multiply(x[5], np.tanh(x[5])))))))), np.tanh(np.multiply(np.absolute(x[4]), np.round(np.round(np.tanh(x[5]))))))))), x[5]))))), x[5])))), np.pi))
+MSE: 188171.94707869782
+============================================================
+
+============================================================
+Problem Number: 5
+Scaling Used: True
+Formula: np.add(np.divide(np.add(np.sqrt(np.i0(np.power(np.remainder(np.euler_gamma, np.pi), np.remainder(np.negative(x[0]), np.i0(x[0]))))), np.hypot(np.sinc(np.sqrt(np.sqrt(np.euler_gamma))), np.add(np.log(np.pi), np.e))), 174318497.75735644), -2.8520706810421616e-08)
+MSE: 4.9965054516001186e-18
+============================================================
+
+============================================================
+Problem Number: 5
+Scaling Used: True
+Formula: np.add(np.divide(np.add(np.add(np.cbrt(np.log1p(np.cbrt(np.log1p(np.round(np.cbrt(np.reciprocal(np.power(np.hypot(np.round(np.euler_gamma), np.log10(np.i0(x[1]))), x[0])))))))), np.pi), np.remainder(np.reciprocal(np.power(np.hypot(np.round(np.euler_gamma), np.log10(np.reciprocal(np.power(np.hypot(np.round(np.euler_gamma), np.log10(np.i0(np.power(np.hypot(np.round(np.round(np.euler_gamma)), np.log10(np.i0(x[1]))), x[0])))), x[0])))), x[0])), np.power(np.pi, np.e))), 174318497.75735644), -2.8520706810421616e-08)
+MSE: 6.229062672792087e-19
+============================================================
+
+============================================================
+Problem Number: 5
+Scaling Used: True
+Formula: np.add(np.divide(np.add(np.sin(np.hypot(np.power(np.hypot(np.power(np.hypot(np.power(x[0], np.negative(np.sin(x[0]))), np.euler_gamma), np.negative(np.sin(np.round(x[1])))), np.arctan(x[0])), np.negative(np.sin(x[1]))), np.arctan(np.pi))), np.add(np.tanh(np.i0(np.tanh(np.power(np.exp2(x[1]), np.sin(x[0]))))), np.pi)), 174318497.75735644), -2.8520706810421616e-08)
+MSE: 5.512898055429115e-19
+============================================================
+
+============================================================
+Problem Number: 4
+Scaling Used: False
+Formula: np.multiply(np.hypot(np.add(np.power(np.absolute(np.round(np.reciprocal(np.absolute(np.square(x[1]))))), np.log1p(np.reciprocal(np.cosh(x[1])))), np.add(np.power(np.cosh(np.power(np.absolute(np.e), np.arctan(np.sqrt(np.reciprocal(np.absolute(np.square(x[1]))))))), np.tanh(np.reciprocal(np.absolute(x[1])))), np.hypot(np.exp(np.tanh(np.log1p(np.pi))), np.sin(np.arctan(np.sqrt(np.euler_gamma)))))), np.sin(np.tanh(np.e))), np.sin(np.hypot(x[1], x[1])))
+MSE: 0.9556162359141188
+============================================================
+
+============================================================
+Problem Number: 4
+Scaling Used: False
+Formula: np.multiply(np.sinc(np.multiply(x[1], np.multiply(np.exp(np.negative(np.sin(np.sin(np.add(np.pi, np.euler_gamma))))), np.log10(np.negative(np.sin(np.sin(np.add(np.pi, np.euler_gamma)))))))), np.hypot(np.multiply(x[1], np.pi), np.hypot(np.add(np.add(np.add(np.pi, np.i0(x[1])), np.euler_gamma), np.add(np.pi, np.exp(np.euler_gamma))), np.pi)))
+MSE: 0.09592352523610304
+============================================================
+
+============================================================
+Problem Number: 3
+Scaling Used: False
+Formula: np.multiply(np.hypot(np.sin(x[1]), np.hypot(np.add(np.add(np.negative(np.hypot(np.add(x[0], x[0]), np.add(np.add(np.negative(np.hypot(np.add(np.add(np.negative(np.hypot(np.add(np.add(np.negative(np.hypot(np.add(x[0], x[0]), np.add(np.add(np.negative(np.hypot(x[0], np.add(x[0], x[0]))), x[2]), x[1]))), np.arctan(x[1])), np.cbrt(np.square(np.round(np.negative(np.square(x[1])))))), x[0])), np.sin(np.negative(np.square(x[1])))), np.cbrt(np.square(np.square(x[1])))), x[0])), x[2]), np.sin(np.arctan(x[1]))))), np.sin(np.pi)), np.cbrt(np.square(x[1]))), np.square(x[1]))), np.add(np.negative(x[1]), np.arctan(np.round(np.square(x[0])))))
+MSE: 237.20735349866393
+============================================================
+
+============================================================
+Problem Number: 3
+Scaling Used: False
+Formula: np.add(np.add(np.power(np.hypot(x[1], np.reciprocal(np.negative(np.tanh(np.tanh(np.reciprocal(np.add(np.reciprocal(np.reciprocal(np.e)), np.reciprocal(np.i0(np.tanh(np.tanh(x[1]))))))))))), np.power(np.reciprocal(np.power(np.reciprocal(np.e), np.tanh(np.negative(np.multiply(np.cbrt(np.hypot(np.i0(x[0]), np.reciprocal(np.i0(x[0])))), np.sqrt(np.power(np.reciprocal(np.hypot(np.add(x[1], np.arctan(np.add(np.reciprocal(np.tanh(np.reciprocal(np.reciprocal(np.e)))), np.negative(x[1])))), np.negative(np.reciprocal(np.absolute(np.i0(np.negative(x[1]))))))), np.tanh(x[1])))))))), np.tanh(np.negative(np.multiply(np.cbrt(np.hypot(np.i0(x[0]), np.add(np.e, np.hypot(x[0], np.hypot(np.i0(np.reciprocal(np.e)), np.add(x[1], np.hypot(np.i0(np.reciprocal(np.reciprocal(np.add(np.negative(x[1]), x[2])))), np.e))))))), np.sqrt(np.power(np.reciprocal(np.absolute(np.i0(np.i0(x[1])))), np.tanh(x[1])))))))), np.i0(x[0])), np.negative(np.hypot(np.absolute(np.add(np.reciprocal(np.absolute(np.tanh(np.tanh(np.reciprocal(np.add(np.reciprocal(np.reciprocal(np.add(np.e, np.reciprocal(np.tanh(np.tanh(np.tanh(np.reciprocal(np.add(np.reciprocal(np.reciprocal(np.e)), x[2]))))))))), x[2])))))), np.reciprocal(np.tanh(np.tanh(np.reciprocal(np.add(np.reciprocal(np.reciprocal(np.add(np.e, np.reciprocal(np.tanh(np.tanh(np.reciprocal(np.add(np.e, x[2])))))))), x[2]))))))), np.reciprocal(np.negative(np.multiply(np.cbrt(np.hypot(np.add(np.absolute(np.add(np.reciprocal(np.tanh(np.tanh(x[1]))), np.negative(x[1]))), np.arctan(np.add(np.negative(np.e), np.negative(x[1])))), np.negative(x[0]))), np.sqrt(np.reciprocal(np.i0(np.hypot(np.i0(np.e), np.power(np.absolute(np.absolute(np.hypot(x[1], np.reciprocal(np.reciprocal(np.e))))), np.power(np.cbrt(np.hypot(np.add(np.reciprocal(np.hypot(np.add(np.add(np.negative(x[1]), np.absolute(np.reciprocal(x[1]))), np.e), np.negative(np.reciprocal(np.tanh(np.tanh(np.reciprocal(np.add(np.negative(x[1]), x[2])))))))), np.arctan(np.cbrt(np.e))), np.e)), np.tanh(x[1])))))))))))))
+MSE: 23.241025570278335
+============================================================
+
+============================================================
+Problem Number: 3
+Scaling Used: False
+Formula: np.add(np.add(np.add(np.negative(np.sin(np.negative(x[1]))), np.round(np.hypot(np.multiply(np.hypot(np.multiply(x[0], x[0]), np.hypot(np.remainder(np.negative(np.e), x[1]), x[0])), np.arctan(np.multiply(np.pi, x[0]))), x[2]))), np.add(np.negative(x[2]), np.add(np.negative(x[2]), np.round(np.hypot(np.multiply(np.hypot(np.multiply(np.pi, x[0]), np.e), np.arctan(np.sqrt(np.cosh(np.negative(np.sin(np.exp(np.arctan(np.hypot(np.multiply(np.pi, x[0]), x[0]))))))))), np.remainder(np.negative(x[1]), np.negative(np.cosh(np.tanh(x[2]))))))))), np.add(np.negative(np.sinh(x[1])), np.multiply(np.hypot(np.hypot(x[1], x[1]), np.hypot(x[1], x[1])), np.negative(np.add(x[1], np.tanh(x[2]))))))
+MSE: 16.071152977922665
+============================================================
+
+============================================================
+Problem Number: 3
+Scaling Used: True
+Formula: np.add(np.divide(np.add(np.add(np.arctan(np.add(np.hypot(np.euler_gamma, np.cbrt(x[0])), np.sin(x[1]))), np.euler_gamma), np.power(np.sinh(np.sqrt(np.euler_gamma)), np.add(x[1], np.sqrt(np.sinc(np.sin(x[1])))))), 0.015566573680996666), -134.0160235060043)
+MSE: 372.9442764270915
+============================================================
+
+============================================================
+Problem Number: 3
+Scaling Used: False
+Formula: np.add(np.add(np.multiply(np.add(np.sinc(np.e), np.negative(np.square(x[1]))), x[1]), np.square(np.hypot(x[0], x[0]))), np.add(np.add(np.negative(x[2]), np.negative(x[2])), np.absolute(np.absolute(np.negative(np.multiply(np.cbrt(np.reciprocal(np.multiply(np.negative(np.arctan(np.negative(np.multiply(np.cbrt(np.negative(np.sinc(np.e))), np.square(np.arctan(x[2])))))), np.square(np.sinc(np.e))))), np.square(np.arctan(np.remainder(np.sin(np.sinc(np.e)), x[2])))))))))
+MSE: 3.5762604488319454
+============================================================
+
+============================================================
+Problem Number: 2
+Scaling Used: False
+Formula: np.multiply(np.add(np.arctan(np.add(x[2], np.add(np.add(np.add(x[0], np.add(x[1], np.arctan(np.add(np.add(x[1], x[0]), np.arctan(np.add(x[2], np.add(np.sin(np.add(x[0], np.add(np.exp2(np.remainder(x[2], x[0])), np.negative(np.remainder(np.power(np.exp(np.arctan(np.add(x[0], x[0]))), np.multiply(np.hypot(np.absolute(np.arctan(np.add(x[2], np.add(x[0], x[0])))), np.add(np.arctan(np.sin(np.add(x[0], np.e))), np.sin(np.add(x[0], np.e)))), np.absolute(np.negative(np.exp(np.arctan(np.add(np.arctan(x[1]), np.sinc(np.arctan(np.add(x[2], x[0])))))))))), x[0]))))), x[0]))))))), np.add(np.add(np.arctan(np.multiply(np.exp2(np.remainder(x[0], np.sinc(np.sinh(np.absolute(np.sin(x[0])))))), x[1])), np.arctan(np.add(x[2], x[0]))), np.arctan(np.add(np.add(np.tanh(x[1]), np.arctan(np.cbrt(x[2]))), np.arctan(np.add(x[2], np.add(x[0], x[0]))))))), x[0]))), np.add(np.add(np.arctan(np.add(x[2], np.add(np.add(np.add(x[0], np.add(x[1], np.arctan(np.add(np.add(x[1], x[0]), np.arctan(np.add(x[2], np.add(np.arctan(np.add(np.arctan(x[1]), np.sinc(np.arctan(np.add(x[2], x[0]))))), x[0]))))))), np.add(np.add(np.arctan(np.multiply(np.exp2(np.remainder(x[0], np.sinc(np.sinh(np.absolute(np.sin(x[2])))))), np.add(np.exp2(np.remainder(x[2], x[0])), np.negative(np.remainder(np.power(np.exp(np.arctan(np.add(x[0], x[0]))), np.multiply(np.hypot(np.absolute(np.arctan(np.add(x[2], np.add(x[0], x[0])))), np.add(np.arctan(x[0]), np.sin(np.add(x[0], np.e)))), np.sinc(np.sinh(np.absolute(np.add(x[1], x[0])))))), x[0]))))), np.arctan(x[0])), np.arctan(np.add(np.add(x[0], np.arctan(np.cbrt(x[2]))), np.arctan(np.add(x[2], np.add(x[0], x[0]))))))), x[0]))), np.sin(x[0])), np.arctan(np.add(x[2], np.add(x[0], np.add(np.arctan(x[1]), np.arctan(np.add(np.add(x[1], x[0]), x[0])))))))), np.square(np.exp2(np.square(np.pi))))
+MSE: 9340612860081.154
+============================================================
+
+============================================================
+Problem Number: 2
+Scaling Used: False
+Formula: np.multiply(np.add(np.hypot(np.cbrt(np.exp2(np.hypot(np.hypot(np.multiply(np.tanh(np.e), np.square(np.add(np.add(np.cbrt(np.absolute(np.add(np.multiply(np.sin(np.add(np.hypot(np.hypot(np.multiply(np.tanh(np.exp2(np.exp2(np.cosh(np.negative(np.e))))), np.square(np.exp2(np.e))), x[2]), np.multiply(x[0], np.i0(np.e))), np.e)), np.add(np.exp2(np.e), np.round(x[1]))), np.cbrt(np.cosh(np.e))))), np.cbrt(x[2])), np.e))), x[1]), np.cbrt(np.square(np.add(np.sin(x[0]), np.e)))))), np.cbrt(np.e)), np.multiply(np.multiply(x[0], np.pi), np.absolute(np.hypot(np.sinh(np.cosh(np.negative(np.e))), np.cbrt(np.square(np.hypot(np.hypot(np.cbrt(np.euler_gamma), x[1]), np.cbrt(np.cbrt(np.e))))))))), np.multiply(np.square(np.e), np.add(np.hypot(np.hypot(np.multiply(np.tanh(np.cosh(np.exp(np.multiply(np.sin(np.add(np.pi, np.cbrt(x[2]))), np.add(np.sin(np.add(np.sin(x[0]), np.e)), np.round(x[1])))))), np.hypot(np.hypot(np.multiply(np.tanh(np.add(np.hypot(np.hypot(np.multiply(np.tanh(np.exp2(np.exp2(np.cosh(np.negative(np.e))))), np.square(np.exp2(np.e))), x[2]), np.multiply(x[0], np.i0(np.e))), np.e)), np.cbrt(np.e)), np.tanh(x[0])), np.hypot(np.cbrt(np.tanh(np.add(np.multiply(np.tanh(np.add(np.arctan(np.add(np.multiply(np.sin(np.add(np.pi, np.cbrt(x[2]))), np.add(np.e, np.round(x[1]))), np.cbrt(x[2]))), np.cbrt(np.tanh(np.add(np.cbrt(x[1]), np.cbrt(np.square(np.exp2(np.e)))))))), np.square(np.hypot(np.hypot(np.cbrt(np.cbrt(np.round(np.tanh(np.tanh(np.add(np.arctan(np.add(np.multiply(np.sin(np.add(np.pi, np.cbrt(x[2]))), np.add(np.e, np.e)), np.cbrt(x[2]))), np.cbrt(np.tanh(np.add(np.cbrt(x[1]), np.cbrt(np.square(np.exp2(np.e)))))))))))), x[1]), np.cbrt(np.cbrt(np.cbrt(np.e)))))), np.cbrt(np.add(np.cbrt(x[1]), np.cbrt(x[2])))))), np.hypot(np.hypot(np.multiply(np.tanh(np.add(np.cbrt(np.sin(x[0])), np.cbrt(np.tanh(np.add(np.cbrt(x[1]), np.cbrt(x[2])))))), np.square(np.exp2(np.e))), x[1]), np.cbrt(np.hypot(np.hypot(np.multiply(np.hypot(np.hypot(np.multiply(np.tanh(np.add(np.cbrt(np.sin(np.square(np.arctan(np.hypot(np.exp(np.sinh(np.arctan(np.multiply(np.cbrt(np.tanh(np.add(np.cbrt(np.sin(np.square(np.arctan(x[0])))), np.cbrt(np.tanh(np.add(np.multiply(np.tanh(np.add(np.arctan(np.add(np.multiply(np.sin(np.add(np.pi, np.cbrt(x[2]))), np.add(np.e, np.round(x[1]))), np.cbrt(x[2]))), np.cbrt(np.tanh(np.add(np.cbrt(x[1]), np.cbrt(np.square(np.exp2(np.e)))))))), np.square(np.hypot(np.hypot(np.cbrt(x[1]), x[1]), np.cbrt(np.cbrt(np.cbrt(np.e)))))), np.cbrt(np.add(np.cbrt(x[1]), np.cbrt(x[2]))))))))), np.i0(np.e))))), np.sinh(np.cbrt(x[2]))))))), np.cbrt(np.tanh(np.add(np.multiply(np.tanh(np.add(np.arctan(np.add(np.multiply(np.sin(np.add(np.pi, np.cbrt(x[2]))), np.add(np.e, np.round(x[1]))), np.cbrt(x[2]))), np.cbrt(np.tanh(np.add(np.cbrt(x[1]), np.cbrt(np.square(np.exp2(np.e)))))))), np.square(np.hypot(np.hypot(np.cbrt(np.cbrt(np.round(np.tanh(np.tanh(np.add(np.arctan(np.add(np.multiply(np.sin(np.add(np.pi, np.cbrt(x[2]))), np.add(np.e, np.round(x[1]))), np.cbrt(x[2]))), np.cbrt(np.tanh(np.add(np.cbrt(x[1]), np.cbrt(np.square(np.exp2(np.euler_gamma)))))))))))), x[1]), np.cbrt(np.euler_gamma)))), np.cbrt(np.add(np.cbrt(np.e), np.cbrt(x[2])))))))), np.square(np.exp2(np.e))), np.hypot(np.euler_gamma, np.cbrt(np.cbrt(np.cbrt(x[1]))))), np.cbrt(x[1])), np.square(np.hypot(np.hypot(np.multiply(np.tanh(np.add(np.cbrt(np.sin(x[0])), np.cbrt(np.tanh(np.add(np.cbrt(x[1]), np.cbrt(x[2])))))), np.square(np.cosh(np.negative(np.e)))), x[1]), np.cbrt(np.hypot(np.hypot(np.multiply(np.e, np.square(np.add(np.pi, np.cbrt(np.cbrt(np.round(x[0])))))), x[1]), np.pi))))), x[1]), np.pi)))))), np.cbrt(np.e)), np.cbrt(np.hypot(np.euler_gamma, np.cbrt(np.cbrt(np.cbrt(x[1])))))), np.multiply(np.tanh(np.exp(np.add(np.multiply(np.sin(np.add(np.hypot(np.hypot(np.multiply(np.tanh(np.exp2(np.exp2(np.e))), np.square(np.exp2(np.e))), x[2]), np.multiply(x[0], np.absolute(np.e))), np.e)), np.add(np.exp2(np.e), np.round(np.e))), np.cbrt(np.cosh(np.negative(np.e)))))), np.hypot(np.multiply(np.tanh(np.exp(np.multiply(np.sin(np.add(x[0], np.cbrt(x[2]))), np.add(np.sin(np.cbrt(x[2])), np.round(x[1]))))), np.square(np.exp2(np.round(np.e)))), np.log2(np.tanh(np.euler_gamma)))))))
+MSE: 8645320196154.205
+============================================================
+
+============================================================
+Problem Number: 1
+Scaling Used: False
+Formula: np.sin(x[0])
+MSE: 3.921193366772412e-34
+============================================================
+
+============================================================
+Problem Number: 1
+Scaling Used: False
+Formula: np.tanh(np.add(np.power(np.exp2(np.add(x[0], np.negative(np.e))), np.square(np.e)), x[0]))
+MSE: 0.001181784435199925
+============================================================
+
+============================================================
+Problem Number: 1
+Scaling Used: False
+Formula: np.sin(np.add(x[0], np.multiply(np.sin(np.pi), np.i0(x[0]))))
+MSE: 1.0861933427360817e-32
+============================================================
+
+============================================================
+Problem Number: 1
+Scaling Used: False
+Formula: np.sin(x[0])
+MSE: 3.921193366772412e-34
+============================================================
+

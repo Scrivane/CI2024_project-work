@@ -13,7 +13,9 @@ def f0(x: np.ndarray) -> np.ndarray:
     return x[0] + np.sin(x[1]) / 5
 
 
-def f1(x: np.ndarray) -> np.ndarray: ...
+def f1(x: np.ndarray) -> np.ndarray: 
+     #0 mse , 1 restart , 1000 steps , no final run 
+     return np.sin(x[0])
 
 
 
@@ -42,7 +44,21 @@ def testf2(x) -> np.ndarray: # [np.float64(5420086.098834277), np.float64(293441
               np.add(np.multiply(np.reciprocal(np.exp(np.tanh(np.negative(np.exp(np.sinh(x[1])))))), 
               np.add(x[0], x[0])), np.negative(np.reciprocal(x[2])))) 
 
-def f2(x: np.ndarray) -> np.ndarray:
+def f2(x: np.ndarray) -> np.ndarray:  #could benefit more steps
+     #nrestarts=10
+     #nsteps = 5000
+     #min_mse no scaling
+     #8645320196154.205 
+     
+    return np.multiply(np.add(np.hypot(np.cbrt(np.exp2(np.hypot(np.hypot(np.multiply(np.tanh(np.e), np.square(np.add(np.add(np.cbrt(np.absolute(np.add(np.multiply(np.sin(np.add(np.hypot(np.hypot(np.multiply(np.tanh(np.exp2(np.exp2(np.cosh(np.negative(np.e))))), np.square(np.exp2(np.e))), x[2]), np.multiply(x[0], np.i0(np.e))), np.e)), np.add(np.exp2(np.e), np.round(x[1]))), np.cbrt(np.cosh(np.e))))), np.cbrt(x[2])), np.e))), x[1]), np.cbrt(np.square(np.add(np.sin(x[0]), np.e)))))), np.cbrt(np.e)), np.multiply(np.multiply(x[0], np.pi), np.absolute(np.hypot(np.sinh(np.cosh(np.negative(np.e))), np.cbrt(np.square(np.hypot(np.hypot(np.cbrt(np.euler_gamma), x[1]), np.cbrt(np.cbrt(np.e))))))))), np.multiply(np.square(np.e), np.add(np.hypot(np.hypot(np.multiply(np.tanh(np.cosh(np.exp(np.multiply(np.sin(np.add(np.pi, np.cbrt(x[2]))), np.add(np.sin(np.add(np.sin(x[0]), np.e)), np.round(x[1])))))), np.hypot(np.hypot(np.multiply(np.tanh(np.add(np.hypot(np.hypot(np.multiply(np.tanh(np.exp2(np.exp2(np.cosh(np.negative(np.e))))), np.square(np.exp2(np.e))), x[2]), np.multiply(x[0], np.i0(np.e))), np.e)), np.cbrt(np.e)), np.tanh(x[0])), np.hypot(np.cbrt(np.tanh(np.add(np.multiply(np.tanh(np.add(np.arctan(np.add(np.multiply(np.sin(np.add(np.pi, np.cbrt(x[2]))), np.add(np.e, np.round(x[1]))), np.cbrt(x[2]))), np.cbrt(np.tanh(np.add(np.cbrt(x[1]), np.cbrt(np.square(np.exp2(np.e)))))))), np.square(np.hypot(np.hypot(np.cbrt(np.cbrt(np.round(np.tanh(np.tanh(np.add(np.arctan(np.add(np.multiply(np.sin(np.add(np.pi, np.cbrt(x[2]))), np.add(np.e, np.e)), np.cbrt(x[2]))), np.cbrt(np.tanh(np.add(np.cbrt(x[1]), np.cbrt(np.square(np.exp2(np.e)))))))))))), x[1]), np.cbrt(np.cbrt(np.cbrt(np.e)))))), np.cbrt(np.add(np.cbrt(x[1]), np.cbrt(x[2])))))), np.hypot(np.hypot(np.multiply(np.tanh(np.add(np.cbrt(np.sin(x[0])), np.cbrt(np.tanh(np.add(np.cbrt(x[1]), np.cbrt(x[2])))))), np.square(np.exp2(np.e))), x[1]), np.cbrt(np.hypot(np.hypot(np.multiply(np.hypot(np.hypot(np.multiply(np.tanh(np.add(np.cbrt(np.sin(np.square(np.arctan(np.hypot(np.exp(np.sinh(np.arctan(np.multiply(np.cbrt(np.tanh(np.add(np.cbrt(np.sin(np.square(np.arctan(x[0])))), np.cbrt(np.tanh(np.add(np.multiply(np.tanh(np.add(np.arctan(np.add(np.multiply(np.sin(np.add(np.pi, np.cbrt(x[2]))), np.add(np.e, np.round(x[1]))), np.cbrt(x[2]))), np.cbrt(np.tanh(np.add(np.cbrt(x[1]), np.cbrt(np.square(np.exp2(np.e)))))))), np.square(np.hypot(np.hypot(np.cbrt(x[1]), x[1]), np.cbrt(np.cbrt(np.cbrt(np.e)))))), np.cbrt(np.add(np.cbrt(x[1]), np.cbrt(x[2]))))))))), np.i0(np.e))))), np.sinh(np.cbrt(x[2]))))))), np.cbrt(np.tanh(np.add(np.multiply(np.tanh(np.add(np.arctan(np.add(np.multiply(np.sin(np.add(np.pi, np.cbrt(x[2]))), np.add(np.e, np.round(x[1]))), np.cbrt(x[2]))), np.cbrt(np.tanh(np.add(np.cbrt(x[1]), np.cbrt(np.square(np.exp2(np.e)))))))), np.square(np.hypot(np.hypot(np.cbrt(np.cbrt(np.round(np.tanh(np.tanh(np.add(np.arctan(np.add(np.multiply(np.sin(np.add(np.pi, np.cbrt(x[2]))), np.add(np.e, np.round(x[1]))), np.cbrt(x[2]))), np.cbrt(np.tanh(np.add(np.cbrt(x[1]), np.cbrt(np.square(np.exp2(np.euler_gamma)))))))))))), x[1]), np.cbrt(np.euler_gamma)))), np.cbrt(np.add(np.cbrt(np.e), np.cbrt(x[2])))))))), np.square(np.exp2(np.e))), np.hypot(np.euler_gamma, np.cbrt(np.cbrt(np.cbrt(x[1]))))), np.cbrt(x[1])), np.square(np.hypot(np.hypot(np.multiply(np.tanh(np.add(np.cbrt(np.sin(x[0])), np.cbrt(np.tanh(np.add(np.cbrt(x[1]), np.cbrt(x[2])))))), np.square(np.cosh(np.negative(np.e)))), x[1]), np.cbrt(np.hypot(np.hypot(np.multiply(np.e, np.square(np.add(np.pi, np.cbrt(np.cbrt(np.round(x[0])))))), x[1]), np.pi))))), x[1]), np.pi)))))), np.cbrt(np.e)), np.cbrt(np.hypot(np.euler_gamma, np.cbrt(np.cbrt(np.cbrt(x[1])))))), np.multiply(np.tanh(np.exp(np.add(np.multiply(np.sin(np.add(np.hypot(np.hypot(np.multiply(np.tanh(np.exp2(np.exp2(np.e))), np.square(np.exp2(np.e))), x[2]), np.multiply(x[0], np.absolute(np.e))), np.e)), np.add(np.exp2(np.e), np.round(np.e))), np.cbrt(np.cosh(np.negative(np.e)))))), np.hypot(np.multiply(np.tanh(np.exp(np.multiply(np.sin(np.add(x[0], np.cbrt(x[2]))), np.add(np.sin(np.cbrt(x[2])), np.round(x[1]))))), np.square(np.exp2(np.round(np.e)))), np.log2(np.tanh(np.euler_gamma)))))))
+
+
+
+
+
+    #9340612860081.154
+    
+    return np.multiply(np.add(np.arctan(np.add(x[2], np.add(np.add(np.add(x[0], np.add(x[1], np.arctan(np.add(np.add(x[1], x[0]), np.arctan(np.add(x[2], np.add(np.sin(np.add(x[0], np.add(np.exp2(np.remainder(x[2], x[0])), np.negative(np.remainder(np.power(np.exp(np.arctan(np.add(x[0], x[0]))), np.multiply(np.hypot(np.absolute(np.arctan(np.add(x[2], np.add(x[0], x[0])))), np.add(np.arctan(np.sin(np.add(x[0], np.e))), np.sin(np.add(x[0], np.e)))), np.absolute(np.negative(np.exp(np.arctan(np.add(np.arctan(x[1]), np.sinc(np.arctan(np.add(x[2], x[0])))))))))), x[0]))))), x[0]))))))), np.add(np.add(np.arctan(np.multiply(np.exp2(np.remainder(x[0], np.sinc(np.sinh(np.absolute(np.sin(x[0])))))), x[1])), np.arctan(np.add(x[2], x[0]))), np.arctan(np.add(np.add(np.tanh(x[1]), np.arctan(np.cbrt(x[2]))), np.arctan(np.add(x[2], np.add(x[0], x[0]))))))), x[0]))), np.add(np.add(np.arctan(np.add(x[2], np.add(np.add(np.add(x[0], np.add(x[1], np.arctan(np.add(np.add(x[1], x[0]), np.arctan(np.add(x[2], np.add(np.arctan(np.add(np.arctan(x[1]), np.sinc(np.arctan(np.add(x[2], x[0]))))), x[0]))))))), np.add(np.add(np.arctan(np.multiply(np.exp2(np.remainder(x[0], np.sinc(np.sinh(np.absolute(np.sin(x[2])))))), np.add(np.exp2(np.remainder(x[2], x[0])), np.negative(np.remainder(np.power(np.exp(np.arctan(np.add(x[0], x[0]))), np.multiply(np.hypot(np.absolute(np.arctan(np.add(x[2], np.add(x[0], x[0])))), np.add(np.arctan(x[0]), np.sin(np.add(x[0], np.e)))), np.sinc(np.sinh(np.absolute(np.add(x[1], x[0])))))), x[0]))))), np.arctan(x[0])), np.arctan(np.add(np.add(x[0], np.arctan(np.cbrt(x[2]))), np.arctan(np.add(x[2], np.add(x[0], x[0]))))))), x[0]))), np.sin(x[0])), np.arctan(np.add(x[2], np.add(x[0], np.add(np.arctan(x[1]), np.arctan(np.add(np.add(x[1], x[0]), x[0])))))))), np.square(np.exp2(np.square(np.pi))))
 
 
 
@@ -76,9 +92,8 @@ ic| ris: np.float64(18549826191418.91) """
     ic| y.shape: (5000,)
     ic| x.shape: (3, 5000)
     ic| ris: np.float64(25498062664766.99) """
-   
-    #10000000000
     #9809284786418.186  no len penalty , alway crossover 0.05 di mutrate
+    #15338468007720.264
     #halvable
     return np.multiply(np.hypot(np.sinh(np.pi), np.exp(np.pi)), np.add(np.add(np.add(np.multiply(np.hypot(np.absolute(np.add(np.log1p(np.pi), np.sinh(np.pi))), np.hypot(np.absolute(np.add(x[0], np.log1p(np.tanh(x[1])))), np.absolute(np.sinh(np.pi)))), np.absolute(np.add(x[0], np.log1p(np.tanh(np.sinh(np.exp2(np.pi))))))), np.absolute(np.i0(np.absolute(np.add(x[0], np.log1p(np.tanh(x[1]))))))), np.absolute(np.exp2(x[2]))), np.add(np.multiply(np.tanh(np.add(np.multiply(np.tanh(np.add(x[0], np.log1p(np.tanh(x[1])))), np.absolute(np.sinh(np.sinh(np.pi)))), np.add(np.multiply(np.hypot(np.hypot(np.pi, np.absolute(np.exp2(np.sinh(np.pi)))), np.hypot(np.absolute(np.absolute(np.absolute(np.hypot(np.pi, x[2])))), np.absolute(np.exp2(np.pi)))), np.e), np.add(np.add(np.exp2(x[2]), np.add(np.exp2(np.sinh(np.pi)), np.add(np.multiply(np.multiply(np.hypot(np.absolute(np.exp2(np.sinh(np.pi))), x[0]), np.sinh(np.pi)), x[0]), np.add(np.add(np.multiply(np.log1p(np.tanh(np.sinh(np.pi))), x[0]), np.add(np.exp2(np.sinh(np.pi)), np.multiply(np.absolute(np.absolute(np.absolute(np.sinh(np.exp2(np.pi))))), np.sinh(x[1])))), np.add(np.add(np.multiply(np.sinh(np.pi), np.sinh(np.log1p(np.tanh(np.exp2(np.pi))))), np.add(np.sinh(np.pi), x[1])), np.add(np.add(np.multiply(np.hypot(np.hypot(np.exp2(np.pi), np.absolute(np.multiply(np.exp2(np.hypot(np.pi, np.hypot(x[1], np.sinh(np.pi)))), np.pi))), np.exp2(np.add(x[0], np.log1p(np.tanh(x[1]))))), x[2]), np.hypot(np.absolute(np.exp2(np.hypot(np.pi, np.multiply(np.absolute(np.i0(np.absolute(np.sin(np.exp2(np.sinh(np.pi)))))), np.sinh(np.e))))), x[1])), np.add(np.multiply(np.hypot(np.hypot(np.absolute(np.exp2(np.hypot(np.absolute(np.add(x[0], np.log1p(np.tanh(x[1])))), np.absolute(np.sinh(np.pi))))), np.absolute(np.exp2(np.sinh(np.pi)))), np.absolute(np.exp2(x[0]))), x[0]), np.multiply(np.hypot(np.absolute(np.exp2(np.absolute(np.absolute(np.exp2(x[0]))))), np.exp(np.pi)), np.square(np.pi))))))))), np.add(np.hypot(np.pi, np.multiply(np.absolute(np.i0(np.absolute(np.sin(np.exp2(np.sinh(np.pi)))))), np.sinh(np.e))), np.add(np.multiply(np.hypot(np.hypot(np.absolute(np.absolute(np.add(x[0], np.log1p(np.tanh(np.sinh(np.exp2(np.pi))))))), np.absolute(np.hypot(np.absolute(np.multiply(np.exp2(np.hypot(np.pi, np.hypot(np.pi, np.sinh(np.pi)))), np.pi)), np.absolute(np.exp2(np.hypot(np.pi, np.hypot(np.pi, np.sinh(np.pi)))))))), np.exp2(np.sinh(np.pi))), x[2]), np.add(np.log1p(np.pi), np.sinh(np.exp2(np.pi))))))))), np.absolute(np.sinh(np.hypot(np.pi, np.hypot(np.pi, np.sinh(np.pi)))))), np.add(np.multiply(np.hypot(np.hypot(np.absolute(np.hypot(np.pi, np.pi)), np.absolute(np.exp2(np.pi))), np.hypot(np.absolute(np.exp2(np.pi)), np.absolute(np.absolute(np.sinh(np.pi))))), np.e), np.add(np.add(np.exp2(np.pi), np.add(np.exp2(np.add(x[0], np.log1p(np.tanh(x[1])))), np.add(np.multiply(np.multiply(np.hypot(np.absolute(np.exp2(np.sinh(np.pi))), x[0]), np.sinh(np.e)), x[0]), np.add(np.add(np.multiply(np.exp2(np.pi), x[0]), np.add(np.square(x[2]), np.absolute(np.absolute(np.absolute(np.exp2(np.pi)))))), np.add(np.add(np.multiply(np.sinh(np.pi), np.sinh(np.log1p(np.tanh(x[2])))), np.add(np.add(np.multiply(np.hypot(np.absolute(np.add(np.log1p(np.pi), np.sinh(np.pi))), np.hypot(np.exp2(x[1]), np.log1p(np.tanh(np.hypot(np.pi, np.absolute(np.exp2(np.sinh(np.pi)))))))), x[2]), np.add(np.multiply(np.hypot(np.absolute(np.add(np.log1p(np.pi), np.sinh(np.pi))), np.hypot(np.absolute(np.add(x[0], np.log1p(np.tanh(x[1])))), np.absolute(np.sinh(np.pi)))), np.absolute(np.add(x[0], np.log1p(np.tanh(np.sinh(np.exp2(np.pi))))))), np.absolute(np.i0(np.absolute(np.add(x[0], np.log1p(np.tanh(x[1])))))))), x[1])), np.add(np.add(np.add(np.multiply(np.hypot(np.absolute(np.add(np.log1p(np.pi), np.sinh(x[2]))), np.hypot(np.absolute(np.add(x[0], np.log1p(np.tanh(x[1])))), np.absolute(np.sinh(np.pi)))), x[2]), np.absolute(np.i0(np.absolute(np.add(x[0], np.log1p(np.tanh(x[1]))))))), np.absolute(np.exp2(x[0]))), np.add(np.add(np.multiply(np.hypot(np.absolute(np.add(np.log1p(np.pi), np.sinh(np.pi))), np.hypot(np.absolute(np.add(np.pi, np.log1p(np.tanh(x[1])))), np.multiply(np.absolute(np.exp2(np.pi)), np.sinh(x[1])))), x[2]), np.absolute(np.i0(np.absolute(np.add(x[0], np.log1p(np.tanh(x[1]))))))), np.absolute(np.exp2(x[0]))))))))), np.add(np.hypot(np.pi, np.multiply(np.absolute(np.i0(np.absolute(np.add(x[0], np.log1p(np.tanh(x[2])))))), x[0])), np.add(np.add(np.square(x[2]), np.absolute(np.hypot(np.pi, np.sinh(np.pi)))), np.pi)))))))
 
@@ -111,12 +126,36 @@ ic| ris: np.float64(18549826191418.91) """
    # return np.multiply(np.power(np.exp(np.sinh(np.negative(np.tanh(np.cosh(np.multiply(x[1], x[0])))))), np.add(x[1], np.tanh(np.cosh(x[0])))), np.power(np.multiply(x[0], x[0]), np.add(x[0], x[1])))
 
 def f3(x: np.ndarray) -> np.ndarray: 
+     #nrestart nrestarts=10   , no run until plateaux
+     #   nstep=50000
+     """ min_mse no scaling
+     3.5762604488319454 """
+
+
+     return np.add(np.add(np.multiply(np.add(np.sinc(np.e), np.negative(np.square(x[1]))), x[1]), np.square(np.hypot(x[0], x[0]))), np.add(np.add(np.negative(x[2]), np.negative(x[2])), np.absolute(np.absolute(np.negative(np.multiply(np.cbrt(np.reciprocal(np.multiply(np.negative(np.arctan(np.negative(np.multiply(np.cbrt(np.negative(np.sinc(np.e))), np.square(np.arctan(x[2])))))), np.square(np.sinc(np.e))))), np.square(np.arctan(np.remainder(np.sin(np.sinc(np.e)), x[2])))))))))
+     
+     
+     
      #always crossover , mutation of 0.05
      #1/3 ble
      #8.006929603960224   mse   using scaled npenalty and hardlimi ton depth after crossover of 1000 (otherwishe it would generate  anew one )
-     return np.add(np.multiply(np.negative(x[1]), np.multiply(x[1], x[1])), np.hypot(np.add(np.multiply(np.negative(np.hypot(np.hypot(x[0], x[0]), np.pi)), np.hypot(np.hypot(np.log1p(np.hypot(np.negative(np.exp2(np.add(np.multiply(np.negative(np.hypot(np.hypot(x[0], x[0]), np.hypot(np.hypot(x[0], x[0]), np.pi))), np.log1p(np.exp2(np.log1p(np.exp2(x[2]))))), np.multiply(np.pi, x[2])))), np.log1p(np.pi))), np.negative(x[0])), x[0])), np.multiply(np.pi, x[2])), np.exp2(np.negative(np.exp2(x[2])))))
+     return np.add(np.multiply(np.negative(x[1]),
+                                np.multiply(x[1], x[1])), np.hypot(np.add(np.multiply(np.negative(np.hypot(np.hypot(x[0], x[0]), np.pi)), 
+                                                                                                        np.hypot(np.hypot(np.log1p(np.hypot(
+                                                                                                             np.negative(
+                                                                                                                  np.exp2(np.add(np.multiply(np.negative(np.hypot(np.hypot(x[0], x[0]), 
+                                                                                                                                                                  np.hypot(np.hypot(x[0], x[0]), np.pi))), 
+                                                                                                                                                                  np.log1p(np.exp2(np.log1p(np.exp2(x[2]))))), 
+                                                                                                                                                                  np.multiply(np.pi, x[2])))), np.log1p(np.pi))),
+                                                                                                                                                                    np.negative(x[0])), x[0])), np.multiply(np.pi, x[2])), 
+                                                                                                                                                                    np.exp2(np.negative(np.exp2(x[2])))))
 
 
+
+
+     """ np.add(np.add(np.add(np.negative(np.sin(np.negative(x[1]))), np.round(np.hypot(np.multiply(np.hypot(np.multiply(x[0], x[0]), np.hypot(np.remainder(np.negative(np.e), x[1]), x[0])), np.arctan(np.multiply(np.pi, x[0]))), x[2]))), np.add(np.negative(x[2]), np.add(np.negative(x[2]), np.round(np.hypot(np.multiply(np.hypot(np.multiply(np.pi, x[0]), np.e), np.arctan(np.sqrt(np.cosh(np.negative(np.sin(np.exp(np.arctan(np.hypot(np.multiply(np.pi, x[0]), x[0]))))))))), np.remainder(np.negative(x[1]), np.negative(np.cosh(np.tanh(x[2]))))))))), np.add(np.negative(np.sinh(x[1])), np.multiply(np.hypot(np.hypot(x[1], x[1]), np.hypot(x[1], x[1])), np.negative(np.add(x[1], np.tanh(x[2]))))))
+     min_mse no scaling
+     16.07115297792266 """
 
 
      #14.466307622905152
@@ -128,6 +167,10 @@ def f3(x: np.ndarray) -> np.ndarray:
 
 
 def f4(x: np.ndarray) -> np.ndarray: #as before  migliorabile
+     """ min_mse no scaling  using run until plateaux
+     0.09592352523610304 """
+
+     return np.multiply(np.sinc(np.multiply(x[1], np.multiply(np.exp(np.negative(np.sin(np.sin(np.add(np.pi, np.euler_gamma))))), np.log10(np.negative(np.sin(np.sin(np.add(np.pi, np.euler_gamma)))))))), np.hypot(np.multiply(x[1], np.pi), np.hypot(np.add(np.add(np.add(np.pi, np.i0(x[1])), np.euler_gamma), np.add(np.pi, np.exp(np.euler_gamma))), np.pi)))
 
 
      #min_mse
