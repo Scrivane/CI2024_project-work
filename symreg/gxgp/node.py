@@ -101,7 +101,13 @@ class Node:   #using property here allows to call those method as a paramenter d
         result = set()
         _get_subtree(result, self)
         return result
-
+    
+    """ @property  # will recall it each time , no cache 
+    def depth(self):
+        if self.is_leaf:
+            return 1
+        return 1 + max(child.depth for child in self._successors)
+ """
     def to_np_formula(self):
         stringa=self.long_name
         newstringa=""
@@ -114,7 +120,7 @@ class Node:   #using property here allows to call those method as a paramenter d
                 newstringa=newstringa+"]"
                 openbracket=0
 
-            if( char=="x" and stringa[i+1].isdigit()):   #change back i think
+            if( char=="x" and stringa[i+1].isdigit()):  
                 newstringa=newstringa+"["
                 openbracket=1
             

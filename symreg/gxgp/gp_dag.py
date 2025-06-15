@@ -85,16 +85,15 @@ class DagGP:
 
     @staticmethod
     def evaluate(individual: Node, X, variable_names=None):  ##change
-        if variable_names:
-            names = variable_names
-        else:
-            names = [DagGP.default_variable(i) for i in range(len(X[0]))]
+        formula=individual.to_np_formula()
+        y_pred = eval(formula, {"np": np, "x": X.T})
+        if np.isscalar(y_pred) or  y_pred.shape == ():
+            #y_pred = np.full(X.shape[0], y_pred)
+            y_pred = y_pred * np.ones(X.shape[0])  
 
-        y_pred = list()
-        #each individual is a collable object with unspecified number of parametesr 
-        #it will do something like individual(x0=3, x1=4) in the call
-        for row in X:
-            y_pred.append(individual(**{n: v for n, v in zip(names, row)}))
+       
+        
+
         return y_pred
     
 

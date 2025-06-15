@@ -132,6 +132,8 @@ def fitness(tree,nodefun:Node,x, y):
         div=6
     elif numproblem==3:
         div=0.8
+    elif numproblem==2:  #added
+        div=0.8
     else:
         div=1 
 
@@ -441,7 +443,7 @@ def EAlgoithm(nproblem,gptree,x,y):  #use elitism try to preserve best ones
     crossOverRate=1#0.9
     mut_increasement=1.2
     
-    nstep=15000#50000#15000 #12000 #5000#10000#1000 #100 #2000   #usa 4000
+    nstep=50000#15000#50000#15000 #12000 #5000#10000#1000 #100 #2000   #usa 4000
     """  lowest_fitness_individual = min(pop, key=lambda x: x.fitness)
     ic(lowest_fitness_individual)
     ic(str(lowest_fitness_individual.genome)) """
@@ -507,6 +509,8 @@ def EAlgoithm(nproblem,gptree,x,y):  #use elitism try to preserve best ones
         missing_individuals=nelemets-len(pop)
         poploc,_=popInizialize(gptree,missing_individuals,x,y)
         pop.extend(poploc)
+        if numproblem==2:
+            nstep=nstep*10
         top_2_individual=EA_Run(nstep,pop,crossOverRate,mutrate,MAX_TREE_LENGTH,gptree)
         best_individuals_each_restart.extend(top_2_individual)
 
@@ -562,7 +566,7 @@ def normalization(y,range=(0,5)):
 
 
 
-numproblem=1
+numproblem=2
 scaling=False
 problem = np.load('/home/adri/universita/magistrale/5_anno_1_sem/computational_intelligence/project_work/CI2024_project-work/data/problem_{}.npz'.format(numproblem))
 x = problem['x']  #3 righe 5000 colonne 
@@ -605,10 +609,11 @@ dag = gxgp.DagGP(   #problems with ldex , it's unsupported for some types   np.l
     #operators=[np.pow],
     #operators =[np.mod,np.arctan,np.sinc,np.sqrt,np.cbrt,np.add,np.negative,np.multiply,np.sin,np.tanh,np.reciprocal,np.exp,np.exp2,np.pow,np.sinh,np.round,np.cosh,np.hypot,np.i0,np.absolute,np.square,np.log1p,np.log2,np.log10,np.log], 
     #operators=[np.multiply,np.cbrt,np.sqrt,np.negative,np.add,np.subtract,np.sin,np.cos,np.cosh,np.sinc,np.log10,np.log2,np.log1p,np.round,np.hypot,np.mod,np.log,np.arctan,np.ceil],
-    operators=[np.mod,np.arctan,np.sinc,np.sqrt,np.cbrt,np.add,np.negative,np.multiply,np.sin,np.tanh,np.reciprocal,np.exp,np.exp2,np.pow,np.sinh,np.round,np.cosh,np.hypot,np.i0,np.absolute,np.square,np.log1p,np.log2,np.log10,np.log],  #np.acos], #ignore_op#np.round],  #np.round #np.pow, #np.ldexp],
+    #operators=[np.mod,np.arctan,np.sinc,np.sqrt,np.cbrt,np.add,np.negative,np.multiply,np.sin,np.tanh,np.reciprocal,np.exp,np.exp2,np.pow,np.sinh,np.round,np.cosh,np.hypot,np.i0,np.absolute,np.square,np.log1p,np.log2,np.log10,np.log],  #np.acos], #ignore_op#np.round],  #np.round #np.pow, #np.ldexp],
+    operators=[np.mod,np.arctan,np.maximum,np.sqrt,np.cbrt,np.add,np.negative,np.multiply,np.sin,np.tanh,np.reciprocal,np.exp,np.exp2,np.pow,np.sinh,np.round,np.cosh,np.hypot,np.i0,np.absolute,np.square,np.log1p,np.log2,np.log10,np.log],  #changed for p2
     #operators=[np.log1p,np.exp2,np.i0,np.sin],
     variables=x.shape[0],
-    constants=[np.pi,np.e,np.euler_gamma],
+    constants=[np.pi,np.e,np.euler_gamma],#,  -1.234,1.5,9.9343,-9.0345,2.345,-6.3454],
    # constants=[np.pi,np.e,np.euler_gamma],#[-1,0,1,np.pi,np.e,np.euler_gamma],#np.linspace(-2, 2, 500),
 )
 
