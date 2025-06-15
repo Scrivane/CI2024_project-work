@@ -11,7 +11,7 @@ try:
 except ImportError:
     pass
 
-from .draw import *
+
 from .gp_common import *
 from .gp_dag import *
 from .node import *

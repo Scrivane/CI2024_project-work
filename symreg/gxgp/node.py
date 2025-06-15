@@ -8,7 +8,7 @@ import numbers
 import warnings
 from typing import Callable
 
-from .draw import draw
+
 from .utils import arity
 
 __all__ = ['Node']
@@ -146,13 +146,6 @@ class Node:   #using property here allows to call those method as a paramenter d
         return newstringa
   
 
-
-    def draw(self,normal_python=False):
-        try:
-            return draw(self,normal_python)
-        except Exception as msg:
-            warnings.warn(f"Drawing not available ({msg})", UserWarning, 2)
-            return None
 
 
 def _get_subtree(bunch: set, node: Node):
