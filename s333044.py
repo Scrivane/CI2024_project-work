@@ -59,6 +59,13 @@ def f2(x: np.ndarray) -> np.ndarray:  #could benefit more steps
 
 
 def f3(x: np.ndarray) -> np.ndarray: 
+     #mse 0.4122990064737059
+     #nrestart nrestarts=6   , no run until plateaux
+     #   nstep=50000
+     #lastrun nstep =50000
+
+
+     return np.add(np.add(np.add(np.add(np.add(np.exp2(np.sqrt(np.add(np.negative(np.multiply(np.hypot(x[0], np.sin(np.e)), np.log1p(np.tanh(np.negative(np.pi))))), np.hypot(x[0], np.euler_gamma)))), np.negative(x[2])), np.negative(x[2])), np.negative(x[2])), np.negative(np.cbrt(x[2]))), np.multiply(np.negative(x[1]), np.square(x[1])))
      #nrestart nrestarts=10   , no run until plateaux
      #   nstep=50000
      """ min_mse no scaling
@@ -224,6 +231,12 @@ def f6(x: np.ndarray) -> np.ndarray:   #migliorabile
 
 
 def f7(x: np.ndarray) -> np.ndarray: 
+     """ min_mse no scaling 50000 steps , last run 500000 steps
+     60.653201048825096 """
+
+
+     return np.add(np.sinh(np.multiply(x[1], x[0])), np.multiply(np.i0(np.multiply(np.cbrt(np.add(np.add(np.hypot(np.add(np.add(np.hypot(np.remainder(np.remainder(np.add(np.hypot(np.euler_gamma, np.multiply(x[1], np.multiply(x[1], x[1]))), np.sin(np.multiply(x[1], x[0]))), np.multiply(x[1], x[0])), np.multiply(x[1], x[1])), np.add(np.hypot(np.remainder(np.remainder(np.add(np.multiply(x[1], x[0]), np.sin(np.multiply(x[1], x[0]))), np.multiply(x[1], x[0])), np.multiply(x[1], x[0])), np.multiply(np.cbrt(np.remainder(np.cbrt(np.multiply(np.i0(np.multiply(x[0], x[0])), np.hypot(np.add(np.cosh(np.add(x[1], x[0])), np.remainder(np.add(np.hypot(np.euler_gamma, np.multiply(x[1], np.multiply(x[1], x[1]))), np.sin(np.multiply(x[1], x[0]))), np.multiply(x[1], x[1]))), np.multiply(x[1], np.multiply(x[0], x[0]))))), np.cosh(np.multiply(np.cbrt(np.cosh(np.cbrt(np.cosh(np.remainder(np.cbrt(np.cbrt(np.multiply(np.absolute(np.i0(np.multiply(x[0], x[0]))), np.add(np.cosh(np.add(x[1], x[0])), np.remainder(x[1], np.cbrt(x[0])))))), np.cbrt(np.add(np.hypot(np.euler_gamma, np.multiply(x[1], np.multiply(x[1], x[1]))), np.sin(np.cbrt(np.add(np.hypot(np.add(np.add(np.cosh(np.add(x[0], x[0])), np.multiply(x[1], x[1])), np.cosh(np.add(x[0], x[0]))), np.add(np.multiply(x[1], x[0]), x[0])), np.cosh(np.add(x[0], x[0])))))))))))), x[0])))), np.pi)), np.sin(np.multiply(x[0], x[0])))), np.sin(np.multiply(x[0], x[0]))), np.sin(np.multiply(x[1], x[1]))), np.multiply(np.cbrt(np.remainder(x[0], np.cosh(np.pi))), np.multiply(np.remainder(np.remainder(np.add(np.hypot(np.remainder(x[1], np.multiply(np.multiply(x[0], x[0]), np.euler_gamma)), np.multiply(x[1], np.multiply(x[1], x[1]))), np.sin(np.multiply(x[1], x[0]))), np.multiply(x[0], x[0])), np.multiply(x[1], x[0])), np.cbrt(np.add(np.multiply(np.remainder(np.remainder(np.add(np.hypot(np.remainder(x[1], np.add(np.cosh(np.remainder(np.add(np.hypot(np.euler_gamma, np.multiply(x[1], np.multiply(x[1], x[1]))), np.sin(np.multiply(x[1], x[0]))), np.multiply(x[1], x[0]))), np.multiply(x[1], np.add(x[1], x[0])))), np.multiply(x[1], np.multiply(x[1], x[1]))), np.sin(np.multiply(x[0], x[0]))), np.multiply(x[0], x[0])), np.multiply(x[1], x[0])), np.pi), np.remainder(x[1], np.multiply(np.multiply(x[0], x[0]), np.euler_gamma))))))), np.sin(np.multiply(x[1], x[1]))), np.sin(np.multiply(x[1], x[1])))), np.remainder(np.cbrt(np.remainder(np.cbrt(np.multiply(np.i0(np.multiply(x[0], x[0])), np.hypot(np.add(np.cosh(np.add(x[1], x[0])), np.remainder(np.cbrt(np.multiply(x[1], x[0])), np.multiply(x[0], x[0]))), np.multiply(x[1], np.multiply(x[0], x[0]))))), np.cosh(np.multiply(np.cbrt(np.cosh(np.cbrt(np.cosh(np.remainder(np.cbrt(np.cbrt(np.multiply(np.absolute(np.i0(np.multiply(x[0], x[0]))), np.add(np.cosh(np.add(x[1], x[0])), np.remainder(np.multiply(x[0], x[0]), np.cbrt(np.cbrt(np.multiply(np.absolute(np.i0(np.multiply(x[0], x[0]))), np.add(np.cosh(np.add(x[1], x[0])), x[1]))))))))), np.cbrt(np.add(np.hypot(np.euler_gamma, np.multiply(x[1], np.multiply(x[1], x[1]))), np.sin(np.cbrt(np.add(np.hypot(np.add(np.add(np.cosh(np.add(x[0], x[0])), np.multiply(x[1], x[1])), np.euler_gamma), x[0]), np.cosh(np.add(x[0], x[0])))))))))))), x[0])))), np.cbrt(np.add(np.hypot(np.remainder(x[1], np.multiply(x[0], np.euler_gamma)), np.multiply(np.multiply(x[1], np.cbrt(x[1])), np.multiply(np.cbrt(x[1]), x[1]))), np.sin(np.cbrt(np.pi))))))), np.hypot(np.add(np.add(np.add(np.cosh(np.add(x[1], x[0])), np.multiply(x[1], x[0])), np.multiply(np.remainder(np.remainder(np.add(np.hypot(np.remainder(x[1], np.multiply(np.multiply(x[0], x[0]), np.euler_gamma)), np.multiply(x[0], np.multiply(x[1], np.cbrt(np.add(np.hypot(np.multiply(x[1], np.euler_gamma), np.multiply(x[1], np.multiply(x[1], x[1]))), np.sin(np.cbrt(np.add(np.hypot(np.add(np.add(np.cosh(np.add(x[0], x[0])), np.multiply(x[1], x[0])), np.euler_gamma), x[0]), np.cosh(np.add(x[0], x[0])))))))))), np.sin(np.euler_gamma)), np.multiply(x[0], x[0])), np.absolute(np.multiply(x[1], x[1]))), np.cbrt(np.add(np.multiply(np.multiply(np.multiply(np.add(x[1], x[0]), np.add(x[1], x[0])), np.pi), np.pi), np.cosh(np.multiply(np.sin(np.multiply(x[1], np.multiply(x[0], x[0]))), np.add(x[1], np.add(np.add(x[1], x[0]), x[0])))))))), np.cbrt(np.add(np.multiply(x[0], x[1]), np.sin(np.multiply(x[1], x[1]))))), x[0])))
+
      """ min_mse no scaling   using run until plateaux
      64.10785620740353 """
 
@@ -242,7 +255,8 @@ def f7(x: np.ndarray) -> np.ndarray:
 
 def f8(x: np.ndarray) -> np.ndarray: #good
      #min_mse
-     #
+     #no run until plateaux , nstep 50000, with final refinement
+     
      #166579.13617635533
      return np.add(np.multiply(np.add(np.add(x[5], np.round(np.cbrt(np.negative(np.exp2(np.cbrt(np.negative(np.exp2(np.hypot(np.round(np.cbrt(np.negative(np.square(np.arctan(np.add(np.multiply(np.square(np.multiply(x[5], np.add(x[5], x[5]))), np.e), np.cbrt(np.remainder(np.arctan(np.negative(np.hypot(np.euler_gamma, np.square(np.remainder(np.arctan(np.negative(np.exp2(np.hypot(x[4], np.pi)))), np.negative(np.add(x[5], x[5]))))))), np.multiply(np.multiply(x[5], np.add(x[5], x[5])), np.add(x[5], x[5])))))))))), np.pi))))))))), x[5]), np.multiply(np.hypot(np.e, x[5]), np.multiply(x[5], np.add(x[5], x[5])))), np.add(np.multiply(np.square(np.multiply(x[5], np.add(x[5], x[5]))), x[5]), np.negative(np.square(np.hypot(np.exp2(np.hypot(np.hypot(np.euler_gamma, np.pi), x[4])), np.round(x[5]))))))
 

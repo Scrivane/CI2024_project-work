@@ -87,7 +87,7 @@ def mutation_collapse(tree1: Node,gptree:DagGP) -> Node:
 
 
 
-def mutation_delete_unirary(tree1: Node) -> Node:
+def mutation_delete_unary(tree1: Node) -> Node:
     offspring = deepcopy(tree1)
     #ic(offspring)
     internal_nodes_arity_1 = [node for node in offspring.subtree if not node.is_leaf and node.arity==1]
@@ -104,7 +104,7 @@ def mutation_delete_unirary(tree1: Node) -> Node:
     parent, idx = find_parent(offspring, target)
 
     if parent is not None:
-        child = target.successors[0]  #it's unirary so there is only the first 
+        child = target.successors[0]  #it's unary so there is only the first 
         #children[idx] = new_node
         succs = parent.successors  # This is a copy of the list done in successors , i need later to replace it whole otherwise no update
         succs[idx] = child         
@@ -118,7 +118,7 @@ def mutation_delete_unirary(tree1: Node) -> Node:
 
 
 
-def mutation_add_unirary(tree1: Node, gptree: DagGP) -> Node:
+def mutation_add_unary(tree1: Node, gptree: DagGP) -> Node:
     offspring = deepcopy(tree1)
 
     all_nodes = list(offspring.subtree)
@@ -182,15 +182,6 @@ def mutation_point(tree1: Node,gptree:DagGP) -> Node:  ##i have the problem that
         children[idx] = new_node
         parent.successors = children
 
-    # Replace target in its parent
-    """ for node in all_nodes:
-        children = node.successors
-        for i, child in enumerate(children):
-            if child is target:  # identity check
-                children[i] = new_node
-                node.successors = children  # this triggers the setter
-                print(offspring)
-                return offspring """
 
 
     return new_node
@@ -199,7 +190,7 @@ def mutation_point(tree1: Node,gptree:DagGP) -> Node:  ##i have the problem that
 
 commutative_func=["multiply","add","hypot","maximum"]
 
-def mutation_permutations(tree1: Node) -> Node:  ##i have the problem that chainging a node changes all similar nodes
+def mutation_permutations(tree1: Node) -> Node:  
     offspring = deepcopy(tree1)  # single deepcopy
 
     
@@ -220,41 +211,4 @@ def mutation_permutations(tree1: Node) -> Node:  ##i have the problem that chain
     return offspring
 
 
-    """ if target_pointer == offspring:
-        # Replacing root
-        return new_node
 
-    # Recursive replacement
-    def replace(node):
-        new_successors = []
-        for child in node.successors:
-            if child == target_pointer:
-                new_successors.append(new_node)
-            else:
-                new_successors.append(replace(child))
-        return Node(node._func, new_successors, name=node.short_name) """
-
-    #return replace(offspring)
-
-
-    
-    """ else:
-        # Replace function with another one of same arity
-        original_arity = node.arity
-        same_arity_ops = [op for op in operators if arity(op) == original_arity]
-        if same_arity_ops:
-            new_op = gxgp_random.choice(same_arity_ops)
-            mutated_node = Node(new_op, node.successors)
-            return offspring.replace_node(node, mutated_node) """
-
-    return offspring
-
-
-    """ while individual is None or len(individual) < n_nodes:
-            op = gxgp_random.choice(self._operators)
-            #params = gxgp_random.choices(pool, k=arity(op))
-            individual = Node(op, params)
-            pool.append(individual)
-        return individual """
-    
-    return "ciao"
