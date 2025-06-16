@@ -19,31 +19,6 @@ def f1(x: np.ndarray) -> np.ndarray:
 
 
 
-def testf2(x) -> np.ndarray: # [np.float64(5420086.098834277), np.float64(2934417.028615387)]
-     for i in range(x.shape[0]):
-          print(x[i])
-    
-     x=[4.52991777,-0.18656382,-1.60071107]
-
-     print(np.multiply(np.add(np.multiply(np.sinh(np.add(np.tanh(1), 1)), 
-              np.add(np.exp(np.sinh(np.pi)), np.exp(np.e))), np.sinh(x[0])), 
-              np.add(np.multiply(np.reciprocal(np.exp(np.tanh(np.negative(np.exp(np.sinh(x[1])))))), 
-              np.add(x[0], x[0])), np.negative(np.reciprocal(x[2])))) )
-     
-     print(np.float64(5420086.098834277))
-     
-     x=[1.90003334,4.07797331,3.23380643]
-     print(np.multiply(np.add(np.multiply(np.sinh(np.add(np.tanh(1), 1)), 
-              np.add(np.exp(np.sinh(np.pi)), np.exp(np.e))), np.sinh(x[0])), 
-              np.add(np.multiply(np.reciprocal(np.exp(np.tanh(np.negative(np.exp(np.sinh(x[1])))))), 
-              np.add(x[0], x[0])), np.negative(np.reciprocal(x[2])))) )
-     print(np.float64(2934417.028615387))
-
-     return   np.multiply(np.add(np.multiply(np.sinh(np.add(np.tanh(1), 1)), 
-              np.add(np.exp(np.sinh(np.pi)), np.exp(np.e))), np.sinh(x[0])), 
-              np.add(np.multiply(np.reciprocal(np.exp(np.tanh(np.negative(np.exp(np.sinh(x[1])))))), 
-              np.add(x[0], x[0])), np.negative(np.reciprocal(x[2])))) 
-
 def f2(x: np.ndarray) -> np.ndarray:  #could benefit more steps
      #nrestarts 5 , last run nstep 500000
      #1548510021431.2053
@@ -62,7 +37,7 @@ def f3(x: np.ndarray) -> np.ndarray:
      #mse 0.4122990064737059
      #nrestart nrestarts=6   , no run until plateaux
      #   nstep=50000
-     #lastrun nstep =50000
+     #lastrun nstep =500000
 
 
      return np.add(np.add(np.add(np.add(np.add(np.exp2(np.sqrt(np.add(np.negative(np.multiply(np.hypot(x[0], np.sin(np.e)), np.log1p(np.tanh(np.negative(np.pi))))), np.hypot(x[0], np.euler_gamma)))), np.negative(x[2])), np.negative(x[2])), np.negative(x[2])), np.negative(np.cbrt(x[2]))), np.multiply(np.negative(x[1]), np.square(x[1])))
@@ -121,15 +96,6 @@ def f4(x: np.ndarray) -> np.ndarray: #as before  migliorabile
      
      #4.653280870773529
      return np.multiply(np.cosh(np.pi), np.power(np.reciprocal(np.i0(np.cosh(x[1]))), np.log1p(np.cosh(x[1]))))
-def trying_f5_rescaled(x:np.ndarray,offset,mul,y:np.ndarray):
-     yset=np.add(np.exp2(np.tanh(np.square(np.hypot(np.sin(np.hypot(np.hypot(np.pi, x[1]), np.e)), np.tanh(np.add(np.tanh(x[1]), np.sin(x[0]))))))), np.pi)
-     yreset=(yset - np.min(x)) / mul + offset
-
-     ris=sum((a - b) ** 2 for a, b in zip(y, yset)) / len(y)
-     print("real result:")
-     print(ris)
-     return yreset
- 
 
      
 

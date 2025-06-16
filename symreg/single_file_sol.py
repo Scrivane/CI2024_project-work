@@ -59,9 +59,6 @@ def fitness(tree,nodefun:Node,x, y):
 
     # Some operations may finish without raising but still yield nan/inf
     if not np.isfinite(mse_val) :#or len(nodefun)>2300:
-        """ if len(nodefun)>2300:
-            
-            print("aqui") """
         return -math.inf 
 
 
@@ -69,13 +66,10 @@ def fitness(tree,nodefun:Node,x, y):
     #depthpenalty=nodefun.depth   # it's too computationally costly
 
     if numproblem==5: #useless
-        div=10
+        #div=10
+        div=1
     elif numproblem==7:
         div=8
-        #div=10
-    elif numproblem==6:
-        #div=10
-        div=6
     elif numproblem==3:
         div=0.8
     elif numproblem==2:  #added
@@ -255,7 +249,7 @@ def EA_Run(nstep,pop,crossOverRate,mutrate,MAX_TREE_LENGTH,gptree,extra_el_sel=0
                 
                 worst_fit_ind=(min(pop, key=lambda ind: ind.fitness))    
                 pop.remove(worst_fit_ind) # delete from population the wrost individual
-                unique_string_genomes.remove(str(worst_fit_ind.genome))
+                unique_string_genomes.discard(str(worst_fit_ind.genome))
             
         
 
@@ -282,12 +276,12 @@ def EA_Run(nstep,pop,crossOverRate,mutrate,MAX_TREE_LENGTH,gptree,extra_el_sel=0
 
 
 
-def EAlgoithm(nproblem,gptree,x,y):  #use elitism try to preserve best ones
+def EAlgoithm(gptree,x,y):  #use elitism try to preserve best ones
     
     final_run_long=True
     MAX_TREE_LENGTH=500
     mutrate=0.055 
-    nrestarts=6  # was 10 for probl 4 #was 5
+    nrestarts=6   ##was 6  # was 10 for probl 4 #was 5
     nelemets=1500  #was 2000    #1000#15   #400   #was 200
     crossOverRate=1#0.9
     mut_increasement=1.2
@@ -380,7 +374,7 @@ def EAlgoithm(nproblem,gptree,x,y):  #use elitism try to preserve best ones
 
     return formula,error(gptree,best_one.genome,x,y)
     
-#2 problem 
+
 
 def normalization(y,range=(0,5)):
     y_min = np.min(y)
@@ -396,8 +390,8 @@ def normalization(y,range=(0,5)):
 
 
 
-numproblem=5
-scaling=True
+numproblem=6
+scaling=False
 problem = np.load('/home/adri/universita/magistrale/5_anno_1_sem/computational_intelligence/project_work/CI2024_project-work/data/problem_{}.npz'.format(numproblem))
 x = problem['x']  #3 righe 5000 colonne 
 
@@ -425,7 +419,7 @@ dag = gxgp.DagGP(
 )
 
 #ic(np.var(y))
-formula,fit=EAlgoithm(numproblem,dag,x,y)
+formula,fit=EAlgoithm(dag,x,y)
 print("THe formula is :")
 print(formula)
 ygen = eval(formula, {"np": np, "x": x})
@@ -440,9 +434,6 @@ print(fit)
 if ris==fit:
     print("good")
 else:
-    print("la differenxza")
-    print(ris)
-    print(fit)
     print("wrong") 
 
 if scaling==True:
