@@ -10,15 +10,6 @@ from itertools import accumulate
 
 
 
-import sys
-
-sys.path.append('/home/adri/universita/magistrale/5_anno_1_sem/computational_intelligence/project_work/CI2024_project-work')
-
-import s333044
-
-
-globaltime=0
-
 
 
 i=1
@@ -370,7 +361,7 @@ def normalization(y,range=(0,5)):  #scales the y into the passed range doing min
 
 numproblem=7
 scaling=False
-problem = np.load('/home/adri/universita/magistrale/5_anno_1_sem/computational_intelligence/project_work/CI2024_project-work/data/problem_{}.npz'.format(numproblem))
+problem = np.load('../data/problem_{}.npz'.format(numproblem)) #depends on where you are running the program , if in the project directory only one dot at the start ,, if in the src directory use two dots
 x = problem['x']  #3 righe 5000 colonne 
 
 y=problem['y']

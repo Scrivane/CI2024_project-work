@@ -293,3 +293,94 @@ Formula: np.add(np.divide(np.add(np.sin(np.sqrt(np.power(np.cosh(x[1]), np.sinh(
 MSE: 6.815696865446356e-19
 ============================================================
 
+============================================================
+Problem Number: 5
+Scaling Used: True
+Formula: np.add(np.divide(np.hypot(np.sin(np.add(np.add(x[0], np.e), x[1])), np.multiply(np.arctan(np.exp(np.add(np.sin(x[1]), np.exp(np.add(np.sin(x[0]), np.add(np.sin(x[1]), np.add(np.sin(np.round(x[1])), np.pi))))))), np.pi)), 174318497.75735644), -2.8520706810421616e-08)
+MSE: 5.833141431342205e-19
+============================================================
+
+============================================================
+Problem Number: 6
+Scaling Used: True
+Formula: np.add(np.divide(np.add(np.remainder(np.hypot(np.sinh(np.euler_gamma), np.hypot(np.sinc(np.tanh(np.add(np.absolute(np.cbrt(x[1])), x[1]))), np.add(np.negative(np.add(np.cbrt(np.e), np.arctan(x[1]))), np.negative(np.tanh(np.power(np.euler_gamma, x[0])))))), np.add(x[1], np.multiply(np.add(np.e, np.exp2(x[1])), np.cbrt(np.hypot(np.sqrt(np.e), np.absolute(np.add(x[0], x[1]))))))), np.i0(np.power(np.i0(x[0]), np.sin(np.hypot(x[0], np.e))))), 0.3033203483907901), -11.914375580518566)
+MSE: 0.31134428517796237
+============================================================
+
+============================================================
+Problem Number: 6
+Scaling Used: True
+Formula: np.add(np.divide(np.add(np.power(np.reciprocal(np.cosh(np.sqrt(np.exp(x[0])))), np.euler_gamma), np.add(np.reciprocal(np.hypot(np.cbrt(np.sqrt(np.exp(x[0]))), np.cosh(np.reciprocal(np.i0(x[0]))))), np.log1p(np.add(np.tanh(x[1]), np.i0(np.add(np.i0(np.e), np.remainder(np.square(np.square(np.tanh(x[1]))), x[1]))))))), 0.3033203483907901), -11.914375580518566)
+MSE: 0.09675130242173513
+============================================================
+
+============================================================
+Problem Number: 6
+Scaling Used: True
+Formula: np.add(np.divide(np.multiply(np.log10(np.pi), np.add(np.add(np.pi, np.sin(np.log1p(np.exp2(np.hypot(np.add(x[0], np.sqrt(np.pi)), np.sqrt(np.pi)))))), np.add(x[1], np.pi))), 0.3033203483907901), -11.914375580518566)
+MSE: 0.18302448007481698
+============================================================
+
+============================================================
+Problem Number: 6
+Scaling Used: True
+Formula: np.add(np.divide(np.add(np.add(np.multiply(x[1], np.arctan(np.euler_gamma)), np.e), np.arctan(np.add(np.cbrt(np.pi), np.arctan(np.negative(x[0]))))), 0.3033203483907901), -11.914375580518566)
+MSE: 0.11651644944414224
+============================================================
+
+============================================================
+Problem Number: 6
+Scaling Used: False
+Formula: np.add(np.cbrt(np.arctan(np.arctan(np.pi))), np.add(np.add(np.negative(x[0]), np.add(x[1], np.multiply(np.negative(np.arctan(np.euler_gamma)), np.multiply(np.euler_gamma, np.add(np.pi, np.negative(np.add(np.negative(x[1]), x[0]))))))), x[1]))
+MSE: 0.00013141506659101066
+============================================================
+
+============================================================
+Problem Number: 6
+Scaling Used: False
+Formula: np.add(x[1], np.multiply(np.arctan(np.euler_gamma), np.add(x[1], np.negative(np.add(np.multiply(np.euler_gamma, np.negative(np.multiply(np.negative(np.euler_gamma), np.add(x[0], np.negative(x[1]))))), x[0])))))
+MSE: 0.0001976259700811934
+============================================================
+
+============================================================
+Problem Number: 6
+Scaling Used: False
+Formula: np.subtract(np.multiply(np.add(x[1], x[1]), np.cbrt(np.euler_gamma)), np.multiply(np.cbrt(np.multiply(np.euler_gamma, np.euler_gamma)), x[0]))
+MSE: 0.005642271347809629
+============================================================
+
+============================================================
+Problem Number: 6
+Scaling Used: False
+Formula: np.subtract(np.add(x[1], np.subtract(np.multiply(np.arctan(np.cbrt(np.euler_gamma)), np.subtract(x[1], x[0])), np.arctan(x[1]))), np.arctan(np.subtract(np.subtract(np.euler_gamma, np.euler_gamma), x[1])))
+MSE: 7.145589969138856e-07
+============================================================
+
+============================================================
+Problem Number: 6
+Scaling Used: False
+Formula: np.add(np.multiply(np.arctan(np.cbrt(np.euler_gamma)), np.subtract(x[1], x[0])), x[1])
+MSE: 7.145589969138917e-07
+============================================================
+
+============================================================
+Problem Number: 6
+Scaling Used: False
+Formula: np.add(np.multiply(np.exp(np.arctan(np.euler_gamma)), x[1]), np.multiply(x[0], np.log(np.tanh(np.euler_gamma))))
+MSE: 0.012527674173584634
+============================================================
+
+============================================================
+Problem Number: 7
+Scaling Used: False
+Formula: np.multiply(np.power(np.exp(x[0]), x[1]), np.add(np.e, np.cosh(np.remainder(np.exp2(x[0]), x[1]))))
+MSE: 312.40459012302495
+============================================================
+
+============================================================
+Problem Number: 7
+Scaling Used: False
+Formula: np.hypot(np.multiply(np.add(np.add(np.add(np.hypot(x[0], x[0]), np.hypot(np.multiply(np.remainder(x[1], np.multiply(x[0], np.cosh(np.euler_gamma))), np.e), x[0])), np.cosh(np.remainder(x[1], x[0]))), np.multiply(np.hypot(np.e, np.add(np.multiply(np.square(np.cosh(np.sin(np.sin(np.multiply(x[1], np.cosh(np.cosh(x[1]))))))), np.multiply(x[1], np.remainder(np.cbrt(np.multiply(np.hypot(x[0], np.add(np.hypot(np.multiply(x[1], np.remainder(x[1], np.multiply(x[0], np.cosh(np.sin(np.e))))), x[0]), np.e)), np.multiply(x[1], np.exp2(np.hypot(x[1], np.log10(np.euler_gamma)))))), x[0]))), np.e)), np.multiply(x[1], x[0]))), np.multiply(np.hypot(np.sin(np.multiply(x[1], np.square(np.cosh(np.euler_gamma)))), np.remainder(x[0], np.multiply(x[1], np.cosh(np.euler_gamma)))), np.exp2(np.hypot(np.remainder(x[0], np.multiply(np.remainder(x[1], np.multiply(np.remainder(x[0], np.multiply(np.remainder(x[1], np.multiply(x[0], np.cosh(np.sin(x[1])))), np.cosh(np.euler_gamma))), np.cosh(np.sin(np.sin(np.e))))), np.cosh(np.arctan(np.arctan(np.arctan(np.sin(np.e))))))), np.log10(np.hypot(np.remainder(x[1], x[0]), np.remainder(np.remainder(x[1], np.multiply(x[0], np.cosh(np.sin(x[1])))), x[0]))))))), np.euler_gamma)
+MSE: 54.844555000111505
+============================================================
+

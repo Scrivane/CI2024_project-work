@@ -197,6 +197,10 @@ def f6(x: np.ndarray) -> np.ndarray:   #migliorabile
 
 
 def f7(x: np.ndarray) -> np.ndarray: 
+     #min_mse no scaling 50000 steps , last run 500000 steps
+     #mse 54.844555000111505
+
+     return np.hypot(np.multiply(np.add(np.add(np.add(np.hypot(x[0], x[0]), np.hypot(np.multiply(np.remainder(x[1], np.multiply(x[0], np.cosh(np.euler_gamma))), np.e), x[0])), np.cosh(np.remainder(x[1], x[0]))), np.multiply(np.hypot(np.e, np.add(np.multiply(np.square(np.cosh(np.sin(np.sin(np.multiply(x[1], np.cosh(np.cosh(x[1]))))))), np.multiply(x[1], np.remainder(np.cbrt(np.multiply(np.hypot(x[0], np.add(np.hypot(np.multiply(x[1], np.remainder(x[1], np.multiply(x[0], np.cosh(np.sin(np.e))))), x[0]), np.e)), np.multiply(x[1], np.exp2(np.hypot(x[1], np.log10(np.euler_gamma)))))), x[0]))), np.e)), np.multiply(x[1], x[0]))), np.multiply(np.hypot(np.sin(np.multiply(x[1], np.square(np.cosh(np.euler_gamma)))), np.remainder(x[0], np.multiply(x[1], np.cosh(np.euler_gamma)))), np.exp2(np.hypot(np.remainder(x[0], np.multiply(np.remainder(x[1], np.multiply(np.remainder(x[0], np.multiply(np.remainder(x[1], np.multiply(x[0], np.cosh(np.sin(x[1])))), np.cosh(np.euler_gamma))), np.cosh(np.sin(np.sin(np.e))))), np.cosh(np.arctan(np.arctan(np.arctan(np.sin(np.e))))))), np.log10(np.hypot(np.remainder(x[1], x[0]), np.remainder(np.remainder(x[1], np.multiply(x[0], np.cosh(np.sin(x[1])))), x[0]))))))), np.euler_gamma)
      """ min_mse no scaling 50000 steps , last run 500000 steps
      60.653201048825096 """
 
