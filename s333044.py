@@ -35,7 +35,7 @@ def f3(x: np.ndarray) -> np.ndarray:
      return np.add(np.add(np.add(np.add(np.add(np.exp2(np.sqrt(np.add(np.negative(np.multiply(np.hypot(x[0], np.sin(np.e)), np.log1p(np.tanh(np.negative(np.pi))))), np.hypot(x[0], np.euler_gamma)))), np.negative(x[2])), np.negative(x[2])), np.negative(x[2])), np.negative(np.cbrt(x[2]))), np.multiply(np.negative(x[1]), np.square(x[1])))
    
 
-def f4(x: np.ndarray) -> np.ndarray: #as before  migliorabile
+def f4(x: np.ndarray) -> np.ndarray: 
      """ min_mse no scaling  using run until plateaux
      0.09592352523610304 """
 
