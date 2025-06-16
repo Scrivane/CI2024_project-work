@@ -14,7 +14,7 @@ from .utils import arity
 __all__ = ['Node']
 
 
-class Node:   #using property here allows to call those method as a paramenter doing for example .subtree instead of .subtree()
+class Node:   #using property here allows to call those method as a parameter doing for example .subtree instead of .subtree()
     _func: Callable
     _successors: tuple['Node']
     _arity: int
