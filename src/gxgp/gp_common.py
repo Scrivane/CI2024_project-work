@@ -25,14 +25,11 @@ def xover_swap_subtree(tree1: Node, tree2: Node) -> Node:
     if not internal_nodes:
         # No crossover possible
         return offspring
-    #ic(offspring)
     node = gxgp_random.choice(internal_nodes)
     successors = node.successors
 
     i = gxgp_random.randrange(len(successors))
-    #ic(successors, i)
     successors[i] = deepcopy(gxgp_random.choice(list(tree2.subtree)))
-    #ic(successors, i)
     node.successors = successors
     return offspring
 
@@ -42,20 +39,14 @@ def xover_swap_subtree(tree1: Node, tree2: Node) -> Node:
 
 def mutation_hoist(tree1: Node) -> Node:
     offspring = deepcopy(tree1)
-    #ic(offspring)
     internal_nodes = [node for node in offspring.subtree if not node.is_leaf and node is not offspring]
     successors = None
     if not internal_nodes:
         return offspring
 
-    # Pick random internal node (i.e., a subtree)
+    # Pick random internal node 
     node = gxgp_random.choice(internal_nodes)
-    """ i = gxgp_random.randrange(len(successors))
-    ic(successors, i)
-    successors[i] = deepcopy(gxgp_random.choice(list(tree2.subtree)))
-    ic(successors, i)
-    node.successors = successors """
-    #ic(node)
+
     return node
 
 
@@ -63,7 +54,6 @@ def mutation_hoist(tree1: Node) -> Node:
 
 def mutation_collapse(tree1: Node,gptree:DagGP) -> Node:
     offspring = deepcopy(tree1)
-    #ic(offspring)
     internal_nodes = [node for node in offspring.subtree if not node.is_leaf]
     successors = None
     if not internal_nodes:
@@ -71,9 +61,9 @@ def mutation_collapse(tree1: Node,gptree:DagGP) -> Node:
     
 
 
-    # Pick random internal node (i.e., a subtree)
+    # Pick random internal node 
     target = gxgp_random.choice(internal_nodes)
-    possibilities= gptree._variables + gptree._constants  #[e for e in (gptree._variables + gptree._constants) if str(e)!=str(target)]
+    possibilities= gptree._variables + gptree._constants  
     new_node = deepcopy(gxgp_random.choice(possibilities))
 
     parent, idx = find_parent(offspring, target)
@@ -89,23 +79,20 @@ def mutation_collapse(tree1: Node,gptree:DagGP) -> Node:
 
 def mutation_delete_unary(tree1: Node) -> Node:
     offspring = deepcopy(tree1)
-    #ic(offspring)
     internal_nodes_arity_1 = [node for node in offspring.subtree if not node.is_leaf and node.arity==1]
     if not internal_nodes_arity_1:
         return offspring
     
 
 
-    # Pick random internal node (i.e., a subtree)
+    # Pick random internal node 
     target = gxgp_random.choice(internal_nodes_arity_1)
-    #possibilities= gptree._variables + gptree._constants  #[e for e in (gptree._variables + gptree._constants) if str(e)!=str(target)]
-    #new_node = deepcopy(gxgp_random.choice(possibilities))
+
 
     parent, idx = find_parent(offspring, target)
 
     if parent is not None:
         child = target.successors[0]  #it's unary so there is only the first 
-        #children[idx] = new_node
         succs = parent.successors  # This is a copy of the list done in successors , i need later to replace it whole otherwise no update
         succs[idx] = child         
         parent.successors = succs 
@@ -146,7 +133,7 @@ def mutation_add_unary(tree1: Node, gptree: DagGP) -> Node:
 
     return offspring
 
-def mutation_point(tree1: Node,gptree:DagGP) -> Node:  ##i have the problem that chainging a node changes all similar nodes
+def mutation_point(tree1: Node,gptree:DagGP) -> Node:  
     offspring = deepcopy(tree1)  # single deepcopy
     
     all_nodes = list(offspring.subtree)
@@ -158,19 +145,14 @@ def mutation_point(tree1: Node,gptree:DagGP) -> Node:  ##i have the problem that
         possibilities=[e for e in (gptree._variables + gptree._constants) if str(e)!=str(target)]
         new_node = deepcopy(gxgp_random.choice(possibilities))  
 
-    else:  #make so only changes
+    else:  
        
-        possible_ops = [op for op in gptree._operators if arity(op) == target.arity and target.short_name!=op.__name__  ]  #con reimbussolamento
+        possible_ops = [op for op in gptree._operators if arity(op) == target.arity and target.short_name!=op.__name__  ]  
         if len(possible_ops)>0:
             new_op = gxgp_random.choice(possible_ops)
-        else:
-            "qui avrei errore"
+    
         new_node = Node(new_op, target.successors)
 
-
-
-
-    
 
     if target is offspring:
 
@@ -194,9 +176,7 @@ def mutation_permutations(tree1: Node) -> Node:
     offspring = deepcopy(tree1)  # single deepcopy
 
     
-    #all_nodes = list(offspring.subtree)
-    internal_nodes = [node for node in offspring.subtree if not node.is_leaf and node.arity>=2 and node.short_name not in commutative_func]  #maybe use non cummutative functions only 
-    #print(internal_nodes)
+    internal_nodes = [node for node in offspring.subtree if not node.is_leaf and node.arity>=2 and node.short_name not in commutative_func]  # uses non cummutative functions only 
     if (len(internal_nodes)>=1):
     
 

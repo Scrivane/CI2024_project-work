@@ -102,13 +102,7 @@ class Node:   #using property here allows to call those method as a paramenter d
         _get_subtree(result, self)
         return result
     
-    """ @property  # will recall it each time , no cache 
-    def depth(self):
-        if self.is_leaf:
-            return 1
-        return 1 + max(child.depth for child in self._successors)
- """
-    def to_np_formula(self):
+    def to_np_formula(self):  #custom function to go from string representation , to numpy string representation (useful for evaluating the function)
         stringa=self.long_name
         newstringa=""
         openbracket=0

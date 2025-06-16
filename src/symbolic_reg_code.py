@@ -73,7 +73,7 @@ def error(tree,nodefun:Node,x, y):
         try:
             mse_val = tree.mse(nodefun, x.T, y)
         except (FloatingPointError, ZeroDivisionError, ValueError):
-            return math.inf                 # ncan't be compute 
+            return math.inf                 # can't be compute 
 
    
     if not np.isfinite(mse_val):
