@@ -48,7 +48,7 @@ class DagGP:
 
 
     @staticmethod
-    def evaluate2(individual: Node, X, variable_names=None):  ##change
+    def evaluate2(individual: Node, X, variable_names=None): 
         
 
 
@@ -69,10 +69,8 @@ class DagGP:
     @staticmethod
     def mse(individual: Node, X, y, variable_names=None):
         y_pred = DagGP.evaluate2(individual, X, variable_names)
-        #y_pred = DagGP.evaluate(individual, X, variable_names)
 
         ris=np.mean((y.astype(np.float64) - y_pred.astype(np.float64)) ** 2)
-        #ris=sum((a - b) ** 2 for a, b in zip(y, y_pred)) / len(y)
         return  ris
 
 
